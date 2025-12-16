@@ -25,6 +25,7 @@ By the end of this chapter, you will:
 1. Start with `docs/01_attention_intuition.md` - understand *what* attention does
 2. Read `docs/02_scaled_dot_product.md` - understand the math
 3. Read `docs/03_multihead_attention.md` - understand why multiple heads help
+4. (Optional) See `docs/04_references.md` - papers, libraries, and further reading
 
 ## Labs
 
