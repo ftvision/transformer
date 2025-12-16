@@ -1,147 +1,133 @@
-# Transformer Learning Repository
+# Transformer Learning Course
 
-A comprehensive learning resource for understanding transformer architectures and recent developments in the field. This repository combines theoretical understanding with practical implementations, covering everything from fundamental concepts to advanced optimization techniques.
+A hands-on, test-driven course for learning transformer architectures from the ground up.
 
-## Learning Objectives
+## Who This Is For
 
-- Master fundamental transformer architecture and attention mechanisms
-- Implement various attention variants and understand their trade-offs
-- Explore inference optimization techniques and frameworks
-- Learn about hardware acceleration and kernel implementations
-- Understand practical training and deployment strategies
+Software engineers with Python and linear algebra background who want to deeply understand transformers - not just use them, but know how they work at every level: from attention mechanisms to custom GPU kernels.
 
-## Major Topics
+## Course Philosophy
 
-### 1. Attention Mechanisms
+- **Code-first**: Implement before you theorize. Understanding comes from building.
+- **Test-driven**: Every concept has runnable tests. Green tests = understanding verified.
+- **Full-stack**: From pure Python attention to Triton kernels to distributed training.
+- **Real ecosystem**: Learn the tools professionals use (PyTorch, HuggingFace, vLLM, etc.)
 
-Core attention concepts and advanced variants:
+## Course Structure
 
-- **Standard Attention**: Multi-head self-attention, cross-attention mechanisms
-- **Linear Attention**: Efficient attention variants reducing computational complexity
-  - Flash Linear Attention
-  - Linear attention from Kimi (e.g., DeltaNet, GLA variants)
-- **Sparse Attention**: Structured sparsity patterns
-  - DeepSeek sparse attention implementations
-  - Other efficient sparse patterns
-- **Flash Attention**: Hardware-aware optimized attention implementations
+| Phase | Chapters | Focus | Hardware |
+|-------|----------|-------|----------|
+| **Foundation** | 1-4 | Attention → Blocks → Full Transformer → Training | Laptop |
+| **Attention Variants** | 5-7 | Linear Attention → Flash Linear/GLA → DeepSeek MLA | Laptop |
+| **Production** | 8-9 | KV-cache, Quantization → vLLM, llama.cpp | Laptop/GPU |
+| **Hardware** | 10-12 | Flash Attention → Distributed → Triton/JAX/TPU | GPU/TPU |
 
-### 2. Transformer Architecture
+**Total: 12 chapters, 54 labs**
 
-- Basic transformer blocks and layer design
-- Positional encodings and rotary embeddings
-- Feed-forward networks and layer normalization strategies
-- Modern architectural variants and improvements
+See [SYLLABUS.md](./SYLLABUS.md) for detailed chapter contents.
 
-### 3. Implementation & Learning
+## Getting Started
 
-#### Python Fundamentals
-- From-scratch implementations of core transformer components
-- Educational code to understand mechanisms deeply
-- Direct tensor operations without abstractions
+### Prerequisites
 
-#### Libraries & Frameworks
-- PyTorch and JAX implementations
-- High-level framework usage for training
-- Integration with modern optimization techniques
+- Python 3.10+
+- [uv](https://github.com/astral-sh/uv) package manager
+- Basic linear algebra (matrix multiplication, dot products)
+- PyTorch familiarity helpful but not required
 
-### 4. Training
+### Setup
 
-- Pretraining strategies and data handling
-- Post-training and fine-tuning techniques
-- Efficient training approaches (LoRA, quantization, etc.)
-- Distributed training considerations
+```bash
+# Clone the repository
+git clone <repo-url>
+cd topeka
 
-### 5. Inference Optimization
+# Install dependencies with uv
+uv sync
 
-Industrial-grade inference frameworks:
+# Verify setup
+uv run pytest shared/tests/
+```
 
-- **vLLM**: High-throughput inference engine with optimized memory management
-- **SGLang**: Structured generation and language engine
-- **llama.cpp**: Efficient CPU and quantized inference
-- Batch processing and dynamic scheduling
-- Quantization and model compression for inference
+### How to Use This Course
 
-### 6. Hardware & Kernels
+1. **Read the chapter docs** - Start with `chapters/ch01_attention/docs/` to understand concepts
+2. **Work through labs** - Each lab has skeleton code in `src/` that you complete
+3. **Run tests to verify** - `uv run pytest chapters/ch01_attention/lab01_dot_product/tests/`
+4. **Check solutions if stuck** - Reference implementations in `solutions/`
 
-- **JAX**: Composable transformations and functional programming for ML
-- **TPU**: Tensor Processing Unit programming and optimization
-- Custom kernel development for bottleneck operations
-- Hardware-aware algorithm design
-- CUDA/HIP kernel implementations
+### Example Workflow
+
+```bash
+# Start Chapter 1, Lab 1
+cd chapters/ch01_attention/lab01_dot_product
+
+# Read the lab instructions
+cat README.md
+
+# Edit the skeleton code
+# ... implement YOUR CODE HERE sections ...
+
+# Run tests until green
+uv run pytest tests/
+
+# Move to next lab
+cd ../lab02_visualization
+```
 
 ## Repository Structure
 
 ```
-belgrade-v2/
-├── README.md                 # This file
-├── basics/                   # Python implementations from scratch
-│   ├── attention.py
-│   ├── transformer.py
+topeka/
+├── README.md                    # This file
+├── SYLLABUS.md                  # Detailed course syllabus
+├── pyproject.toml               # uv workspace config
+│
+├── chapters/
+│   ├── ch01_attention/
+│   │   ├── README.md            # Chapter overview
+│   │   ├── docs/                # Lecture materials
+│   │   ├── lab01_dot_product/
+│   │   │   ├── README.md        # Lab instructions
+│   │   │   ├── src/             # YOUR CODE HERE
+│   │   │   ├── tests/           # Verification tests
+│   │   │   └── solutions/       # Reference implementation
+│   │   └── ...
 │   └── ...
-├── attention_variants/       # Different attention mechanisms
-│   ├── flash_attention/
-│   ├── linear_attention/
-│   ├── sparse_attention/
-│   └── ...
-├── training/                 # Training implementations
-│   ├── pretraining/
-│   ├── finetuning/
-│   └── ...
-├── inference/                # Inference optimization
-│   ├── vllm_integration/
-│   ├── sglang_integration/
-│   ├── llamacpp_integration/
-│   └── ...
-├── hardware/                 # Hardware-specific optimizations
-│   ├── jax_implementations/
-│   ├── tpu_kernels/
-│   ├── cuda_kernels/
-│   └── ...
-└── experiments/              # Reproducible experiments and benchmarks
+│
+├── shared/                      # Shared utilities
+│   └── src/shared/
+│       ├── utils.py
+│       └── data/
+│
+└── scripts/                     # Helper scripts
 ```
 
-## Key Resources & References
+## Progress Tracking
 
-### Papers
-- Attention is All You Need (Vaswani et al., 2017)
-- Flash Attention (Dao et al., 2022)
-- DeepSeek variants and sparse attention papers
-- Kimi attention mechanism papers
+Each chapter has a milestone that marks completion:
 
-### Frameworks & Tools
-- PyTorch: https://pytorch.org/
-- JAX: https://jax.readthedocs.io/
-- vLLM: https://github.com/vllm-project/vllm
-- SGLang: https://github.com/hpcaitech/SGLang
-- llama.cpp: https://github.com/ggerganov/llama.cpp
-
-## Getting Started
-
-1. **Understand the Basics**: Start with fundamental implementations in `basics/`
-2. **Explore Attention Variants**: Study different attention mechanisms in `attention_variants/`
-3. **Practice Training**: Implement training loops in `training/`
-4. **Optimize Inference**: Learn inference optimization with `inference/`
-5. **Hardware Acceleration**: Dive into `hardware/` for performance optimization
-
-## Development Setup
-
-```bash
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate
-
-# Install dependencies (to be updated as we add code)
-pip install torch jax numpy
-```
+- [ ] **Ch 1**: Multi-head attention matches PyTorch within 1e-5
+- [ ] **Ch 2**: Transformer block matches GPT-2 block output
+- [ ] **Ch 3**: Full transformer matches HuggingFace GPT-2 logits
+- [ ] **Ch 4**: Train ~1M param model on Shakespeare
+- [ ] **Ch 5**: Linear attention 10x faster at seq_len=4096
+- [ ] **Ch 6**: GLA matches `fla` library reference
+- [ ] **Ch 7**: MLA reduces KV cache by 4x
+- [ ] **Ch 8**: KV-cache gives 10x generation speedup
+- [ ] **Ch 9**: Serve 7B model with vLLM at >100 tok/sec
+- [ ] **Ch 10**: Train with 4x longer sequences via Flash Attention
+- [ ] **Ch 11**: Train model too large for single GPU with FSDP
+- [ ] **Ch 12**: Custom Triton kernel within 80% of Flash Attention
 
 ## Contributing
 
-As this is a learning repository, feel free to:
-- Add new implementations and explanations
-- Document learnings and insights
-- Include benchmarks and comparisons
-- Share optimization techniques
+This is a learning repository. Contributions welcome:
+- Bug fixes in labs or solutions
+- Improved explanations in docs
+- Additional test cases
+- Typo fixes
 
----
+## License
 
-**Status**: Repository initialization in progress. Major topics identified, structure ready for implementation.
+MIT
