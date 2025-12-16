@@ -1,0 +1,206 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
+  <!-- Pure black background -->
+  <rect width="900" height="520" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Layer Normalization on 2D</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    LayerNorm normalizes each row independently: mean=0, std=1
+  </text>
+
+  <!-- ============ Input Matrix ============ -->
+  <g transform="translate(50, 100)">
+    <text x="100" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#888888" text-anchor="middle">Input (4×5)</text>
+
+    <!-- Grid of cells -->
+    <g transform="translate(0, 0)">
+      <!-- Row 0 -->
+      <rect x="0" y="0" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="20" y="22" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">10</text>
+      <rect x="42" y="0" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="62" y="22" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">20</text>
+      <rect x="84" y="0" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="104" y="22" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">30</text>
+      <rect x="126" y="0" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="146" y="22" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">40</text>
+      <rect x="168" y="0" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="188" y="22" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">50</text>
+
+      <!-- Row 1 -->
+      <rect x="0" y="37" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="20" y="59" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">1</text>
+      <rect x="42" y="37" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="62" y="59" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">2</text>
+      <rect x="84" y="37" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="104" y="59" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">3</text>
+      <rect x="126" y="37" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="146" y="59" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">4</text>
+      <rect x="168" y="37" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="188" y="59" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">5</text>
+
+      <!-- Row 2 -->
+      <rect x="0" y="74" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="20" y="96" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">0</text>
+      <rect x="42" y="74" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="62" y="96" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">0</text>
+      <rect x="84" y="74" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="104" y="96" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">0</text>
+      <rect x="126" y="74" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="146" y="96" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">10</text>
+      <rect x="168" y="74" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="188" y="96" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">0</text>
+
+      <!-- Row 3 -->
+      <rect x="0" y="111" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="20" y="133" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">-5</text>
+      <rect x="42" y="111" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="62" y="133" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">0</text>
+      <rect x="84" y="111" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="104" y="133" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">5</text>
+      <rect x="126" y="111" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="146" y="133" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">10</text>
+      <rect x="168" y="111" width="40" height="35" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="188" y="133" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">15</text>
+    </g>
+
+    <!-- Stats per row -->
+    <g transform="translate(220, 0)">
+      <text x="0" y="-5" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="start">μ</text>
+      <text x="35" y="-5" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="start">σ</text>
+
+      <text x="0" y="22" font-family="monospace" font-size="10" fill="#666666" text-anchor="start">30</text>
+      <text x="35" y="22" font-family="monospace" font-size="10" fill="#666666" text-anchor="start">14.1</text>
+
+      <text x="0" y="59" font-family="monospace" font-size="10" fill="#666666" text-anchor="start">3</text>
+      <text x="35" y="59" font-family="monospace" font-size="10" fill="#666666" text-anchor="start">1.41</text>
+
+      <text x="0" y="96" font-family="monospace" font-size="10" fill="#666666" text-anchor="start">2</text>
+      <text x="35" y="96" font-family="monospace" font-size="10" fill="#666666" text-anchor="start">4.0</text>
+
+      <text x="0" y="133" font-family="monospace" font-size="10" fill="#666666" text-anchor="start">5</text>
+      <text x="35" y="133" font-family="monospace" font-size="10" fill="#666666" text-anchor="start">7.07</text>
+    </g>
+  </g>
+
+  <!-- ============ Arrow ============ -->
+  <g transform="translate(355, 170)">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#888888" stroke-width="2"/>
+    <polygon points="60,0 53,-5 53,5" fill="#888888"/>
+    <text x="30" y="-12" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FC6255" text-anchor="middle">LayerNorm</text>
+  </g>
+
+  <!-- ============ Output Matrix ============ -->
+  <g transform="translate(440, 100)">
+    <text x="100" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FC6255" text-anchor="middle">Output (4×5)</text>
+
+    <!-- Grid of cells with highlights -->
+    <g transform="translate(0, 0)">
+      <!-- Row 0 - highlighted -->
+      <rect x="-5" y="-5" width="220" height="45" fill="#FC6255" fill-opacity="0.15" stroke="#FC6255" stroke-width="2"/>
+      <rect x="0" y="0" width="40" height="35" fill="none" stroke="#FC6255" stroke-width="1"/>
+      <text x="20" y="22" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">-1.41</text>
+      <rect x="42" y="0" width="40" height="35" fill="none" stroke="#FC6255" stroke-width="1"/>
+      <text x="62" y="22" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">-0.71</text>
+      <rect x="84" y="0" width="40" height="35" fill="none" stroke="#FC6255" stroke-width="1"/>
+      <text x="104" y="22" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">0.00</text>
+      <rect x="126" y="0" width="40" height="35" fill="none" stroke="#FC6255" stroke-width="1"/>
+      <text x="146" y="22" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">0.71</text>
+      <rect x="168" y="0" width="40" height="35" fill="none" stroke="#FC6255" stroke-width="1"/>
+      <text x="188" y="22" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">1.41</text>
+
+      <!-- Row 1 -->
+      <rect x="-5" y="32" width="220" height="45" fill="#FC6255" fill-opacity="0.05"/>
+      <rect x="0" y="37" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="20" y="59" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">-1.41</text>
+      <rect x="42" y="37" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="62" y="59" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">-0.71</text>
+      <rect x="84" y="37" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="104" y="59" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">0.00</text>
+      <rect x="126" y="37" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="146" y="59" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">0.71</text>
+      <rect x="168" y="37" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="188" y="59" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">1.41</text>
+
+      <!-- Row 2 -->
+      <rect x="-5" y="69" width="220" height="45" fill="#FC6255" fill-opacity="0.05"/>
+      <rect x="0" y="74" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="20" y="96" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">-0.50</text>
+      <rect x="42" y="74" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="62" y="96" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">-0.50</text>
+      <rect x="84" y="74" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="104" y="96" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">-0.50</text>
+      <rect x="126" y="74" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="146" y="96" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">2.00</text>
+      <rect x="168" y="74" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="188" y="96" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">-0.50</text>
+
+      <!-- Row 3 -->
+      <rect x="-5" y="106" width="220" height="45" fill="#FC6255" fill-opacity="0.05"/>
+      <rect x="0" y="111" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="20" y="133" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">-1.41</text>
+      <rect x="42" y="111" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="62" y="133" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">-0.71</text>
+      <rect x="84" y="111" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="104" y="133" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">0.00</text>
+      <rect x="126" y="111" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="146" y="133" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">0.71</text>
+      <rect x="168" y="111" width="40" height="35" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="188" y="133" font-family="monospace" font-size="10" fill="#FC6255" text-anchor="middle">1.41</text>
+    </g>
+
+    <!-- Stats per row (now normalized) -->
+    <g transform="translate(220, 0)">
+      <text x="0" y="-5" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="start">μ</text>
+      <text x="25" y="-5" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="start">σ</text>
+
+      <text x="0" y="22" font-family="monospace" font-size="10" fill="#83C167" text-anchor="start">0</text>
+      <text x="25" y="22" font-family="monospace" font-size="10" fill="#83C167" text-anchor="start">1</text>
+
+      <text x="0" y="59" font-family="monospace" font-size="10" fill="#83C167" text-anchor="start">0</text>
+      <text x="25" y="59" font-family="monospace" font-size="10" fill="#83C167" text-anchor="start">1</text>
+
+      <text x="0" y="96" font-family="monospace" font-size="10" fill="#83C167" text-anchor="start">0</text>
+      <text x="25" y="96" font-family="monospace" font-size="10" fill="#83C167" text-anchor="start">1</text>
+
+      <text x="0" y="133" font-family="monospace" font-size="10" fill="#83C167" text-anchor="start">0</text>
+      <text x="25" y="133" font-family="monospace" font-size="10" fill="#83C167" text-anchor="start">1</text>
+    </g>
+  </g>
+
+  <!-- ============ Formula ============ -->
+  <g transform="translate(50, 290)">
+    <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#ffffff" text-anchor="start">Formula for each row:</text>
+
+    <text x="30" y="35" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#FC6255" text-anchor="start">output = (x − μ) / σ</text>
+
+    <text x="300" y="35" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="start">where μ = mean of row, σ = std of row</text>
+  </g>
+
+  <!-- ============ Key Differences Box ============ -->
+  <g transform="translate(50, 350)">
+    <rect x="0" y="0" width="800" height="85" fill="none" stroke="#444444" stroke-width="1"/>
+    <text x="400" y="25" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#ffffff" text-anchor="middle">LayerNorm vs Softmax</text>
+
+    <text x="30" y="50" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FFFF00" text-anchor="start">Softmax:</text>
+    <text x="100" y="50" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#888888" text-anchor="start">converts to probabilities (sum=1, all positive)</text>
+
+    <text x="30" y="72" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FC6255" text-anchor="start">LayerNorm:</text>
+    <text x="115" y="72" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#888888" text-anchor="start">standardizes to mean=0, std=1 (can be negative)</text>
+  </g>
+
+  <!-- ============ Code Example ============ -->
+  <g transform="translate(50, 455)">
+    <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666" text-anchor="start">PyTorch:</text>
+    <text x="80" y="0" font-family="monospace" font-size="13" fill="#29ABCA" text-anchor="start">x = torch.tensor([[10, 20, 30, 40, 50], ...])</text>
+    <text x="80" y="25" font-family="monospace" font-size="13" fill="#FC6255" text-anchor="start">nn.LayerNorm(5)(x)  # normalize over last dim (5 features)</text>
+  </g>
+
+  <!-- ============ Why Use It ============ -->
+  <g transform="translate(550, 455)">
+    <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666" text-anchor="start">Why?</text>
+    <text x="0" y="20" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="start">• Stabilizes training</text>
+    <text x="0" y="40" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="start">• Reduces internal covariate shift</text>
+  </g>
+</svg>

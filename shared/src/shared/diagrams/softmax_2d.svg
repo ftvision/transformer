@@ -1,0 +1,215 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Pure black background -->
+  <rect width="800" height="500" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Softmax on 2D: Which Axis?</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    softmax normalizes along one axis — each slice sums to 1
+  </text>
+
+  <!-- ============ Input Matrix ============ -->
+  <g transform="translate(50, 100)">
+    <text x="80" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#888888" text-anchor="middle">Input (4×3)</text>
+
+    <!-- Grid of cells -->
+    <g transform="translate(0, 0)">
+      <!-- Row 0 -->
+      <rect x="0" y="0" width="50" height="40" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="25" y="25" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">2.0</text>
+      <rect x="55" y="0" width="50" height="40" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="80" y="25" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">1.0</text>
+      <rect x="110" y="0" width="50" height="40" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="135" y="25" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">0.1</text>
+
+      <!-- Row 1 -->
+      <rect x="0" y="45" width="50" height="40" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="25" y="70" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">1.0</text>
+      <rect x="55" y="45" width="50" height="40" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="80" y="70" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">3.0</text>
+      <rect x="110" y="45" width="50" height="40" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="135" y="70" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">2.0</text>
+
+      <!-- Row 2 -->
+      <rect x="0" y="90" width="50" height="40" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="25" y="115" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">0.5</text>
+      <rect x="55" y="90" width="50" height="40" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="80" y="115" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">0.5</text>
+      <rect x="110" y="90" width="50" height="40" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="135" y="115" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">1.0</text>
+
+      <!-- Row 3 -->
+      <rect x="0" y="135" width="50" height="40" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="25" y="160" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">3.0</text>
+      <rect x="55" y="135" width="50" height="40" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="80" y="160" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">1.0</text>
+      <rect x="110" y="135" width="50" height="40" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="135" y="160" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">1.0</text>
+    </g>
+
+    <!-- Axis labels -->
+    <text x="80" y="195" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="middle">axis=1 (cols) →</text>
+    <text x="-15" y="90" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="middle" transform="rotate(-90, -15, 90)">axis=0 (rows) ↓</text>
+  </g>
+
+  <!-- ============ Softmax axis=-1 (along rows) ============ -->
+  <g transform="translate(280, 100)">
+    <text x="80" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FFFF00" text-anchor="middle">softmax(axis=−1)</text>
+
+    <!-- Highlight: each ROW sums to 1 -->
+    <g transform="translate(0, 0)">
+      <!-- Row 0 - highlighted -->
+      <rect x="-5" y="-5" width="170" height="50" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" stroke-width="2"/>
+      <rect x="0" y="0" width="50" height="40" fill="none" stroke="#FFFF00" stroke-width="1"/>
+      <text x="25" y="25" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.67</text>
+      <rect x="55" y="0" width="50" height="40" fill="none" stroke="#FFFF00" stroke-width="1"/>
+      <text x="80" y="25" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.24</text>
+      <rect x="110" y="0" width="50" height="40" fill="none" stroke="#FFFF00" stroke-width="1"/>
+      <text x="135" y="25" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.09</text>
+      <text x="175" y="25" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">=1</text>
+
+      <!-- Row 1 -->
+      <rect x="-5" y="40" width="170" height="50" fill="#FFFF00" fill-opacity="0.05"/>
+      <rect x="0" y="45" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="25" y="70" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.09</text>
+      <rect x="55" y="45" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="80" y="70" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.67</text>
+      <rect x="110" y="45" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="135" y="70" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.24</text>
+      <text x="175" y="70" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">=1</text>
+
+      <!-- Row 2 -->
+      <rect x="-5" y="85" width="170" height="50" fill="#FFFF00" fill-opacity="0.05"/>
+      <rect x="0" y="90" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="25" y="115" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.27</text>
+      <rect x="55" y="90" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="80" y="115" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.27</text>
+      <rect x="110" y="90" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="135" y="115" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.45</text>
+      <text x="175" y="115" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">=1</text>
+
+      <!-- Row 3 -->
+      <rect x="-5" y="130" width="170" height="50" fill="#FFFF00" fill-opacity="0.05"/>
+      <rect x="0" y="135" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="25" y="160" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.73</text>
+      <rect x="55" y="135" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="80" y="160" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.13</text>
+      <rect x="110" y="135" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="135" y="160" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.13</text>
+      <text x="175" y="160" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">=1</text>
+    </g>
+
+    <text x="80" y="205" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FFFF00" text-anchor="middle">Each row sums to 1</text>
+  </g>
+
+  <!-- ============ Softmax axis=0 (along columns) ============ -->
+  <g transform="translate(530, 100)">
+    <text x="80" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#83C167" text-anchor="middle">softmax(axis=0)</text>
+
+    <!-- Highlight: each COLUMN sums to 1 -->
+    <g transform="translate(0, 0)">
+      <!-- Col 0 - highlighted -->
+      <rect x="-5" y="-5" width="60" height="185" fill="#83C167" fill-opacity="0.1" stroke="#83C167" stroke-width="2"/>
+
+      <!-- Row 0 -->
+      <rect x="0" y="0" width="50" height="40" fill="none" stroke="#83C167" stroke-width="1"/>
+      <text x="25" y="25" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">.24</text>
+      <rect x="55" y="0" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="80" y="25" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">.05</text>
+      <rect x="110" y="0" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="135" y="25" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">.12</text>
+
+      <!-- Row 1 -->
+      <rect x="0" y="45" width="50" height="40" fill="none" stroke="#83C167" stroke-width="1"/>
+      <text x="25" y="70" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">.09</text>
+      <rect x="55" y="45" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="80" y="70" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">.80</text>
+      <rect x="110" y="45" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="135" y="70" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">.76</text>
+
+      <!-- Row 2 -->
+      <rect x="0" y="90" width="50" height="40" fill="none" stroke="#83C167" stroke-width="1"/>
+      <text x="25" y="115" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">.05</text>
+      <rect x="55" y="90" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="80" y="115" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">.07</text>
+      <rect x="110" y="90" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="135" y="115" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">.12</text>
+
+      <!-- Row 3 -->
+      <rect x="0" y="135" width="50" height="40" fill="none" stroke="#83C167" stroke-width="1"/>
+      <text x="25" y="160" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">.62</text>
+      <rect x="55" y="135" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="80" y="160" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">.08</text>
+      <rect x="110" y="135" width="50" height="40" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="135" y="160" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">.00</text>
+
+      <!-- Sum labels at bottom -->
+      <text x="25" y="195" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">=1</text>
+      <text x="80" y="195" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">=1</text>
+      <text x="135" y="195" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">=1</text>
+    </g>
+
+    <text x="80" y="220" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#83C167" text-anchor="middle">Each col sums to 1</text>
+  </g>
+
+  <!-- ============ Attention Use Case ============ -->
+  <g transform="translate(50, 350)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">In Attention</text>
+
+    <g transform="translate(0, 25)">
+      <!-- Attention scores matrix -->
+      <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">Scores (seq × seq)</text>
+
+      <g transform="translate(30, 15)">
+        <rect x="0" y="0" width="40" height="30" fill="none" stroke="#444444"/>
+        <rect x="40" y="0" width="40" height="30" fill="none" stroke="#444444"/>
+        <rect x="80" y="0" width="40" height="30" fill="none" stroke="#444444"/>
+        <rect x="0" y="30" width="40" height="30" fill="none" stroke="#444444"/>
+        <rect x="40" y="30" width="40" height="30" fill="none" stroke="#444444"/>
+        <rect x="80" y="30" width="40" height="30" fill="none" stroke="#444444"/>
+        <rect x="0" y="60" width="40" height="30" fill="none" stroke="#444444"/>
+        <rect x="40" y="60" width="40" height="30" fill="none" stroke="#444444"/>
+        <rect x="80" y="60" width="40" height="30" fill="none" stroke="#444444"/>
+      </g>
+
+      <!-- Arrow -->
+      <g transform="translate(175, 50)">
+        <line x1="0" y1="0" x2="50" y2="0" stroke="#888888" stroke-width="2"/>
+        <polygon points="50,0 43,-4 43,4" fill="#888888"/>
+        <text x="25" y="-10" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00" text-anchor="middle">softmax(−1)</text>
+      </g>
+
+      <!-- Attention weights -->
+      <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">Attention Weights</text>
+
+      <g transform="translate(280, 15)">
+        <!-- Highlighted row -->
+        <rect x="-5" y="-5" width="130" height="40" fill="#FFFF00" fill-opacity="0.15" stroke="#FFFF00" stroke-width="2"/>
+        <rect x="0" y="0" width="40" height="30" fill="none" stroke="#FFFF00"/>
+        <text x="20" y="20" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.5</text>
+        <rect x="40" y="0" width="40" height="30" fill="none" stroke="#FFFF00"/>
+        <text x="60" y="20" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.3</text>
+        <rect x="80" y="0" width="40" height="30" fill="none" stroke="#FFFF00"/>
+        <text x="100" y="20" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.2</text>
+        <text x="135" y="20" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">=1</text>
+
+        <rect x="0" y="30" width="40" height="30" fill="none" stroke="#666666"/>
+        <rect x="40" y="30" width="40" height="30" fill="none" stroke="#666666"/>
+        <rect x="80" y="30" width="40" height="30" fill="none" stroke="#666666"/>
+        <text x="135" y="50" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">=1</text>
+
+        <rect x="0" y="60" width="40" height="30" fill="none" stroke="#666666"/>
+        <rect x="40" y="60" width="40" height="30" fill="none" stroke="#666666"/>
+        <rect x="80" y="60" width="40" height="30" fill="none" stroke="#666666"/>
+        <text x="135" y="80" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">=1</text>
+      </g>
+
+      <!-- Explanation -->
+      <text x="550" y="50" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#888888" text-anchor="start">Each query attends</text>
+      <text x="550" y="70" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#888888" text-anchor="start">to all keys with</text>
+      <text x="550" y="90" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#888888" text-anchor="start">weights summing to 1</text>
+    </g>
+  </g>
+</svg>
