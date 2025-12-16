@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <!-- Pure black background -->
+  <rect width="800" height="400" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="CMU Serif, Georgia, serif" font-size="26" fill="#ffffff" text-anchor="middle">Activation Functions</text>
+
+  <!-- ============ ReLU (Left) ============ -->
+  <g transform="translate(100, 70)">
+    <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="20" fill="#29ABCA" text-anchor="middle">ReLU</text>
+    <text x="100" y="25" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle" font-style="italic">max(0, x)</text>
+
+    <!-- Coordinate system -->
+    <g transform="translate(0, 50)">
+      <!-- Grid lines - very subtle -->
+      <line x1="0" y1="100" x2="200" y2="100" stroke="#333333" stroke-width="1"/>
+      <line x1="100" y1="0" x2="100" y2="200" stroke="#333333" stroke-width="1"/>
+
+      <!-- Axis labels -->
+      <text x="195" y="95" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666">x</text>
+      <text x="105" y="15" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666">y</text>
+
+      <!-- Tick marks -->
+      <text x="20" y="115" font-family="monospace" font-size="10" fill="#444444" text-anchor="middle">−2</text>
+      <text x="60" y="115" font-family="monospace" font-size="10" fill="#444444" text-anchor="middle">−1</text>
+      <text x="140" y="115" font-family="monospace" font-size="10" fill="#444444" text-anchor="middle">1</text>
+      <text x="180" y="115" font-family="monospace" font-size="10" fill="#444444" text-anchor="middle">2</text>
+
+      <!-- ReLU curve - 3b1b teal -->
+      <line x1="0" y1="100" x2="100" y2="100" stroke="#29ABCA" stroke-width="3"/>
+      <line x1="100" y1="100" x2="200" y2="0" stroke="#29ABCA" stroke-width="3"/>
+
+      <!-- Corner point -->
+      <circle cx="100" cy="100" r="4" fill="#29ABCA"/>
+
+      <!-- "Dead zone" annotation -->
+      <text x="50" y="85" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FC6255" text-anchor="middle">gradient = 0</text>
+    </g>
+  </g>
+
+  <!-- ============ GELU (Right) ============ -->
+  <g transform="translate(500, 70)">
+    <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="20" fill="#83C167" text-anchor="middle">GELU</text>
+    <text x="100" y="25" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle" font-style="italic">x · Φ(x)</text>
+
+    <!-- Coordinate system -->
+    <g transform="translate(0, 50)">
+      <!-- Grid lines -->
+      <line x1="0" y1="100" x2="200" y2="100" stroke="#333333" stroke-width="1"/>
+      <line x1="100" y1="0" x2="100" y2="200" stroke="#333333" stroke-width="1"/>
+
+      <!-- Axis labels -->
+      <text x="195" y="95" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666">x</text>
+      <text x="105" y="15" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666">y</text>
+
+      <!-- Tick marks -->
+      <text x="20" y="115" font-family="monospace" font-size="10" fill="#444444" text-anchor="middle">−2</text>
+      <text x="60" y="115" font-family="monospace" font-size="10" fill="#444444" text-anchor="middle">−1</text>
+      <text x="140" y="115" font-family="monospace" font-size="10" fill="#444444" text-anchor="middle">1</text>
+      <text x="180" y="115" font-family="monospace" font-size="10" fill="#444444" text-anchor="middle">2</text>
+
+      <!-- GELU curve - 3b1b green, smooth S-curve -->
+      <path d="M 0 100
+               Q 30 100, 50 102
+               Q 70 104, 80 103
+               Q 90 101, 100 97
+               Q 115 88, 130 72
+               Q 150 50, 170 25
+               Q 185 8, 200 -15"
+            fill="none" stroke="#83C167" stroke-width="3"/>
+
+      <!-- Smooth transition annotation -->
+      <text x="75" y="130" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="middle">smooth</text>
+
+      <!-- Small bump annotation -->
+      <circle cx="65" cy="103" r="3" fill="#83C167"/>
+    </g>
+  </g>
+
+  <!-- Comparison at bottom -->
+  <g transform="translate(100, 330)">
+    <!-- ReLU properties -->
+    <g transform="translate(0, 0)">
+      <circle cx="10" cy="8" r="4" fill="#29ABCA"/>
+      <text x="25" y="12" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#888888">Simple, fast, sparse</text>
+
+      <circle cx="10" cy="35" r="4" fill="#FC6255"/>
+      <text x="25" y="39" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#888888">"Dying ReLU" problem</text>
+    </g>
+
+    <!-- GELU properties -->
+    <g transform="translate(400, 0)">
+      <circle cx="10" cy="8" r="4" fill="#83C167"/>
+      <text x="25" y="12" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#888888">Smooth, non-zero gradients</text>
+
+      <circle cx="10" cy="35" r="4" fill="#83C167"/>
+      <text x="25" y="39" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#888888">Used in modern transformers</text>
+    </g>
+  </g>
+</svg>

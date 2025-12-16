@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <!-- Pure black background - 3b1b style -->
+  <rect width="800" height="450" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="400" y="40" font-family="CMU Serif, Georgia, serif" font-size="28" fill="#ffffff" text-anchor="middle">Softmax</text>
+
+  <!-- Formula in 3b1b yellow -->
+  <text x="400" y="75" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#FFFF00" text-anchor="middle" font-style="italic">
+    softmax(x)ᵢ = exp(xᵢ - max) / Σ exp(xⱼ - max)
+  </text>
+
+  <!-- Input vector - simple bars -->
+  <g transform="translate(80, 120)">
+    <text x="50" y="-10" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#888888" text-anchor="middle">Input x</text>
+
+    <!-- Bars - 3b1b teal -->
+    <rect x="20" y="30" width="20" height="100" fill="#29ABCA"/>
+    <rect x="50" y="60" width="20" height="70" fill="#29ABCA"/>
+    <rect x="80" y="90" width="20" height="40" fill="#29ABCA"/>
+
+    <!-- Values -->
+    <text x="30" y="145" font-family="monospace" font-size="12" fill="#888888" text-anchor="middle">2.0</text>
+    <text x="60" y="145" font-family="monospace" font-size="12" fill="#888888" text-anchor="middle">1.0</text>
+    <text x="90" y="145" font-family="monospace" font-size="12" fill="#888888" text-anchor="middle">0.1</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <g transform="translate(200, 200)">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#888888" stroke-width="2"/>
+    <polygon points="60,0 50,-5 50,5" fill="#888888"/>
+    <text x="30" y="-12" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FC6255" text-anchor="middle">− max(x)</text>
+  </g>
+
+  <!-- Shifted vector (stability trick) -->
+  <g transform="translate(280, 120)">
+    <text x="50" y="-10" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FC6255" text-anchor="middle">x − max</text>
+
+    <!-- Zero line -->
+    <line x1="10" y1="130" x2="110" y2="130" stroke="#444444" stroke-width="1" stroke-dasharray="4,3"/>
+
+    <!-- Bars relative to zero - showing negative values going down -->
+    <rect x="20" y="130" width="20" height="0" fill="#29ABCA"/>
+    <circle cx="30" cy="130" r="4" fill="#29ABCA"/>
+
+    <rect x="50" y="130" width="20" height="25" fill="#29ABCA"/>
+
+    <rect x="80" y="130" width="20" height="48" fill="#29ABCA"/>
+
+    <!-- Values -->
+    <text x="30" y="145" font-family="monospace" font-size="11" fill="#888888" text-anchor="middle">0</text>
+    <text x="60" y="170" font-family="monospace" font-size="11" fill="#888888" text-anchor="middle">−1</text>
+    <text x="90" y="193" font-family="monospace" font-size="11" fill="#888888" text-anchor="middle">−1.9</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <g transform="translate(400, 200)">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#888888" stroke-width="2"/>
+    <polygon points="60,0 50,-5 50,5" fill="#888888"/>
+    <text x="30" y="-12" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">exp</text>
+  </g>
+
+  <!-- Exponentials -->
+  <g transform="translate(480, 120)">
+    <text x="50" y="-10" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#888888" text-anchor="middle">exp(x−max)</text>
+
+    <!-- Bars - showing relative magnitudes -->
+    <rect x="20" y="30" width="20" height="100" fill="#83C167"/>
+    <rect x="50" y="93" width="20" height="37" fill="#83C167"/>
+    <rect x="80" y="115" width="20" height="15" fill="#83C167"/>
+
+    <!-- Values -->
+    <text x="30" y="145" font-family="monospace" font-size="11" fill="#888888" text-anchor="middle">1.00</text>
+    <text x="60" y="145" font-family="monospace" font-size="11" fill="#888888" text-anchor="middle">0.37</text>
+    <text x="90" y="145" font-family="monospace" font-size="11" fill="#888888" text-anchor="middle">0.15</text>
+
+    <text x="50" y="165" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">Σ = 1.52</text>
+  </g>
+
+  <!-- Arrow 3 -->
+  <g transform="translate(600, 200)">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#888888" stroke-width="2"/>
+    <polygon points="60,0 50,-5 50,5" fill="#888888"/>
+    <text x="30" y="-12" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">÷ Σ</text>
+  </g>
+
+  <!-- Output probabilities -->
+  <g transform="translate(680, 120)">
+    <text x="50" y="-10" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FFFF00" text-anchor="middle">Probabilities</text>
+
+    <!-- Bars -->
+    <rect x="20" y="30" width="20" height="100" fill="#FFFF00"/>
+    <rect x="50" y="93" width="20" height="37" fill="#FFFF00"/>
+    <rect x="80" y="115" width="20" height="15" fill="#FFFF00"/>
+
+    <!-- Values -->
+    <text x="30" y="145" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.66</text>
+    <text x="60" y="145" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.24</text>
+    <text x="90" y="145" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="middle">.10</text>
+
+    <text x="50" y="165" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="middle">Σ = 1</text>
+  </g>
+
+  <!-- Why subtract max? - bottom section -->
+  <g transform="translate(50, 300)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#FC6255" text-anchor="middle">Why subtract max(x)?</text>
+
+    <!-- Without trick -->
+    <g transform="translate(50, 30)">
+      <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">Without:</text>
+      <text x="100" y="22" font-family="monospace" font-size="13" fill="#888888" text-anchor="middle">x = [1000, 1001, 1002]</text>
+      <text x="100" y="44" font-family="monospace" font-size="13" fill="#FC6255" text-anchor="middle">exp(1000) = ∞</text>
+      <text x="100" y="66" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="middle">Overflow → NaN</text>
+    </g>
+
+    <!-- With trick -->
+    <g transform="translate(400, 30)">
+      <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">With:</text>
+      <text x="100" y="22" font-family="monospace" font-size="13" fill="#888888" text-anchor="middle">x − max = [−2, −1, 0]</text>
+      <text x="100" y="44" font-family="monospace" font-size="13" fill="#83C167" text-anchor="middle">exp(0) = 1</text>
+      <text x="100" y="66" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="middle">Safe, same result</text>
+    </g>
+  </g>
+
+  <!-- Key insight at bottom -->
+  <text x="400" y="430" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666" text-anchor="middle">
+    softmax(x) = softmax(x − c) for any constant c
+  </text>
+</svg>
