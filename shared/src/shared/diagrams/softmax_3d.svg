@@ -1,0 +1,242 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580">
+  <!-- Pure black background -->
+  <rect width="900" height="580" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Softmax on 3D Tensor: Which Axis?</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Shape: (batch=2, seq=3, features=4) — softmax normalizes along one axis
+  </text>
+
+  <!-- ============ 3D Tensor Visualization ============ -->
+  <g transform="translate(50, 90)">
+    <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#888888" text-anchor="middle">Input 3D Tensor</text>
+
+    <!-- Batch 1 (back layer - draw first so it's behind) -->
+    <g transform="translate(20, 15)">
+      <text x="175" y="-5" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#555555" text-anchor="start">b[1]</text>
+
+      <!-- 3x4 grid (dimmed to show depth) -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="40" height="30" fill="#111111" stroke="#333333" stroke-width="1"/>
+        <rect x="42" y="0" width="40" height="30" fill="#111111" stroke="#333333" stroke-width="1"/>
+        <rect x="84" y="0" width="40" height="30" fill="#111111" stroke="#333333" stroke-width="1"/>
+        <rect x="126" y="0" width="40" height="30" fill="#111111" stroke="#333333" stroke-width="1"/>
+
+        <rect x="0" y="32" width="40" height="30" fill="#111111" stroke="#333333" stroke-width="1"/>
+        <rect x="42" y="32" width="40" height="30" fill="#111111" stroke="#333333" stroke-width="1"/>
+        <rect x="84" y="32" width="40" height="30" fill="#111111" stroke="#333333" stroke-width="1"/>
+        <rect x="126" y="32" width="40" height="30" fill="#111111" stroke="#333333" stroke-width="1"/>
+
+        <rect x="0" y="64" width="40" height="30" fill="#111111" stroke="#333333" stroke-width="1"/>
+        <rect x="42" y="64" width="40" height="30" fill="#111111" stroke="#333333" stroke-width="1"/>
+        <rect x="84" y="64" width="40" height="30" fill="#111111" stroke="#333333" stroke-width="1"/>
+        <rect x="126" y="64" width="40" height="30" fill="#111111" stroke="#333333" stroke-width="1"/>
+      </g>
+    </g>
+
+    <!-- Connecting lines from front to back (correct direction) -->
+    <g transform="translate(0, 30)">
+      <line x1="0" y1="0" x2="20" y2="-15" stroke="#333333" stroke-width="1"/>
+      <line x1="166" y1="0" x2="186" y2="-15" stroke="#333333" stroke-width="1"/>
+      <line x1="0" y1="94" x2="20" y2="79" stroke="#333333" stroke-width="1"/>
+      <line x1="166" y1="94" x2="186" y2="79" stroke="#333333" stroke-width="1"/>
+    </g>
+
+    <!-- Batch 0 (front layer - draw second so it's in front) -->
+    <g transform="translate(0, 30)">
+      <text x="-10" y="50" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="end">batch[0]</text>
+
+      <!-- 3x4 grid with values -->
+      <g transform="translate(0, 0)">
+        <!-- Row 0 -->
+        <rect x="0" y="0" width="40" height="30" fill="#000000" stroke="#444444" stroke-width="1"/>
+        <text x="20" y="20" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">2.0</text>
+        <rect x="42" y="0" width="40" height="30" fill="#000000" stroke="#444444" stroke-width="1"/>
+        <text x="62" y="20" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">1.0</text>
+        <rect x="84" y="0" width="40" height="30" fill="#000000" stroke="#444444" stroke-width="1"/>
+        <text x="104" y="20" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">0.5</text>
+        <rect x="126" y="0" width="40" height="30" fill="#000000" stroke="#444444" stroke-width="1"/>
+        <text x="146" y="20" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">0.5</text>
+
+        <!-- Row 1 -->
+        <rect x="0" y="32" width="40" height="30" fill="#000000" stroke="#444444" stroke-width="1"/>
+        <text x="20" y="52" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">1.0</text>
+        <rect x="42" y="32" width="40" height="30" fill="#000000" stroke="#444444" stroke-width="1"/>
+        <text x="62" y="52" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">3.0</text>
+        <rect x="84" y="32" width="40" height="30" fill="#000000" stroke="#444444" stroke-width="1"/>
+        <text x="104" y="52" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">1.0</text>
+        <rect x="126" y="32" width="40" height="30" fill="#000000" stroke="#444444" stroke-width="1"/>
+        <text x="146" y="52" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">2.0</text>
+
+        <!-- Row 2 -->
+        <rect x="0" y="64" width="40" height="30" fill="#000000" stroke="#444444" stroke-width="1"/>
+        <text x="20" y="84" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">0.0</text>
+        <rect x="42" y="64" width="40" height="30" fill="#000000" stroke="#444444" stroke-width="1"/>
+        <text x="62" y="84" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">1.0</text>
+        <rect x="84" y="64" width="40" height="30" fill="#000000" stroke="#444444" stroke-width="1"/>
+        <text x="104" y="84" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">2.0</text>
+        <rect x="126" y="64" width="40" height="30" fill="#000000" stroke="#444444" stroke-width="1"/>
+        <text x="146" y="84" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">1.0</text>
+      </g>
+    </g>
+
+    <!-- Axis labels -->
+    <text x="83" y="145" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">axis=2 (features) →</text>
+    <text x="-25" y="75" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle" transform="rotate(-90, -25, 75)">axis=1 (seq) ↓</text>
+    <text x="200" y="10" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="start">↗ batch</text>
+  </g>
+
+  <!-- ============ Softmax axis=-1 (features) - MOST COMMON ============ -->
+  <g transform="translate(300, 90)">
+    <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FFFF00" text-anchor="middle">softmax(axis=−1)</text>
+    <text x="100" y="18" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">★ Most common</text>
+
+    <!-- Just batch 0 for clarity -->
+    <g transform="translate(0, 30)">
+      <!-- Row 0 - highlighted -->
+      <rect x="-5" y="-5" width="180" height="40" fill="#FFFF00" fill-opacity="0.15" stroke="#FFFF00" stroke-width="2"/>
+      <rect x="0" y="0" width="40" height="30" fill="none" stroke="#FFFF00" stroke-width="1"/>
+      <text x="20" y="20" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.47</text>
+      <rect x="42" y="0" width="40" height="30" fill="none" stroke="#FFFF00" stroke-width="1"/>
+      <text x="62" y="20" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.17</text>
+      <rect x="84" y="0" width="40" height="30" fill="none" stroke="#FFFF00" stroke-width="1"/>
+      <text x="104" y="20" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.10</text>
+      <rect x="126" y="0" width="40" height="30" fill="none" stroke="#FFFF00" stroke-width="1"/>
+      <text x="146" y="20" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.10</text>
+      <text x="180" y="20" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">=1</text>
+
+      <!-- Row 1 -->
+      <rect x="-5" y="27" width="180" height="40" fill="#FFFF00" fill-opacity="0.05"/>
+      <rect x="0" y="32" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="20" y="52" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.06</text>
+      <rect x="42" y="32" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="62" y="52" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.47</text>
+      <rect x="84" y="32" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="104" y="52" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.06</text>
+      <rect x="126" y="32" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="146" y="52" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.17</text>
+      <text x="180" y="52" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">=1</text>
+
+      <!-- Row 2 -->
+      <rect x="-5" y="59" width="180" height="40" fill="#FFFF00" fill-opacity="0.05"/>
+      <rect x="0" y="64" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="20" y="84" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.09</text>
+      <rect x="42" y="64" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="62" y="84" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.24</text>
+      <rect x="84" y="64" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="104" y="84" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.67</text>
+      <rect x="126" y="64" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="146" y="84" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">.24</text>
+      <text x="180" y="84" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">=1</text>
+    </g>
+
+    <text x="100" y="130" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00" text-anchor="middle">Each row → sums to 1</text>
+  </g>
+
+  <!-- ============ Softmax axis=1 (sequence) ============ -->
+  <g transform="translate(560, 90)">
+    <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#83C167" text-anchor="middle">softmax(axis=1)</text>
+    <text x="100" y="18" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="middle">Attention-style</text>
+
+    <!-- Just batch 0 for clarity -->
+    <g transform="translate(0, 30)">
+      <!-- Col 0 - highlighted -->
+      <rect x="-5" y="-5" width="50" height="104" fill="#83C167" fill-opacity="0.15" stroke="#83C167" stroke-width="2"/>
+
+      <!-- Row 0 -->
+      <rect x="0" y="0" width="40" height="30" fill="none" stroke="#83C167" stroke-width="1"/>
+      <text x="20" y="20" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">.67</text>
+      <rect x="42" y="0" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="62" y="20" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">.05</text>
+      <rect x="84" y="0" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="104" y="20" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">.10</text>
+      <rect x="126" y="0" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="146" y="20" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">.18</text>
+
+      <!-- Row 1 -->
+      <rect x="0" y="32" width="40" height="30" fill="none" stroke="#83C167" stroke-width="1"/>
+      <text x="20" y="52" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">.24</text>
+      <rect x="42" y="32" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="62" y="52" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">.88</text>
+      <rect x="84" y="32" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="104" y="52" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">.24</text>
+      <rect x="126" y="32" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="146" y="52" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">.60</text>
+
+      <!-- Row 2 -->
+      <rect x="0" y="64" width="40" height="30" fill="none" stroke="#83C167" stroke-width="1"/>
+      <text x="20" y="84" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">.09</text>
+      <rect x="42" y="64" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="62" y="84" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">.07</text>
+      <rect x="84" y="64" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="104" y="84" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">.67</text>
+      <rect x="126" y="64" width="40" height="30" fill="none" stroke="#666666" stroke-width="1"/>
+      <text x="146" y="84" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">.22</text>
+
+      <!-- Sum labels at bottom -->
+      <text x="20" y="105" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">Σ=1</text>
+      <text x="62" y="105" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">Σ=1</text>
+      <text x="104" y="105" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">Σ=1</text>
+      <text x="146" y="105" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">Σ=1</text>
+    </g>
+
+    <text x="100" y="145" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="middle">Each col ↓ sums to 1</text>
+  </g>
+
+  <!-- ============ Output Shape Box ============ -->
+  <g transform="translate(50, 260)">
+    <rect x="0" y="0" width="800" height="130" fill="none" stroke="#444444" stroke-width="1"/>
+    <text x="400" y="25" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">Output Shape: Always Same as Input</text>
+
+    <!-- Input shape -->
+    <g transform="translate(50, 50)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#29ABCA" text-anchor="start">Input:</text>
+      <text x="60" y="0" font-family="monospace" font-size="14" fill="#29ABCA" text-anchor="start">(2, 3, 4)</text>
+      <text x="140" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="start">← batch=2, seq=3, features=4</text>
+    </g>
+
+    <!-- Arrow -->
+    <g transform="translate(50, 70)">
+      <line x1="40" y1="0" x2="40" y2="20" stroke="#888888" stroke-width="2"/>
+      <polygon points="40,20 36,14 44,14" fill="#888888"/>
+      <text x="55" y="15" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="start">softmax(any axis)</text>
+    </g>
+
+    <!-- Output shape -->
+    <g transform="translate(50, 105)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FC6255" text-anchor="start">Output:</text>
+      <text x="60" y="0" font-family="monospace" font-size="14" fill="#FC6255" text-anchor="start">(2, 3, 4)</text>
+      <text x="140" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="start">← same shape! Values change, dimensions don't</text>
+    </g>
+
+    <!-- Visual representation -->
+    <g transform="translate(450, 50)">
+      <rect x="0" y="0" width="80" height="60" fill="none" stroke="#29ABCA" stroke-width="2"/>
+      <text x="40" y="35" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">2×3×4</text>
+
+      <line x1="100" y1="30" x2="140" y2="30" stroke="#888888" stroke-width="2"/>
+      <polygon points="140,30 133,26 133,34" fill="#888888"/>
+
+      <rect x="160" y="0" width="80" height="60" fill="none" stroke="#FC6255" stroke-width="2"/>
+      <text x="200" y="35" font-family="monospace" font-size="11" fill="#FC6255" text-anchor="middle">2×3×4</text>
+    </g>
+  </g>
+
+  <!-- ============ Code Example ============ -->
+  <g transform="translate(50, 410)">
+    <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666" text-anchor="start">PyTorch:</text>
+    <text x="0" y="25" font-family="monospace" font-size="13" fill="#29ABCA" text-anchor="start">x = torch.randn(2, 3, 4)           # (batch, seq, features)</text>
+    <text x="0" y="50" font-family="monospace" font-size="13" fill="#FFFF00" text-anchor="start">y = F.softmax(x, dim=-1)           # shape: (2, 3, 4) ← same!</text>
+    <text x="0" y="75" font-family="monospace" font-size="13" fill="#83C167" text-anchor="start">z = F.softmax(x, dim=1)            # shape: (2, 3, 4) ← same!</text>
+  </g>
+
+  <!-- ============ Key Insight ============ -->
+  <g transform="translate(50, 505)">
+    <rect x="0" y="0" width="800" height="60" fill="none" stroke="#444444" stroke-width="1"/>
+    <text x="400" y="25" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#ffffff" text-anchor="middle">Key Insight</text>
+    <text x="30" y="48" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#888888" text-anchor="start">• axis=-1 (features): Each token's embedding becomes a probability distribution — used for vocabulary prediction</text>
+  </g>
+</svg>
