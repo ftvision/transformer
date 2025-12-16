@@ -1,0 +1,201 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550">
+  <defs>
+    <!-- 3b1b-style gradients -->
+    <linearGradient id="blueGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="greenGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16a34a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="purpleGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="orangeGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ea580c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#eab308;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ca8a04;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Arrow marker -->
+    <marker id="arrowhead3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="550" fill="url(#bgGrad3)"/>
+
+  <!-- Title -->
+  <text x="450" y="40" font-family="Georgia, serif" font-size="28" fill="#f1f5f9" text-anchor="middle" font-weight="bold">Layer Normalization</text>
+  <text x="450" y="70" font-family="Georgia, serif" font-size="16" fill="#94a3b8" text-anchor="middle" font-style="italic">
+    LayerNorm(x) = γ · (x - μ) / σ + β
+  </text>
+
+  <!-- ============ Input Features ============ -->
+  <g transform="translate(50, 110)">
+    <text x="80" y="0" font-family="Georgia, serif" font-size="16" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Input Features</text>
+    <text x="80" y="20" font-family="Georgia, serif" font-size="12" fill="#64748b" text-anchor="middle">(one token's embedding)</text>
+
+    <!-- Feature bars - varied heights showing different scales -->
+    <g transform="translate(0, 40)">
+      <rect x="0" y="20" width="30" height="140" rx="3" fill="url(#blueGrad3)" filter="url(#glow3)"/>
+      <text x="15" y="175" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">5.2</text>
+
+      <rect x="40" y="120" width="30" height="40" rx="3" fill="url(#greenGrad3)" filter="url(#glow3)"/>
+      <text x="55" y="175" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">1.1</text>
+
+      <rect x="80" y="60" width="30" height="100" rx="3" fill="url(#purpleGrad3)" filter="url(#glow3)"/>
+      <text x="95" y="175" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">3.4</text>
+
+      <rect x="120" y="100" width="30" height="60" rx="3" fill="url(#orangeGrad3)" filter="url(#glow3)"/>
+      <text x="135" y="175" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">2.0</text>
+    </g>
+
+    <!-- Stats -->
+    <text x="80" y="250" font-family="Georgia, serif" font-size="12" fill="#94a3b8" text-anchor="middle">μ = 2.93, σ = 1.52</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <g transform="translate(200, 200)">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead3)"/>
+    <text x="30" y="-10" font-family="Georgia, serif" font-size="11" fill="#94a3b8" text-anchor="middle">subtract μ</text>
+  </g>
+
+  <!-- ============ Mean-Centered ============ -->
+  <g transform="translate(280, 110)">
+    <text x="80" y="0" font-family="Georgia, serif" font-size="16" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Mean-Centered</text>
+    <text x="80" y="20" font-family="Georgia, serif" font-size="12" fill="#64748b" text-anchor="middle">(x - μ)</text>
+
+    <!-- Feature bars - centered around 0 -->
+    <g transform="translate(0, 40)">
+      <!-- Zero line -->
+      <line x1="-10" y1="95" x2="170" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="4,2"/>
+      <text x="175" y="98" font-family="monospace" font-size="10" fill="#64748b">0</text>
+
+      <!-- Bars relative to zero -->
+      <rect x="0" y="25" width="30" height="70" rx="3" fill="url(#blueGrad3)" opacity="0.8" filter="url(#glow3)"/>
+      <text x="15" y="175" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">+2.27</text>
+
+      <rect x="40" y="95" width="30" height="55" rx="3" fill="url(#greenGrad3)" opacity="0.8" filter="url(#glow3)"/>
+      <text x="55" y="175" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">-1.83</text>
+
+      <rect x="80" y="60" width="30" height="35" rx="3" fill="url(#purpleGrad3)" opacity="0.8" filter="url(#glow3)"/>
+      <text x="95" y="175" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">+0.47</text>
+
+      <rect x="120" y="95" width="30" height="28" rx="3" fill="url(#orangeGrad3)" opacity="0.8" filter="url(#glow3)"/>
+      <text x="135" y="175" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">-0.93</text>
+    </g>
+
+    <text x="80" y="250" font-family="Georgia, serif" font-size="12" fill="#22c55e" text-anchor="middle">μ = 0 ✓</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <g transform="translate(430, 200)">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead3)"/>
+    <text x="30" y="-10" font-family="Georgia, serif" font-size="11" fill="#94a3b8" text-anchor="middle">divide by σ</text>
+  </g>
+
+  <!-- ============ Normalized ============ -->
+  <g transform="translate(510, 110)">
+    <text x="80" y="0" font-family="Georgia, serif" font-size="16" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Normalized</text>
+    <text x="80" y="20" font-family="Georgia, serif" font-size="12" fill="#64748b" text-anchor="middle">(x - μ) / σ</text>
+
+    <!-- Feature bars - normalized scale -->
+    <g transform="translate(0, 40)">
+      <!-- Zero line -->
+      <line x1="-10" y1="95" x2="170" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="4,2"/>
+
+      <!-- Scale markers -->
+      <text x="175" y="48" font-family="monospace" font-size="9" fill="#64748b">+1</text>
+      <text x="175" y="98" font-family="monospace" font-size="9" fill="#64748b">0</text>
+      <text x="175" y="148" font-family="monospace" font-size="9" fill="#64748b">-1</text>
+
+      <!-- Bars with normalized heights -->
+      <rect x="0" y="25" width="30" height="70" rx="3" fill="url(#blueGrad3)" filter="url(#glow3)"/>
+      <text x="15" y="175" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">+1.49</text>
+
+      <rect x="40" y="95" width="30" height="55" rx="3" fill="url(#greenGrad3)" filter="url(#glow3)"/>
+      <text x="55" y="175" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">-1.20</text>
+
+      <rect x="80" y="80" width="30" height="15" rx="3" fill="url(#purpleGrad3)" filter="url(#glow3)"/>
+      <text x="95" y="175" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">+0.31</text>
+
+      <rect x="120" y="95" width="30" height="28" rx="3" fill="url(#orangeGrad3)" filter="url(#glow3)"/>
+      <text x="135" y="175" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">-0.61</text>
+    </g>
+
+    <text x="80" y="250" font-family="Georgia, serif" font-size="12" fill="#22c55e" text-anchor="middle">σ = 1 ✓</text>
+  </g>
+
+  <!-- Arrow 3 -->
+  <g transform="translate(660, 200)">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead3)"/>
+    <text x="30" y="-10" font-family="Georgia, serif" font-size="11" fill="#94a3b8" text-anchor="middle">γ · x + β</text>
+  </g>
+
+  <!-- ============ Scaled & Shifted ============ -->
+  <g transform="translate(740, 110)">
+    <text x="80" y="0" font-family="Georgia, serif" font-size="16" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Output</text>
+    <text x="80" y="20" font-family="Georgia, serif" font-size="12" fill="#64748b" text-anchor="middle">(learnable γ, β)</text>
+
+    <!-- Feature bars - final output -->
+    <g transform="translate(0, 40)">
+      <rect x="0" y="30" width="30" height="65" rx="3" fill="url(#yellowGrad)" filter="url(#glow3)"/>
+      <rect x="40" y="95" width="30" height="50" rx="3" fill="url(#yellowGrad)" filter="url(#glow3)"/>
+      <rect x="80" y="75" width="30" height="20" rx="3" fill="url(#yellowGrad)" filter="url(#glow3)"/>
+      <rect x="120" y="95" width="30" height="25" rx="3" fill="url(#yellowGrad)" filter="url(#glow3)"/>
+    </g>
+
+    <text x="80" y="250" font-family="Georgia, serif" font-size="12" fill="#eab308" text-anchor="middle">Learned scale &amp; shift</text>
+  </g>
+
+  <!-- ============ Why Layer Norm? ============ -->
+  <g transform="translate(50, 400)">
+    <rect x="0" y="0" width="800" height="130" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+
+    <text x="400" y="25" font-family="Georgia, serif" font-size="16" fill="#f1f5f9" text-anchor="middle" font-weight="bold">Why Layer Normalization?</text>
+
+    <!-- Three columns -->
+    <g transform="translate(50, 50)">
+      <text x="80" y="0" font-family="Georgia, serif" font-size="13" fill="#3b82f6" text-anchor="middle" font-weight="bold">Per-Token</text>
+      <text x="80" y="20" font-family="Georgia, serif" font-size="11" fill="#94a3b8" text-anchor="middle">Normalizes each token</text>
+      <text x="80" y="35" font-family="Georgia, serif" font-size="11" fill="#94a3b8" text-anchor="middle">independently across</text>
+      <text x="80" y="50" font-family="Georgia, serif" font-size="11" fill="#94a3b8" text-anchor="middle">feature dimensions</text>
+    </g>
+
+    <g transform="translate(300, 50)">
+      <text x="100" y="0" font-family="Georgia, serif" font-size="13" fill="#22c55e" text-anchor="middle" font-weight="bold">Stable Training</text>
+      <text x="100" y="20" font-family="Georgia, serif" font-size="11" fill="#94a3b8" text-anchor="middle">Keeps activations in</text>
+      <text x="100" y="35" font-family="Georgia, serif" font-size="11" fill="#94a3b8" text-anchor="middle">a reasonable range,</text>
+      <text x="100" y="50" font-family="Georgia, serif" font-size="11" fill="#94a3b8" text-anchor="middle">prevents gradient issues</text>
+    </g>
+
+    <g transform="translate(550, 50)">
+      <text x="100" y="0" font-family="Georgia, serif" font-size="13" fill="#a855f7" text-anchor="middle" font-weight="bold">Learnable</text>
+      <text x="100" y="20" font-family="Georgia, serif" font-size="11" fill="#94a3b8" text-anchor="middle">γ and β let the model</text>
+      <text x="100" y="35" font-family="Georgia, serif" font-size="11" fill="#94a3b8" text-anchor="middle">learn optimal scale</text>
+      <text x="100" y="50" font-family="Georgia, serif" font-size="11" fill="#94a3b8" text-anchor="middle">for each feature</text>
+    </g>
+  </g>
+</svg>
