@@ -15,6 +15,30 @@ Attention(Q, K, V) = softmax(QK^T / √d_k) V
 
 **Key insight**: Attention allows every position to directly attend to every other position in O(1) hops (vs O(n) for RNNs).
 
+```
+WHY O(1) HOPS BUT O(n²) COMPUTE?
+────────────────────────────────
+
+"Hops" refers to information flow distance, not compute cost:
+
+RNN: Token 1 → Token 2 → Token 3 → ... → Token n
+     Information from token 1 must "hop" through n-1 tokens
+     to reach token n. Path length = O(n).
+
+Transformer: Token 1 ─────────────────────→ Token n
+             Direct connection! Path length = O(1).
+
+But to CREATE these direct connections for ALL pairs:
+  - Token 1 computes attention with tokens 1,2,3,...,n  → n operations
+  - Token 2 computes attention with tokens 1,2,3,...,n  → n operations
+  - ...
+  - Token n computes attention with tokens 1,2,3,...,n  → n operations
+  ──────────────────────────────────────────────────────────────────
+  Total: n × n = O(n²) operations
+
+The BENEFIT (O(1) hops for gradient flow) comes at a COST (O(n²) compute).
+```
+
 **The problem it created**: The attention matrix is n×n, leading to O(n²) complexity in both time and memory.
 
 **Practical impact**: Transformers were limited to ~512-1024 tokens in practice.
@@ -70,6 +94,34 @@ FIXED (alternating patterns):
 The foundational paper for linear attention. **Key insight**: By changing the kernel function, we can reorder the computation.
 
 ```
+WHAT IS A "KERNEL" IN THIS CONTEXT?
+───────────────────────────────────
+
+A kernel K(x, y) is a function that measures SIMILARITY between two vectors.
+
+In standard attention, the similarity between query q and key k is:
+  sim(q, k) = exp(q · k / √d)    ← this is the "softmax kernel"
+
+The "kernel trick" from machine learning says:
+  Any kernel K(x,y) can be written as: K(x, y) = φ(x) · φ(y)
+  where φ is a "feature map" that transforms vectors.
+
+Example:
+  Polynomial kernel: K(x,y) = (x·y)²
+  Can be rewritten as: K(x,y) = φ(x) · φ(y) where φ(x) = [x₁², x₂², √2·x₁x₂]
+
+WHY does φ apply to BOTH Q and K?
+─────────────────────────────────
+Because similarity is symmetric! To measure how similar q is to k,
+we transform both into the same feature space and take their dot product.
+
+  Original: sim(q,k) = kernel(q, k)
+  Rewritten: sim(q,k) = φ(q) · φ(k)
+
+The feature map φ must be the SAME for both - that's what makes it a valid kernel.
+```
+
+```
 STANDARD ATTENTION:
   Attention = softmax(QK^T) V
             = [n×n matrix] × V
@@ -80,6 +132,20 @@ LINEAR ATTENTION (kernel trick):
   Replace softmax with feature map φ:
 
   Attention = φ(Q) φ(K)^T V
+
+  WHY CAN WE REORDER?
+  ───────────────────
+  Matrix multiplication is associative: (AB)C = A(BC)
+
+  φ(Q) φ(K)^T V
+  └─┬─┘└──┬──┘
+    n×d   d×n  n×d_v
+
+  Option 1: (φ(Q) φ(K)^T) V = [n×n] × V → O(n²) ✗
+  Option 2: φ(Q) (φ(K)^T V) = [n×d] × [d×d_v] → O(n·d²) ✓
+
+  Since d << n (typically d=64, n=thousands), Option 2 wins!
+
             = φ(Q) (φ(K)^T V)    ← associativity!
             = φ(Q) × [d×d matrix]
             → Compute K^T V first (d×d, independent of n)
@@ -114,6 +180,51 @@ PERFORMER'S APPROACH:
   φ(x) = exp(x^T ω_1), exp(x^T ω_2), ..., exp(x^T ω_r)
 
   With ω sampled from appropriate distribution
+```
+
+```
+WHAT EXACTLY IS LOST FROM SOFTMAX?
+──────────────────────────────────
+
+Softmax attention has special properties that linear attention approximations struggle to match:
+
+1. SHARP ATTENTION (spikiness)
+   ────────────────────────────
+   Softmax with large values → nearly one-hot distribution
+   Example: softmax([10, 1, 1]) ≈ [0.9999, 0.00005, 0.00005]
+
+   Linear attention can't do this! φ(Q)φ(K)^T produces smoother distributions.
+   This hurts tasks requiring precise retrieval ("find the exact token that...").
+
+2. NORMALIZATION IS APPROXIMATE
+   ────────────────────────────
+   Softmax guarantees: Σ weights = 1 (exact probability distribution)
+   Linear attention: normalization is estimated, can be unstable
+
+3. NON-NEGATIVITY
+   ───────────────
+   Softmax: all weights ≥ 0 (true attention scores)
+   Some linear φ: can produce negative "attention" (harder to interpret)
+   Performer's FAVOR+ addresses this with positive random features.
+
+4. INFINITE FEATURE DIMENSION
+   ──────────────────────────
+   Softmax kernel exp(q·k) theoretically needs INFINITE dimensional φ.
+   Any finite φ is an approximation. More features → better but slower.
+
+WHY DOES THIS MATTER?
+
+   Task: "What color was the car mentioned in paragraph 3?"
+
+   Full attention: Can put 99% weight on the exact token "red"
+   Linear attention: Spreads weight more evenly, might miss precision
+
+This is why early linear attention worked on language modeling (predicting
+next token, where smooth distributions are fine) but struggled on retrieval
+and reasoning tasks (where sharp focus is essential).
+
+The 2025 breakthrough (KDA) solved this by using HYBRID architectures:
+linear attention for most layers + periodic full attention for sharp focus.
 ```
 
 **Trade-off**: Requires more random features for better approximation, increasing the hidden dimension d → r.
