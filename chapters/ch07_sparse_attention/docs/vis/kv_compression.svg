@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+  <defs>
+    <style>
+      .title { font-family: "CMU Serif", Georgia, serif; font-size: 24px; fill: #FFFFFF; }
+      .subtitle { font-family: "CMU Serif", Georgia, serif; font-size: 14px; fill: #888888; }
+      .label { font-family: "CMU Serif", Georgia, serif; font-size: 12px; fill: #FFFFFF; }
+      .small-label { font-family: "CMU Serif", Georgia, serif; font-size: 10px; fill: #888888; }
+      .dim { font-family: monospace; font-size: 9px; fill: #666666; }
+      .box { stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="500" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" class="title">KV Compression Techniques</text>
+  <text x="450" y="55" text-anchor="middle" class="subtitle">Reducing memory while preserving attention quality</text>
+
+  <!-- MHA (baseline) -->
+  <g transform="translate(50, 90)">
+    <text x="90" y="0" text-anchor="middle" class="label" fill="#FF6B6B">Multi-Head Attention</text>
+    <text x="90" y="15" text-anchor="middle" class="small-label">(Baseline)</text>
+
+    <!-- Q heads -->
+    <rect x="0" y="30" width="20" height="60" fill="#83C167" class="box" stroke="#83C167"/>
+    <rect x="22" y="30" width="20" height="60" fill="#83C167" class="box" stroke="#83C167"/>
+    <rect x="44" y="30" width="20" height="60" fill="#83C167" class="box" stroke="#83C167"/>
+    <rect x="66" y="30" width="20" height="60" fill="#83C167" class="box" stroke="#83C167"/>
+    <text x="45" y="105" text-anchor="middle" class="small-label">Q (4 heads)</text>
+
+    <!-- K heads -->
+    <rect x="100" y="30" width="20" height="60" fill="#FFFF00" class="box" stroke="#FFFF00"/>
+    <rect x="122" y="30" width="20" height="60" fill="#FFFF00" class="box" stroke="#FFFF00"/>
+    <rect x="144" y="30" width="20" height="60" fill="#FFFF00" class="box" stroke="#FFFF00"/>
+    <rect x="166" y="30" width="20" height="60" fill="#FFFF00" class="box" stroke="#FFFF00"/>
+    <text x="145" y="105" text-anchor="middle" class="small-label">K (4 heads)</text>
+
+    <!-- Arrows showing 1:1 -->
+    <line x1="30" y1="90" x2="110" y2="90" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="52" y1="90" x2="132" y2="90" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="74" y1="90" x2="154" y2="90" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="96" y1="90" x2="176" y2="90" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+
+    <!-- Memory indicator -->
+    <rect x="30" y="120" width="130" height="20" fill="#FF6B6B" rx="3"/>
+    <text x="95" y="134" text-anchor="middle" class="small-label" fill="#000000">4 K heads cached</text>
+  </g>
+
+  <!-- GQA -->
+  <g transform="translate(280, 90)">
+    <text x="90" y="0" text-anchor="middle" class="label" fill="#29ABCA">Grouped Query Attention</text>
+    <text x="90" y="15" text-anchor="middle" class="small-label">(GQA, groups=2)</text>
+
+    <!-- Q heads -->
+    <rect x="0" y="30" width="20" height="60" fill="#83C167" class="box" stroke="#83C167"/>
+    <rect x="22" y="30" width="20" height="60" fill="#83C167" class="box" stroke="#83C167"/>
+    <rect x="44" y="30" width="20" height="60" fill="#83C167" class="box" stroke="#83C167"/>
+    <rect x="66" y="30" width="20" height="60" fill="#83C167" class="box" stroke="#83C167"/>
+    <text x="45" y="105" text-anchor="middle" class="small-label">Q (4 heads)</text>
+
+    <!-- K heads (only 2) -->
+    <rect x="115" y="30" width="25" height="60" fill="#FFFF00" class="box" stroke="#FFFF00"/>
+    <rect x="150" y="30" width="25" height="60" fill="#FFFF00" class="box" stroke="#FFFF00"/>
+    <text x="147" y="105" text-anchor="middle" class="small-label">K (2 groups)</text>
+
+    <!-- Arrows showing 2:1 grouping -->
+    <line x1="30" y1="90" x2="127" y2="90" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="52" y1="90" x2="127" y2="90" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="74" y1="90" x2="162" y2="90" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="96" y1="90" x2="162" y2="90" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+
+    <!-- Memory indicator -->
+    <rect x="30" y="120" width="65" height="20" fill="#29ABCA" rx="3"/>
+    <text x="95" y="134" text-anchor="middle" class="small-label" fill="#FFFFFF">2× smaller</text>
+  </g>
+
+  <!-- MQA -->
+  <g transform="translate(510, 90)">
+    <text x="90" y="0" text-anchor="middle" class="label" fill="#9B59B6">Multi-Query Attention</text>
+    <text x="90" y="15" text-anchor="middle" class="small-label">(MQA, groups=1)</text>
+
+    <!-- Q heads -->
+    <rect x="0" y="30" width="20" height="60" fill="#83C167" class="box" stroke="#83C167"/>
+    <rect x="22" y="30" width="20" height="60" fill="#83C167" class="box" stroke="#83C167"/>
+    <rect x="44" y="30" width="20" height="60" fill="#83C167" class="box" stroke="#83C167"/>
+    <rect x="66" y="30" width="20" height="60" fill="#83C167" class="box" stroke="#83C167"/>
+    <text x="45" y="105" text-anchor="middle" class="small-label">Q (4 heads)</text>
+
+    <!-- K head (only 1) -->
+    <rect x="130" y="30" width="30" height="60" fill="#FFFF00" class="box" stroke="#FFFF00"/>
+    <text x="145" y="105" text-anchor="middle" class="small-label">K (1 head)</text>
+
+    <!-- Arrows showing 4:1 -->
+    <line x1="30" y1="90" x2="145" y2="90" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="52" y1="90" x2="145" y2="90" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="74" y1="90" x2="145" y2="90" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="96" y1="90" x2="145" y2="90" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+
+    <!-- Memory indicator -->
+    <rect x="30" y="120" width="32" height="20" fill="#9B59B6" rx="3"/>
+    <text x="95" y="134" text-anchor="middle" class="small-label" fill="#FFFFFF">4× smaller</text>
+  </g>
+
+  <!-- Low-rank projection -->
+  <g transform="translate(720, 90)">
+    <text x="70" y="0" text-anchor="middle" class="label" fill="#FF9500">Low-Rank KV</text>
+    <text x="70" y="15" text-anchor="middle" class="small-label">(Projection)</text>
+
+    <!-- Original K -->
+    <rect x="0" y="30" width="60" height="60" fill="#FFFF00" class="box" stroke="#FFFF00" opacity="0.3"/>
+    <text x="30" y="65" text-anchor="middle" class="small-label" fill="#FFFF00">K full</text>
+    <text x="30" y="105" text-anchor="middle" class="dim">(seq, h×d)</text>
+
+    <!-- Compressed -->
+    <rect x="90" y="40" width="40" height="40" fill="#FF9500" class="box" stroke="#FF9500"/>
+    <text x="110" y="65" text-anchor="middle" class="small-label" fill="#000000">K_c</text>
+    <text x="110" y="95" text-anchor="middle" class="dim">(seq, r)</text>
+
+    <!-- Arrow -->
+    <line x1="60" y1="60" x2="88" y2="60" stroke="#666666" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="74" y="52" text-anchor="middle" class="dim">W_down</text>
+  </g>
+
+  <!-- Comparison chart -->
+  <g transform="translate(100, 260)">
+    <text x="350" y="0" text-anchor="middle" class="label">Memory Usage Comparison</text>
+
+    <!-- Headers -->
+    <text x="0" y="30" class="label" fill="#888888">Method</text>
+    <text x="180" y="30" class="label" fill="#888888">KV Size (per token)</text>
+    <text x="400" y="30" class="label" fill="#888888">Relative</text>
+    <text x="550" y="30" class="label" fill="#888888">Quality Impact</text>
+
+    <!-- Separator -->
+    <line x1="0" y1="40" x2="700" y2="40" stroke="#333333" stroke-width="1"/>
+
+    <!-- MHA row -->
+    <text x="0" y="60" class="label" fill="#FF6B6B">MHA (h=32, d=128)</text>
+    <text x="180" y="60" class="label">2 × 32 × 128 = 8192</text>
+    <rect x="400" y="48" width="100" height="16" fill="#FF6B6B" rx="2"/>
+    <text x="450" y="60" text-anchor="middle" class="small-label" fill="#000000">1.0×</text>
+    <text x="550" y="60" class="label" fill="#83C167">Baseline</text>
+
+    <!-- GQA row -->
+    <text x="0" y="90" class="label" fill="#29ABCA">GQA (g=8)</text>
+    <text x="180" y="90" class="label">2 × 8 × 128 = 2048</text>
+    <rect x="400" y="78" width="25" height="16" fill="#29ABCA" rx="2"/>
+    <text x="450" y="90" text-anchor="middle" class="small-label">0.25×</text>
+    <text x="550" y="90" class="label" fill="#83C167">Minimal loss</text>
+
+    <!-- MQA row -->
+    <text x="0" y="120" class="label" fill="#9B59B6">MQA (g=1)</text>
+    <text x="180" y="120" class="label">2 × 1 × 128 = 256</text>
+    <rect x="400" y="108" width="3" height="16" fill="#9B59B6" rx="1"/>
+    <text x="450" y="120" text-anchor="middle" class="small-label">0.03×</text>
+    <text x="550" y="120" class="label" fill="#FFFF00">Some degradation</text>
+
+    <!-- Low-rank row -->
+    <text x="0" y="150" class="label" fill="#FF9500">Low-Rank (r=256)</text>
+    <text x="180" y="150" class="label">2 × 256 = 512</text>
+    <rect x="400" y="138" width="6" height="16" fill="#FF9500" rx="1"/>
+    <text x="450" y="150" text-anchor="middle" class="small-label">0.06×</text>
+    <text x="550" y="150" class="label" fill="#83C167">Depends on rank</text>
+
+    <!-- MLA row -->
+    <text x="0" y="180" class="label" fill="#83C167">MLA (latent=512)</text>
+    <text x="180" y="180" class="label">512</text>
+    <rect x="400" y="168" width="6" height="16" fill="#83C167" rx="1"/>
+    <text x="450" y="180" text-anchor="middle" class="small-label">0.06×</text>
+    <text x="550" y="180" class="label" fill="#83C167">Excellent (DeepSeek)</text>
+  </g>
+
+  <!-- Key insight -->
+  <g transform="translate(100, 470)">
+    <rect x="0" y="0" width="700" height="25" fill="#111111" rx="3"/>
+    <text x="350" y="17" text-anchor="middle" class="subtitle" fill="#FFFFFF">Key: Trade per-head diversity for memory efficiency. GQA is the sweet spot for most models.</text>
+  </g>
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666666"/>
+    </marker>
+  </defs>
+</svg>
