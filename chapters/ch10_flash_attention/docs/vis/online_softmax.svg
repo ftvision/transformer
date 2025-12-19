@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550">
+  <!-- Pure black background -->
+  <rect width="800" height="550" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Online Softmax: Incremental Computation</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Compute softmax as we see blocks, without storing all scores
+  </text>
+
+  <!-- ============ The Problem ============ -->
+  <g transform="translate(50, 90)">
+    <text x="150" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FF6B6B" text-anchor="middle">Standard Softmax Problem</text>
+
+    <!-- Score blocks -->
+    <g transform="translate(0, 25)">
+      <rect x="0" y="0" width="70" height="35" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <text x="35" y="22" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">Block 1</text>
+
+      <rect x="75" y="0" width="70" height="35" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <text x="110" y="22" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">Block 2</text>
+
+      <rect x="150" y="0" width="70" height="35" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <text x="185" y="22" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">Block 3</text>
+
+      <text x="235" y="22" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888">...</text>
+    </g>
+
+    <!-- Need all for softmax -->
+    <g transform="translate(0, 75)">
+      <path d="M35,0 L35,15 L185,15 L185,0" fill="none" stroke="#FF6B6B" stroke-width="1.5"/>
+      <line x1="110" y1="15" x2="110" y2="30" stroke="#FF6B6B" stroke-width="1.5"/>
+      <polygon points="110,30 106,23 114,23" fill="#FF6B6B"/>
+      <text x="110" y="50" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B" text-anchor="middle">Need ALL scores for softmax!</text>
+      <text x="110" y="68" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">max() and sum() over everything</text>
+    </g>
+  </g>
+
+  <!-- ============ The Solution ============ -->
+  <g transform="translate(420, 90)">
+    <text x="170" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#83C167" text-anchor="middle">Online Softmax Solution</text>
+
+    <!-- Track running statistics -->
+    <g transform="translate(0, 25)">
+      <text x="170" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Track running statistics:</text>
+
+      <rect x="60" y="15" width="80" height="30" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="1" rx="3"/>
+      <text x="100" y="35" font-family="monospace" font-size="11" fill="#FF6B6B" text-anchor="middle">m (max)</text>
+
+      <rect x="160" y="15" width="120" height="30" fill="#83C167" fill-opacity="0.2" stroke="#83C167" stroke-width="1" rx="3"/>
+      <text x="220" y="35" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">l (sum of exp)</text>
+    </g>
+
+    <!-- Update formula -->
+    <g transform="translate(0, 90)">
+      <text x="170" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">Update as we see each block:</text>
+
+      <text x="170" y="25" font-family="monospace" font-size="11" fill="#FF6B6B" text-anchor="middle">m_new = max(m, max(block))</text>
+      <text x="170" y="45" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">l = l × exp(m - m_new) + Σexp(block - m_new)</text>
+    </g>
+  </g>
+
+  <!-- ============ Step by Step Example ============ -->
+  <g transform="translate(50, 240)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">Example: Processing 3 Blocks</text>
+
+    <!-- Block 1 -->
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="200" height="75" fill="#29ABCA" fill-opacity="0.1" stroke="#29ABCA" stroke-width="1" rx="5"/>
+      <text x="100" y="20" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#29ABCA" text-anchor="middle">Block 1: scores = [2, 1, 3]</text>
+
+      <text x="20" y="45" font-family="monospace" font-size="10" fill="#FF6B6B">m = 3</text>
+      <text x="20" y="62" font-family="monospace" font-size="10" fill="#83C167">l = e⁰ + e⁻¹ + e⁻² = 1.50</text>
+    </g>
+
+    <!-- Arrow 1 -->
+    <g transform="translate(210, 60)">
+      <line x1="0" y1="0" x2="30" y2="0" stroke="#888888" stroke-width="1.5"/>
+      <polygon points="30,0 24,-3 24,3" fill="#888888"/>
+    </g>
+
+    <!-- Block 2 -->
+    <g transform="translate(250, 30)">
+      <rect x="0" y="0" width="200" height="75" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" stroke-width="1" rx="5"/>
+      <text x="100" y="20" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FFFF00" text-anchor="middle">Block 2: scores = [5, 4, 4]</text>
+
+      <text x="20" y="45" font-family="monospace" font-size="10" fill="#FF6B6B">m_new = max(3, 5) = 5</text>
+      <text x="20" y="62" font-family="monospace" font-size="10" fill="#83C167">l = 1.50×e⁻² + e⁰+2e⁻¹ = 1.94</text>
+    </g>
+
+    <!-- Arrow 2 -->
+    <g transform="translate(460, 60)">
+      <line x1="0" y1="0" x2="30" y2="0" stroke="#888888" stroke-width="1.5"/>
+      <polygon points="30,0 24,-3 24,3" fill="#888888"/>
+    </g>
+
+    <!-- Block 3 -->
+    <g transform="translate(500, 30)">
+      <rect x="0" y="0" width="200" height="75" fill="#83C167" fill-opacity="0.1" stroke="#83C167" stroke-width="1" rx="5"/>
+      <text x="100" y="20" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#83C167" text-anchor="middle">Block 3: scores = [1, 2, 1]</text>
+
+      <text x="20" y="45" font-family="monospace" font-size="10" fill="#FF6B6B">m = 5 (no change)</text>
+      <text x="20" y="62" font-family="monospace" font-size="10" fill="#83C167">l = 1.94×1 + 2e⁻⁴+e⁻³ = 2.03</text>
+    </g>
+  </g>
+
+  <!-- ============ Key Insight ============ -->
+  <g transform="translate(50, 370)">
+    <rect x="0" y="0" width="700" height="70" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" stroke-width="2" rx="5"/>
+
+    <text x="350" y="25" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">The Magic: Rescaling When Max Changes</text>
+
+    <text x="350" y="50" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">
+      When we find a new max, we rescale previous sum by exp(m_old - m_new)
+    </text>
+  </g>
+
+  <!-- ============ With Output Accumulation ============ -->
+  <g transform="translate(50, 460)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#ffffff" text-anchor="middle">For Attention: Also Accumulate Output</text>
+
+    <g transform="translate(80, 20)">
+      <text x="0" y="0" font-family="monospace" font-size="11" fill="#29ABCA">O_new = O × scale + P_block @ V_block</text>
+      <text x="320" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">← weighted value sum</text>
+    </g>
+
+    <g transform="translate(80, 45)">
+      <text x="0" y="0" font-family="monospace" font-size="11" fill="#83C167">scale = exp(m_old - m_new) × l_old / l_new</text>
+      <text x="320" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">← rescale previous</text>
+    </g>
+  </g>
+</svg>
