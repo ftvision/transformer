@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
+  <!-- Pure black background -->
+  <rect width="900" height="520" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Feature Maps: φ(x) Comparison</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="58" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Different φ functions trade off accuracy vs efficiency
+  </text>
+
+  <!-- ============ Function Plots ============ -->
+  <g transform="translate(50, 90)">
+    <!-- Axes for all plots -->
+    <g transform="translate(0, 0)">
+      <text x="400" y="-5" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#ffffff" text-anchor="middle">Function Shapes</text>
+    </g>
+
+    <!-- Plot 1: ELU+1 -->
+    <g transform="translate(30, 30)">
+      <text x="75" y="-5" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167" text-anchor="middle">ELU + 1</text>
+
+      <!-- Axes -->
+      <line x1="0" y1="60" x2="150" y2="60" stroke="#444444" stroke-width="1"/>
+      <line x1="75" y1="0" x2="75" y2="120" stroke="#444444" stroke-width="1"/>
+
+      <!-- Labels -->
+      <text x="75" y="135" font-family="monospace" font-size="9" fill="#666666" text-anchor="middle">x</text>
+      <text x="0" y="65" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">-2</text>
+      <text x="150" y="65" font-family="monospace" font-size="9" fill="#666666" text-anchor="start">2</text>
+
+      <!-- ELU+1 curve: x+1 for x>0, exp(x) for x≤0 -->
+      <path d="M 0,55 Q 35,58 75,30 L 150,-30" fill="none" stroke="#83C167" stroke-width="2"/>
+
+      <!-- y=1 line (minimum) -->
+      <line x1="0" y1="30" x2="75" y2="30" stroke="#83C167" stroke-dasharray="3,3" stroke-opacity="0.5"/>
+      <text x="-5" y="35" font-family="monospace" font-size="8" fill="#83C167" text-anchor="end">1</text>
+
+      <!-- Always positive annotation -->
+      <text x="75" y="150" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">Always > 0</text>
+    </g>
+
+    <!-- Plot 2: ReLU -->
+    <g transform="translate(220, 30)">
+      <text x="75" y="-5" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">ReLU</text>
+
+      <!-- Axes -->
+      <line x1="0" y1="60" x2="150" y2="60" stroke="#444444" stroke-width="1"/>
+      <line x1="75" y1="0" x2="75" y2="120" stroke="#444444" stroke-width="1"/>
+
+      <!-- Labels -->
+      <text x="75" y="135" font-family="monospace" font-size="9" fill="#666666" text-anchor="middle">x</text>
+
+      <!-- ReLU curve: 0 for x<0, x for x≥0 -->
+      <path d="M 0,60 L 75,60 L 150,0" fill="none" stroke="#FFFF00" stroke-width="2"/>
+
+      <!-- Zero annotation -->
+      <text x="75" y="150" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00" text-anchor="middle">Can be 0</text>
+    </g>
+
+    <!-- Plot 3: Squared ReLU -->
+    <g transform="translate(410, 30)">
+      <text x="75" y="-5" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FF6B6B" text-anchor="middle">ReLU²</text>
+
+      <!-- Axes -->
+      <line x1="0" y1="60" x2="150" y2="60" stroke="#444444" stroke-width="1"/>
+      <line x1="75" y1="0" x2="75" y2="120" stroke="#444444" stroke-width="1"/>
+
+      <!-- Labels -->
+      <text x="75" y="135" font-family="monospace" font-size="9" fill="#666666" text-anchor="middle">x</text>
+
+      <!-- Squared ReLU curve: 0 for x<0, x² for x≥0 -->
+      <path d="M 0,60 L 75,60 Q 112,50 150,-10" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+
+      <!-- Smooth annotation -->
+      <text x="75" y="150" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FF6B6B" text-anchor="middle">Smoother</text>
+    </g>
+
+    <!-- Plot 4: Exp -->
+    <g transform="translate(600, 30)">
+      <text x="75" y="-5" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#29ABCA" text-anchor="middle">exp(x)</text>
+
+      <!-- Axes -->
+      <line x1="0" y1="60" x2="150" y2="60" stroke="#444444" stroke-width="1"/>
+      <line x1="75" y1="0" x2="75" y2="120" stroke="#444444" stroke-width="1"/>
+
+      <!-- Labels -->
+      <text x="75" y="135" font-family="monospace" font-size="9" fill="#666666" text-anchor="middle">x</text>
+
+      <!-- Exp curve -->
+      <path d="M 0,58 Q 50,55 75,30 Q 100,-20 120,-60" fill="none" stroke="#29ABCA" stroke-width="2"/>
+
+      <!-- Warning annotation -->
+      <text x="75" y="150" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA" text-anchor="middle">Can overflow!</text>
+    </g>
+  </g>
+
+  <!-- ============ Comparison Table ============ -->
+  <g transform="translate(50, 290)">
+    <text x="400" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">Trade-offs</text>
+
+    <!-- Table -->
+    <g transform="translate(50, 25)">
+      <!-- Headers -->
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Feature Map</text>
+      <text x="150" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Positivity</text>
+      <text x="280" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Softmax Approx</text>
+      <text x="430" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Speed</text>
+      <text x="530" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Stability</text>
+      <text x="650" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Used In</text>
+
+      <!-- Divider -->
+      <line x1="0" y1="10" x2="750" y2="10" stroke="#444444" stroke-width="1"/>
+
+      <!-- Row 1: ELU+1 -->
+      <text x="0" y="35" font-family="monospace" font-size="12" fill="#83C167">ELU + 1</text>
+      <text x="150" y="35" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">✓ Always</text>
+      <text x="280" y="35" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00">⭐⭐</text>
+      <text x="430" y="35" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">⭐⭐⭐⭐⭐</text>
+      <text x="530" y="35" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">⭐⭐⭐⭐</text>
+      <text x="650" y="35" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Linear Trans.</text>
+
+      <!-- Row 2: ReLU -->
+      <text x="0" y="60" font-family="monospace" font-size="12" fill="#FFFF00">ReLU</text>
+      <text x="150" y="60" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B">Partial</text>
+      <text x="280" y="60" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00">⭐</text>
+      <text x="430" y="60" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">⭐⭐⭐⭐⭐</text>
+      <text x="530" y="60" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00">⭐⭐⭐</text>
+      <text x="650" y="60" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Experiments</text>
+
+      <!-- Row 3: Squared ReLU -->
+      <text x="0" y="85" font-family="monospace" font-size="12" fill="#FF6B6B">ReLU²</text>
+      <text x="150" y="85" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">✓ Always</text>
+      <text x="280" y="85" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00">⭐⭐⭐</text>
+      <text x="430" y="85" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">⭐⭐⭐⭐</text>
+      <text x="530" y="85" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">⭐⭐⭐⭐</text>
+      <text x="650" y="85" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Recent work</text>
+
+      <!-- Row 4: Random Features -->
+      <text x="0" y="110" font-family="monospace" font-size="12" fill="#29ABCA">Random</text>
+      <text x="150" y="110" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">✓ Always</text>
+      <text x="280" y="110" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">⭐⭐⭐⭐⭐</text>
+      <text x="430" y="110" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B">⭐⭐</text>
+      <text x="530" y="110" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00">⭐⭐⭐</text>
+      <text x="650" y="110" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Performers</text>
+
+      <!-- Row 5: Exp -->
+      <text x="0" y="135" font-family="monospace" font-size="12" fill="#29ABCA">exp(x)</text>
+      <text x="150" y="135" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">✓ Always</text>
+      <text x="280" y="135" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">⭐⭐⭐⭐</text>
+      <text x="430" y="135" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">⭐⭐⭐⭐</text>
+      <text x="530" y="135" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B">⭐</text>
+      <text x="650" y="135" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">With caution</text>
+    </g>
+  </g>
+
+  <!-- Key insight -->
+  <g transform="translate(50, 470)">
+    <rect x="0" y="0" width="800" height="40" fill="#111111" stroke="#444444" rx="5"/>
+    <text x="400" y="25" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FFFF00" text-anchor="middle">
+      Key: Positivity ensures non-negative attention weights — ELU+1 is a good default choice
+    </text>
+  </g>
+</svg>

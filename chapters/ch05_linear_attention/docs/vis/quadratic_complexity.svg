@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580">
+  <!-- Pure black background -->
+  <rect width="900" height="580" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">The O(n²) Attention Bottleneck</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Doubling sequence length → 4× memory and compute
+  </text>
+
+  <!-- ============ Small Matrix (n=4) ============ -->
+  <g transform="translate(80, 100)">
+    <text x="60" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#29ABCA" text-anchor="middle">n = 4</text>
+
+    <!-- 4x4 attention matrix -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <rect x="30" y="0" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <rect x="60" y="0" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <rect x="90" y="0" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+
+      <rect x="0" y="30" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <rect x="30" y="30" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <rect x="60" y="30" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <rect x="90" y="30" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+
+      <rect x="0" y="60" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <rect x="30" y="60" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <rect x="60" y="60" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <rect x="90" y="60" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+
+      <rect x="0" y="90" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <rect x="30" y="90" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <rect x="60" y="90" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+      <rect x="90" y="90" width="30" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+    </g>
+
+    <text x="60" y="145" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">16 cells</text>
+    <text x="60" y="165" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">4² = 16</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <g transform="translate(195, 150)">
+    <line x1="0" y1="0" x2="40" y2="0" stroke="#666666" stroke-width="2"/>
+    <polygon points="40,0 33,-4 33,4" fill="#666666"/>
+    <text x="20" y="-10" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FF6B6B" text-anchor="middle">×4</text>
+  </g>
+
+  <!-- ============ Medium Matrix (n=8) ============ -->
+  <g transform="translate(250, 100)">
+    <text x="80" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FFFF00" text-anchor="middle">n = 8</text>
+
+    <!-- 8x8 attention matrix (using smaller cells) -->
+    <g transform="translate(0, 0)">
+      <!-- Draw 8x8 grid -->
+      <rect x="0" y="0" width="160" height="160" fill="#FFFF00" fill-opacity="0.15" stroke="#FFFF00" stroke-width="2"/>
+      <!-- Grid lines -->
+      <line x1="20" y1="0" x2="20" y2="160" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="40" y1="0" x2="40" y2="160" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="60" y1="0" x2="60" y2="160" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="80" y1="0" x2="80" y2="160" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="100" y1="0" x2="100" y2="160" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="120" y1="0" x2="120" y2="160" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="140" y1="0" x2="140" y2="160" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="0" y1="20" x2="160" y2="20" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="0" y1="40" x2="160" y2="40" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="0" y1="60" x2="160" y2="60" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="0" y1="80" x2="160" y2="80" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="0" y1="100" x2="160" y2="100" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="0" y1="120" x2="160" y2="120" stroke="#FFFF00" stroke-opacity="0.3"/>
+      <line x1="0" y1="140" x2="160" y2="140" stroke="#FFFF00" stroke-opacity="0.3"/>
+    </g>
+
+    <text x="80" y="185" font-family="monospace" font-size="12" fill="#FFFF00" text-anchor="middle">64 cells</text>
+    <text x="80" y="205" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">8² = 64</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <g transform="translate(425, 150)">
+    <line x1="0" y1="0" x2="40" y2="0" stroke="#666666" stroke-width="2"/>
+    <polygon points="40,0 33,-4 33,4" fill="#666666"/>
+    <text x="20" y="-10" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FF6B6B" text-anchor="middle">×4</text>
+  </g>
+
+  <!-- ============ Large Matrix (n=16) ============ -->
+  <g transform="translate(480, 100)">
+    <text x="100" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FF6B6B" text-anchor="middle">n = 16</text>
+
+    <!-- 16x16 attention matrix (represented as large block) -->
+    <rect x="0" y="0" width="200" height="200" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="2"/>
+    <!-- Some grid lines to suggest density -->
+    <g stroke="#FF6B6B" stroke-opacity="0.2">
+      <line x1="12.5" y1="0" x2="12.5" y2="200"/>
+      <line x1="25" y1="0" x2="25" y2="200"/>
+      <line x1="50" y1="0" x2="50" y2="200"/>
+      <line x1="100" y1="0" x2="100" y2="200"/>
+      <line x1="150" y1="0" x2="150" y2="200"/>
+      <line x1="175" y1="0" x2="175" y2="200"/>
+      <line x1="187.5" y1="0" x2="187.5" y2="200"/>
+      <line x1="0" y1="12.5" x2="200" y2="12.5"/>
+      <line x1="0" y1="25" x2="200" y2="25"/>
+      <line x1="0" y1="50" x2="200" y2="50"/>
+      <line x1="0" y1="100" x2="200" y2="100"/>
+      <line x1="0" y1="150" x2="200" y2="150"/>
+      <line x1="0" y1="175" x2="200" y2="175"/>
+      <line x1="0" y1="187.5" x2="200" y2="187.5"/>
+    </g>
+
+    <text x="100" y="215" font-family="monospace" font-size="12" fill="#FF6B6B" text-anchor="middle">256 cells</text>
+    <text x="100" y="230" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">16² = 256</text>
+  </g>
+
+  <!-- ============ Complexity Chart ============ -->
+  <g transform="translate(100, 360)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">Memory &amp; Compute Growth</text>
+
+    <!-- Chart area -->
+    <g transform="translate(50, 30)">
+      <!-- Axes -->
+      <line x1="0" y1="150" x2="600" y2="150" stroke="#444444" stroke-width="1"/>
+      <line x1="0" y1="0" x2="0" y2="150" stroke="#444444" stroke-width="1"/>
+
+      <!-- Y-axis label -->
+      <text x="-30" y="75" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle" transform="rotate(-90, -30, 75)">Operations</text>
+
+      <!-- X-axis label -->
+      <text x="300" y="175" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">Sequence Length (n)</text>
+
+      <!-- X-axis ticks -->
+      <text x="0" y="165" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">0</text>
+      <text x="150" y="165" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">1K</text>
+      <text x="300" y="165" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">2K</text>
+      <text x="450" y="165" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">4K</text>
+      <text x="600" y="165" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">8K</text>
+
+      <!-- O(n²) curve - quadratic -->
+      <path d="M 0,150 Q 150,140 300,100 T 600,0" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+      <text x="520" y="25" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FF6B6B">O(n²)</text>
+      <text x="520" y="42" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B">Standard</text>
+
+      <!-- O(n) curve - linear -->
+      <path d="M 0,150 L 600,100" fill="none" stroke="#83C167" stroke-width="3"/>
+      <text x="520" y="110" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167">O(n)</text>
+      <text x="520" y="127" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">Linear</text>
+
+      <!-- Highlight the gap -->
+      <line x1="450" y1="35" x2="450" y2="115" stroke="#FFFF00" stroke-width="1" stroke-dasharray="4,2"/>
+      <text x="470" y="75" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00">64× gap</text>
+      <text x="470" y="90" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666">at n=4K</text>
+    </g>
+  </g>
+
+  <!-- Key insight box -->
+  <g transform="translate(720, 340)">
+    <rect x="0" y="0" width="160" height="100" fill="#111111" stroke="#444444" rx="5"/>
+    <text x="80" y="25" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Key Insight</text>
+    <text x="80" y="50" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#ffffff" text-anchor="middle">2× sequence length</text>
+    <text x="80" y="70" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#ffffff" text-anchor="middle">= 4× memory</text>
+    <text x="80" y="90" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#ffffff" text-anchor="middle">= 4× compute</text>
+  </g>
+</svg>
