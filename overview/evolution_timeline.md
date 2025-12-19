@@ -201,6 +201,25 @@ Softmax attention has special properties that linear attention approximations st
    Softmax guarantees: Σ weights = 1 (exact probability distribution)
    Linear attention: normalization is estimated, can be unstable
 
+   WHY DOES EXACT NORMALIZATION MATTER?
+
+   a) Interpretability: Attention weights should mean "fraction of focus"
+      - Softmax: "I put 30% attention on word A, 70% on word B" ✓
+      - Linear: weights might sum to 0.8 or 1.3 (what does that mean?)
+
+   b) Numerical stability: During training, unnormalized values can explode
+      - Softmax: bounded output, gradients well-behaved
+      - Linear: may need extra LayerNorm, careful initialization
+
+   c) Weighted average interpretation:
+      output = Σ (attention_weight_i × value_i)
+
+      If weights sum to 1: output is a proper weighted average of values
+      If weights sum to ≠1: output magnitude depends on normalization error
+
+      This can cause the model to behave inconsistently across sequences
+      of different lengths or with different attention patterns.
+
 3. NON-NEGATIVITY
    ───────────────
    Softmax: all weights ≥ 0 (true attention scores)
