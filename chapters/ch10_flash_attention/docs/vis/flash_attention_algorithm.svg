@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Pure black background -->
+  <rect width="800" height="600" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Flash Attention: The Full Picture</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Tiling + Online Softmax + Recomputation = O(N) memory instead of O(N²)
+  </text>
+
+  <!-- ============ Loop Structure ============ -->
+  <g transform="translate(50, 90)">
+    <text x="160" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FFFF00" text-anchor="middle">Loop Structure</text>
+
+    <!-- Outer loop -->
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="320" height="180" fill="#29ABCA" fill-opacity="0.1" stroke="#29ABCA" stroke-width="2" rx="5"/>
+      <text x="10" y="20" font-family="monospace" font-size="11" fill="#29ABCA">for j in K,V blocks:</text>
+
+      <!-- K,V loading -->
+      <rect x="20" y="30" width="130" height="25" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1" rx="3"/>
+      <text x="85" y="47" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Load K_j, V_j to SRAM</text>
+
+      <!-- Inner loop -->
+      <g transform="translate(20, 65)">
+        <rect x="0" y="0" width="280" height="105" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" stroke-width="2" rx="5"/>
+        <text x="10" y="18" font-family="monospace" font-size="11" fill="#FFFF00">for i in Q blocks:</text>
+
+        <!-- Operations -->
+        <text x="20" y="38" font-family="monospace" font-size="9" fill="#888888">1. Load Q_i, O_i, m_i, l_i</text>
+        <text x="20" y="53" font-family="monospace" font-size="9" fill="#83C167">2. S_ij = Q_i @ K_j.T / √d</text>
+        <text x="20" y="68" font-family="monospace" font-size="9" fill="#FF6B6B">3. Update m, l (online softmax)</text>
+        <text x="20" y="83" font-family="monospace" font-size="9" fill="#83C167">4. O_i += softmax(S_ij) @ V_j</text>
+        <text x="20" y="98" font-family="monospace" font-size="9" fill="#888888">5. Store O_i, m_i, l_i</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ============ Memory Usage Comparison ============ -->
+  <g transform="translate(420, 90)">
+    <text x="170" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#ffffff" text-anchor="middle">Memory Comparison</text>
+
+    <!-- Standard -->
+    <g transform="translate(0, 25)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FF6B6B">Standard Attention:</text>
+
+      <rect x="0" y="10" width="200" height="20" fill="#FF6B6B" fill-opacity="0.3" stroke="#FF6B6B" stroke-width="1"/>
+      <text x="100" y="25" font-family="monospace" font-size="10" fill="#FF6B6B" text-anchor="middle">Q, K, V: O(Nd)</text>
+
+      <rect x="0" y="35" width="340" height="20" fill="#FF6B6B" fill-opacity="0.5" stroke="#FF6B6B" stroke-width="1"/>
+      <text x="170" y="50" font-family="monospace" font-size="10" fill="#FF6B6B" text-anchor="middle">Attention Matrix: O(N²) ← HUGE!</text>
+
+      <text x="0" y="75" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">N=4096 → 64 MB just for attention</text>
+    </g>
+
+    <!-- Flash -->
+    <g transform="translate(0, 110)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#83C167">Flash Attention:</text>
+
+      <rect x="0" y="10" width="200" height="20" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="100" y="25" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">Q, K, V, O: O(Nd)</text>
+
+      <rect x="0" y="35" width="80" height="20" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+      <text x="40" y="50" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">SRAM: O(B²)</text>
+
+      <text x="0" y="75" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">N² attention never materialized!</text>
+    </g>
+  </g>
+
+  <!-- ============ Data Flow Diagram ============ -->
+  <g transform="translate(50, 320)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">Data Flow</text>
+
+    <!-- HBM -->
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="700" height="60" fill="#29ABCA" fill-opacity="0.15" stroke="#29ABCA" stroke-width="1"/>
+      <text x="350" y="20" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#29ABCA" text-anchor="middle">HBM (Global Memory)</text>
+
+      <!-- Q, K, V, O blocks -->
+      <rect x="50" y="30" width="60" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA" stroke-width="1"/>
+      <text x="80" y="47" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">Q</text>
+
+      <rect x="130" y="30" width="60" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA" stroke-width="1"/>
+      <text x="160" y="47" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">K</text>
+
+      <rect x="210" y="30" width="60" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA" stroke-width="1"/>
+      <text x="240" y="47" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">V</text>
+
+      <rect x="550" y="30" width="100" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167" stroke-width="1"/>
+      <text x="600" y="47" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">Output O</text>
+    </g>
+
+    <!-- Arrows down -->
+    <g transform="translate(80, 90)">
+      <line x1="0" y1="0" x2="0" y2="30" stroke="#888888" stroke-width="1.5"/>
+      <polygon points="0,30 -4,24 4,24" fill="#888888"/>
+    </g>
+    <g transform="translate(160, 90)">
+      <line x1="0" y1="0" x2="0" y2="30" stroke="#888888" stroke-width="1.5"/>
+      <polygon points="0,30 -4,24 4,24" fill="#888888"/>
+    </g>
+    <g transform="translate(240, 90)">
+      <line x1="0" y1="0" x2="0" y2="30" stroke="#888888" stroke-width="1.5"/>
+      <polygon points="0,30 -4,24 4,24" fill="#888888"/>
+    </g>
+
+    <!-- SRAM -->
+    <g transform="translate(50, 120)">
+      <rect x="0" y="0" width="450" height="80" fill="#FFFF00" fill-opacity="0.15" stroke="#FFFF00" stroke-width="2"/>
+      <text x="225" y="20" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">SRAM (Shared Memory)</text>
+
+      <!-- Processing blocks -->
+      <rect x="20" y="35" width="50" height="30" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA" stroke-width="1"/>
+      <text x="45" y="55" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Q_i</text>
+
+      <rect x="80" y="35" width="50" height="30" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA" stroke-width="1"/>
+      <text x="105" y="55" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">K_j</text>
+
+      <rect x="140" y="35" width="50" height="30" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA" stroke-width="1"/>
+      <text x="165" y="55" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">V_j</text>
+
+      <!-- Arrow to compute -->
+      <line x1="200" y1="50" x2="230" y2="50" stroke="#FFFF00" stroke-width="1.5"/>
+      <polygon points="230,50 224,47 224,53" fill="#FFFF00"/>
+
+      <!-- Compute block -->
+      <rect x="240" y="30" width="100" height="40" fill="#FF6B6B" fill-opacity="0.3" stroke="#FF6B6B" stroke-width="1" rx="3"/>
+      <text x="290" y="47" font-family="monospace" font-size="9" fill="#FF6B6B" text-anchor="middle">QK^T, softmax</text>
+      <text x="290" y="60" font-family="monospace" font-size="9" fill="#FF6B6B" text-anchor="middle">× V</text>
+
+      <!-- Arrow to output -->
+      <line x1="350" y1="50" x2="380" y2="50" stroke="#FFFF00" stroke-width="1.5"/>
+      <polygon points="380,50 374,47 374,53" fill="#FFFF00"/>
+
+      <!-- Output accumulator -->
+      <rect x="390" y="35" width="50" height="30" fill="#83C167" fill-opacity="0.4" stroke="#83C167" stroke-width="1"/>
+      <text x="415" y="55" font-family="monospace" font-size="9" fill="#83C167" text-anchor="middle">O_i</text>
+    </g>
+
+    <!-- Arrow up -->
+    <g transform="translate(600, 150)">
+      <line x1="0" y1="50" x2="0" y2="20" stroke="#83C167" stroke-width="1.5"/>
+      <polygon points="0,20 -4,26 4,26" fill="#83C167"/>
+    </g>
+
+    <!-- Key point -->
+    <g transform="translate(520, 140)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">N² matrix</text>
+      <text x="0" y="15" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">stays in SRAM,</text>
+      <text x="0" y="30" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00">never goes to HBM!</text>
+    </g>
+  </g>
+
+  <!-- ============ Summary Stats ============ -->
+  <g transform="translate(50, 540)">
+    <rect x="0" y="0" width="700" height="45" fill="#83C167" fill-opacity="0.1" stroke="#83C167" stroke-width="1" rx="5"/>
+
+    <text x="120" y="17" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Memory: O(N) ✓</text>
+    <text x="300" y="17" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Speed: 2-4× faster</text>
+    <text x="500" y="17" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Exact (no approximation)</text>
+
+    <text x="350" y="37" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Backward pass: recompute attention (trade compute for memory)</text>
+  </g>
+</svg>
