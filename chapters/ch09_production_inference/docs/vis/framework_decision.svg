@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <!-- Pure black background -->
+  <rect width="900" height="600" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Choosing an Inference Framework</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Decision flowchart based on your requirements
+  </text>
+
+  <!-- Start node -->
+  <g transform="translate(400, 100)">
+    <ellipse cx="50" cy="20" rx="40" ry="20" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="2"/>
+    <text x="50" y="25" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">Start</text>
+  </g>
+
+  <!-- Decision: GPU? -->
+  <g transform="translate(350, 160)">
+    <polygon points="100,0 200,40 100,80 0,40" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" stroke-width="2"/>
+    <text x="100" y="35" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Have a</text>
+    <text x="100" y="50" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">GPU?</text>
+  </g>
+
+  <!-- No GPU -> llama.cpp -->
+  <g transform="translate(100, 200)">
+    <line x1="250" y1="0" x2="170" y2="40" stroke="#888888" stroke-width="1.5"/>
+    <text x="190" y="15" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B">No</text>
+
+    <rect x="40" y="45" width="160" height="50" fill="#E67E22" fill-opacity="0.3" stroke="#E67E22" stroke-width="2" rx="5"/>
+    <text x="120" y="70" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#E67E22" text-anchor="middle">llama.cpp</text>
+    <text x="120" y="85" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888" text-anchor="middle">CPU / Edge / Local</text>
+  </g>
+
+  <!-- Yes GPU -> Production? -->
+  <g transform="translate(550, 200)">
+    <line x1="0" y1="0" x2="60" y2="40" stroke="#888888" stroke-width="1.5"/>
+    <text x="45" y="15" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">Yes</text>
+  </g>
+
+  <g transform="translate(530, 260)">
+    <polygon points="80,0 160,40 80,80 0,40" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" stroke-width="2"/>
+    <text x="80" y="35" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Production</text>
+    <text x="80" y="50" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">serving?</text>
+  </g>
+
+  <!-- No Production -> HuggingFace -->
+  <g transform="translate(680, 300)">
+    <line x1="0" y1="0" x2="60" y2="35" stroke="#888888" stroke-width="1.5"/>
+    <text x="45" y="10" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B">No</text>
+
+    <rect x="50" y="40" width="160" height="50" fill="#9B59B6" fill-opacity="0.3" stroke="#9B59B6" stroke-width="2" rx="5"/>
+    <text x="130" y="65" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#9B59B6" text-anchor="middle">HuggingFace</text>
+    <text x="130" y="80" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888" text-anchor="middle">Research / Prototyping</text>
+  </g>
+
+  <!-- Yes Production -> Structured Output? -->
+  <g transform="translate(450, 360)">
+    <line x1="160" y1="-20" x2="100" y2="15" stroke="#888888" stroke-width="1.5"/>
+    <text x="145" y="-5" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">Yes</text>
+
+    <polygon points="80,20 160,60 80,100 0,60" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" stroke-width="2"/>
+    <text x="80" y="55" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Structured</text>
+    <text x="80" y="70" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">output?</text>
+  </g>
+
+  <!-- Yes Structured -> SGLang -->
+  <g transform="translate(250, 420)">
+    <line x1="200" y1="0" x2="130" y2="40" stroke="#888888" stroke-width="1.5"/>
+    <text x="180" y="15" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">Yes</text>
+
+    <rect x="0" y="45" width="160" height="50" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="2" rx="5"/>
+    <text x="80" y="70" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#29ABCA" text-anchor="middle">SGLang</text>
+    <text x="80" y="85" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888" text-anchor="middle">JSON / Constrained</text>
+  </g>
+
+  <!-- No Structured -> Max Performance? -->
+  <g transform="translate(530, 420)">
+    <line x1="0" y1="0" x2="60" y2="35" stroke="#888888" stroke-width="1.5"/>
+    <text x="45" y="10" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B">No</text>
+
+    <polygon points="80,40 160,80 80,120 0,80" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" stroke-width="2"/>
+    <text x="80" y="70" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00" text-anchor="middle">Max perf</text>
+    <text x="80" y="85" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00" text-anchor="middle">+ NVIDIA?</text>
+  </g>
+
+  <!-- Yes Max Perf -> TensorRT-LLM -->
+  <g transform="translate(700, 490)">
+    <line x1="-10" y1="-10" x2="40" y2="25" stroke="#888888" stroke-width="1.5"/>
+    <text x="30" y="5" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">Yes</text>
+
+    <rect x="30" y="30" width="160" height="50" fill="#FF6B6B" fill-opacity="0.3" stroke="#FF6B6B" stroke-width="2" rx="5"/>
+    <text x="110" y="55" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FF6B6B" text-anchor="middle">TensorRT-LLM</text>
+    <text x="110" y="70" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888" text-anchor="middle">Maximum throughput</text>
+  </g>
+
+  <!-- No Max Perf -> vLLM -->
+  <g transform="translate(450, 520)">
+    <line x1="160" y1="-40" x2="100" y2="0" stroke="#888888" stroke-width="1.5"/>
+    <text x="145" y="-25" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B">No</text>
+
+    <rect x="30" y="5" width="160" height="50" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="2" rx="5"/>
+    <text x="110" y="30" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167" text-anchor="middle">vLLM</text>
+    <text x="110" y="45" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888" text-anchor="middle">High throughput serving</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(30, 520)">
+    <rect x="0" y="0" width="180" height="70" fill="#ffffff" fill-opacity="0.05" stroke="#444444" stroke-width="1" rx="3"/>
+    <text x="90" y="20" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">Legend</text>
+    <polygon points="20,35 50,45 20,55 0,45" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1" transform="scale(0.5) translate(40, 35)"/>
+    <text x="50" y="48" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888">Decision</text>
+    <rect x="20" y="55" width="20" height="12" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1" rx="2"/>
+    <text x="50" y="65" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888">Framework</text>
+  </g>
+</svg>
