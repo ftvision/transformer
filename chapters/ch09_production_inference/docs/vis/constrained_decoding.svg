@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
+  <!-- Pure black background -->
+  <rect width="900" height="520" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Constrained Decoding: Guaranteed Structure</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Mask invalid tokens at each step to ensure valid output format
+  </text>
+
+  <!-- ============ Standard Generation (Problem) ============ -->
+  <g transform="translate(50, 100)">
+    <text x="175" y="-10" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FF6B6B" text-anchor="middle">Standard Generation</text>
+
+    <!-- Vocabulary distribution -->
+    <g transform="translate(0, 20)">
+      <text x="0" y="15" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Token probabilities:</text>
+
+      <!-- Bar chart -->
+      <g transform="translate(0, 30)">
+        <rect x="0" y="0" width="30" height="80" fill="#29ABCA" fill-opacity="0.6" stroke="#29ABCA" stroke-width="1"/>
+        <text x="15" y="95" font-family="monospace" font-size="8" fill="#29ABCA" text-anchor="middle">"</text>
+        <text x="15" y="-5" font-family="monospace" font-size="8" fill="#888888" text-anchor="middle">.30</text>
+
+        <rect x="35" y="20" width="30" height="60" fill="#29ABCA" fill-opacity="0.6" stroke="#29ABCA" stroke-width="1"/>
+        <text x="50" y="95" font-family="monospace" font-size="8" fill="#29ABCA" text-anchor="middle">{</text>
+        <text x="50" y="15" font-family="monospace" font-size="8" fill="#888888" text-anchor="middle">.22</text>
+
+        <rect x="70" y="30" width="30" height="50" fill="#29ABCA" fill-opacity="0.6" stroke="#29ABCA" stroke-width="1"/>
+        <text x="85" y="95" font-family="monospace" font-size="8" fill="#29ABCA" text-anchor="middle">Sure</text>
+        <text x="85" y="25" font-family="monospace" font-size="8" fill="#888888" text-anchor="middle">.18</text>
+
+        <rect x="105" y="45" width="30" height="35" fill="#29ABCA" fill-opacity="0.6" stroke="#29ABCA" stroke-width="1"/>
+        <text x="120" y="95" font-family="monospace" font-size="8" fill="#29ABCA" text-anchor="middle">Here</text>
+        <text x="120" y="40" font-family="monospace" font-size="8" fill="#888888" text-anchor="middle">.12</text>
+
+        <rect x="140" y="55" width="30" height="25" fill="#29ABCA" fill-opacity="0.6" stroke="#29ABCA" stroke-width="1"/>
+        <text x="155" y="95" font-family="monospace" font-size="8" fill="#29ABCA" text-anchor="middle">The</text>
+        <text x="155" y="50" font-family="monospace" font-size="8" fill="#888888" text-anchor="middle">.08</text>
+
+        <text x="200" y="50" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666">...</text>
+      </g>
+    </g>
+
+    <!-- Problem output -->
+    <g transform="translate(0, 170)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Possible outputs:</text>
+      <text x="10" y="22" font-family="monospace" font-size="11" fill="#83C167">{"name": "Alice"}</text>
+      <text x="180" y="22" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">valid JSON</text>
+      <text x="10" y="42" font-family="monospace" font-size="11" fill="#FF6B6B">Sure! {"name": Alice}</text>
+      <text x="180" y="42" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FF6B6B">invalid</text>
+      <text x="10" y="62" font-family="monospace" font-size="11" fill="#FF6B6B">"Here's a person...</text>
+      <text x="180" y="62" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FF6B6B">not JSON</text>
+    </g>
+  </g>
+
+  <!-- ============ Constrained Generation (Solution) ============ -->
+  <g transform="translate(480, 100)">
+    <text x="175" y="-10" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#83C167" text-anchor="middle">Constrained Generation</text>
+
+    <!-- Constraint: expect "{" -->
+    <g transform="translate(0, 20)">
+      <text x="0" y="15" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Constraint:</text>
+      <text x="75" y="15" font-family="monospace" font-size="12" fill="#FFFF00">must start with "{"</text>
+
+      <!-- Bar chart with masking -->
+      <g transform="translate(0, 30)">
+        <!-- Masked tokens (crossed out) -->
+        <rect x="0" y="0" width="30" height="80" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="0" y1="0" x2="30" y2="80" stroke="#FF6B6B" stroke-width="2"/>
+        <text x="15" y="95" font-family="monospace" font-size="8" fill="#FF6B6B" text-anchor="middle">"</text>
+
+        <!-- Valid token highlighted -->
+        <rect x="35" y="0" width="30" height="80" fill="#83C167" fill-opacity="0.6" stroke="#83C167" stroke-width="2"/>
+        <text x="50" y="95" font-family="monospace" font-size="8" fill="#83C167" text-anchor="middle">{</text>
+        <text x="50" y="-5" font-family="monospace" font-size="8" fill="#83C167" text-anchor="middle">1.0</text>
+
+        <rect x="70" y="30" width="30" height="50" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="70" y1="30" x2="100" y2="80" stroke="#FF6B6B" stroke-width="2"/>
+        <text x="85" y="95" font-family="monospace" font-size="8" fill="#FF6B6B" text-anchor="middle">Sure</text>
+
+        <rect x="105" y="45" width="30" height="35" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="105" y1="45" x2="135" y2="80" stroke="#FF6B6B" stroke-width="2"/>
+        <text x="120" y="95" font-family="monospace" font-size="8" fill="#FF6B6B" text-anchor="middle">Here</text>
+
+        <rect x="140" y="55" width="30" height="25" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="140" y1="55" x2="170" y2="80" stroke="#FF6B6B" stroke-width="2"/>
+        <text x="155" y="95" font-family="monospace" font-size="8" fill="#FF6B6B" text-anchor="middle">The</text>
+      </g>
+    </g>
+
+    <!-- Guaranteed output -->
+    <g transform="translate(0, 170)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Guaranteed output:</text>
+      <text x="10" y="22" font-family="monospace" font-size="11" fill="#83C167">{"name": "Alice", "age": 30}</text>
+      <text x="10" y="45" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">Always valid JSON!</text>
+    </g>
+  </g>
+
+  <!-- ============ FSM for Regex ============ -->
+  <g transform="translate(100, 330)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">Regex → Finite State Machine</text>
+
+    <g transform="translate(0, 20)">
+      <text x="0" y="20" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Constraint:</text>
+      <text x="80" y="20" font-family="monospace" font-size="12" fill="#FFFF00">\d{3}-\d{4}</text>
+      <text x="200" y="20" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666">(phone: 123-4567)</text>
+    </g>
+
+    <!-- FSM diagram -->
+    <g transform="translate(50, 60)">
+      <!-- States -->
+      <circle cx="0" cy="40" r="20" fill="none" stroke="#29ABCA" stroke-width="2"/>
+      <text x="0" y="45" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">S0</text>
+
+      <circle cx="100" cy="40" r="20" fill="none" stroke="#29ABCA" stroke-width="2"/>
+      <text x="100" y="45" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">S1</text>
+
+      <circle cx="200" cy="40" r="20" fill="none" stroke="#29ABCA" stroke-width="2"/>
+      <text x="200" y="45" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">S2</text>
+
+      <circle cx="300" cy="40" r="20" fill="none" stroke="#FFFF00" stroke-width="2"/>
+      <text x="300" y="45" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">S3</text>
+
+      <circle cx="400" cy="40" r="20" fill="none" stroke="#29ABCA" stroke-width="2"/>
+      <text x="400" y="45" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">S4</text>
+
+      <text x="480" y="45" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666">...</text>
+
+      <circle cx="560" cy="40" r="20" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="2"/>
+      <circle cx="560" cy="40" r="16" fill="none" stroke="#83C167" stroke-width="1"/>
+      <text x="560" y="45" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">Done</text>
+
+      <!-- Transitions -->
+      <line x1="22" y1="40" x2="78" y2="40" stroke="#888888" stroke-width="1.5"/>
+      <polygon points="78,40 72,37 72,43" fill="#888888"/>
+      <text x="50" y="32" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">[0-9]</text>
+
+      <line x1="122" y1="40" x2="178" y2="40" stroke="#888888" stroke-width="1.5"/>
+      <polygon points="178,40 172,37 172,43" fill="#888888"/>
+      <text x="150" y="32" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">[0-9]</text>
+
+      <line x1="222" y1="40" x2="278" y2="40" stroke="#888888" stroke-width="1.5"/>
+      <polygon points="278,40 272,37 272,43" fill="#888888"/>
+      <text x="250" y="32" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">[0-9]</text>
+
+      <line x1="322" y1="40" x2="378" y2="40" stroke="#888888" stroke-width="1.5"/>
+      <polygon points="378,40 372,37 372,43" fill="#888888"/>
+      <text x="350" y="32" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">[-]</text>
+
+      <line x1="422" y1="40" x2="458" y2="40" stroke="#888888" stroke-width="1.5"/>
+      <polygon points="458,40 452,37 452,43" fill="#888888"/>
+
+      <line x1="502" y1="40" x2="538" y2="40" stroke="#888888" stroke-width="1.5"/>
+      <polygon points="538,40 532,37 532,43" fill="#888888"/>
+    </g>
+
+    <!-- Valid tokens at state -->
+    <g transform="translate(50, 130)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">At S3 (after "123"):</text>
+      <text x="130" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00">Valid tokens = ["-"]</text>
+      <text x="280" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">→ Only "-" can be sampled</text>
+    </g>
+  </g>
+
+  <!-- Key insight -->
+  <g transform="translate(100, 490)">
+    <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#29ABCA">Key insight:</text>
+    <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888">FSM tracks valid states → valid tokens → mask logits → sample from valid only</text>
+  </g>
+</svg>
