@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <!-- Pure black background -->
+  <rect width="800" height="520" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">AdamW: Adaptive Moments + Decoupled Weight Decay</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Each parameter gets its own adaptive learning rate
+  </text>
+
+  <!-- ============ Gradient with momentum ============ -->
+  <g transform="translate(50, 90)">
+    <text x="150" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#29ABCA" text-anchor="middle">First Moment: Momentum</text>
+
+    <!-- Gradient visualization -->
+    <g transform="translate(0, 25)">
+      <!-- Noisy gradient arrows -->
+      <text x="0" y="15" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Gradients:</text>
+
+      <!-- Step 1 -->
+      <line x1="80" y1="10" x2="110" y2="-10" stroke="#FF6B6B" stroke-width="2"/>
+      <polygon points="110,-10 102,-8 105,-3" fill="#FF6B6B"/>
+
+      <!-- Step 2 -->
+      <line x1="130" y1="10" x2="155" y2="25" stroke="#FF6B6B" stroke-width="2"/>
+      <polygon points="155,25 147,20 150,27" fill="#FF6B6B"/>
+
+      <!-- Step 3 -->
+      <line x1="175" y1="10" x2="205" y2="-5" stroke="#FF6B6B" stroke-width="2"/>
+      <polygon points="205,-5 197,-5 199,2" fill="#FF6B6B"/>
+
+      <!-- Step 4 -->
+      <line x1="225" y1="10" x2="250" y2="20" stroke="#FF6B6B" stroke-width="2"/>
+      <polygon points="250,20 243,14 247,22" fill="#FF6B6B"/>
+
+      <text x="165" y="50" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FF6B6B" text-anchor="middle">zigzag path</text>
+    </g>
+
+    <!-- Momentum visualization -->
+    <g transform="translate(0, 85)">
+      <text x="0" y="15" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">With m:</text>
+
+      <!-- Smooth momentum arrow -->
+      <line x1="80" y1="10" x2="260" y2="10" stroke="#29ABCA" stroke-width="3"/>
+      <polygon points="260,10 250,5 250,15" fill="#29ABCA"/>
+
+      <text x="165" y="35" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA" text-anchor="middle">smooth direction</text>
+    </g>
+
+    <!-- Formula -->
+    <text x="150" y="150" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">m = β₁·m + (1-β₁)·g</text>
+    <text x="150" y="170" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">β₁ = 0.9 (keep 90% of old m)</text>
+  </g>
+
+  <!-- ============ Adaptive learning rate ============ -->
+  <g transform="translate(350, 90)">
+    <text x="180" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FFFF00" text-anchor="middle">Second Moment: Adaptive LR</text>
+
+    <!-- Gradient magnitude visualization -->
+    <g transform="translate(50, 30)">
+      <!-- Parameter A: large gradients -->
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Param A:</text>
+      <rect x="70" y="-12" width="150" height="18" fill="#333333" stroke="#444444"/>
+      <rect x="70" y="-12" width="140" height="18" fill="#FF6B6B" fill-opacity="0.6"/>
+      <text x="230" y="0" font-family="monospace" font-size="10" fill="#FF6B6B">large g²</text>
+
+      <!-- Parameter B: small gradients -->
+      <text x="0" y="35" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Param B:</text>
+      <rect x="70" y="23" width="150" height="18" fill="#333333" stroke="#444444"/>
+      <rect x="70" y="23" width="30" height="18" fill="#83C167" fill-opacity="0.6"/>
+      <text x="230" y="35" font-family="monospace" font-size="10" fill="#83C167">small g²</text>
+    </g>
+
+    <!-- Resulting LR -->
+    <g transform="translate(50, 95)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Effective LR:</text>
+
+      <!-- Parameter A: smaller effective LR -->
+      <text x="0" y="25" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Param A:</text>
+      <rect x="70" y="13" width="100" height="18" fill="#333333" stroke="#444444"/>
+      <rect x="70" y="13" width="25" height="18" fill="#FFFF00" fill-opacity="0.6"/>
+      <text x="180" y="25" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00">small step</text>
+
+      <!-- Parameter B: larger effective LR -->
+      <text x="0" y="55" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Param B:</text>
+      <rect x="70" y="43" width="100" height="18" fill="#333333" stroke="#444444"/>
+      <rect x="70" y="43" width="80" height="18" fill="#FFFF00" fill-opacity="0.6"/>
+      <text x="180" y="55" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00">large step</text>
+    </g>
+
+    <!-- Formula -->
+    <text x="180" y="180" font-family="monospace" font-size="12" fill="#FFFF00" text-anchor="middle">v = β₂·v + (1-β₂)·g²</text>
+    <text x="180" y="200" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">step ∝ 1/√v (normalize by magnitude)</text>
+  </g>
+
+  <!-- ============ Weight Decay ============ -->
+  <g transform="translate(50, 300)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">The "W" in AdamW: Decoupled Weight Decay</text>
+
+    <!-- Adam (wrong) -->
+    <g transform="translate(0, 40)">
+      <text x="150" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FF6B6B" text-anchor="middle">Adam + L2 (coupled)</text>
+
+      <g transform="translate(20, 20)">
+        <text x="130" y="0" font-family="monospace" font-size="11" fill="#888888" text-anchor="middle">g' = g + λθ</text>
+        <text x="130" y="20" font-family="monospace" font-size="11" fill="#888888" text-anchor="middle">m = β₁·m + (1-β₁)·g'</text>
+        <text x="130" y="40" font-family="monospace" font-size="11" fill="#FF6B6B" text-anchor="middle">↑ decay gets momentum!</text>
+        <text x="130" y="60" font-family="monospace" font-size="11" fill="#888888" text-anchor="middle">v = β₂·v + (1-β₂)·g'²</text>
+        <text x="130" y="80" font-family="monospace" font-size="11" fill="#FF6B6B" text-anchor="middle">↑ and affects v too!</text>
+      </g>
+
+      <text x="150" y="130" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B" text-anchor="middle">Weight decay is scaled by Adam</text>
+    </g>
+
+    <!-- AdamW (right) -->
+    <g transform="translate(400, 40)">
+      <text x="150" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167" text-anchor="middle">AdamW (decoupled)</text>
+
+      <g transform="translate(20, 20)">
+        <text x="130" y="0" font-family="monospace" font-size="11" fill="#888888" text-anchor="middle">m = β₁·m + (1-β₁)·g</text>
+        <text x="130" y="20" font-family="monospace" font-size="11" fill="#888888" text-anchor="middle">v = β₂·v + (1-β₂)·g²</text>
+        <text x="130" y="45" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">θ = θ - lr·(m̂/√v̂ + λθ)</text>
+        <text x="130" y="70" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">↑ decay applied separately</text>
+      </g>
+
+      <text x="150" y="130" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="middle">Weight decay is clean and uniform</text>
+    </g>
+  </g>
+
+  <!-- ============ Full Update Rule ============ -->
+  <g transform="translate(50, 470)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#ffffff" text-anchor="middle">Full AdamW Update:</text>
+    <text x="350" y="25" font-family="monospace" font-size="13" fill="#FFFF00" text-anchor="middle">
+      θ = θ - lr × ( m̂ / (√v̂ + ε) + λ × θ )
+    </text>
+    <g transform="translate(100, 35)">
+      <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA" text-anchor="middle">momentum</text>
+      <text x="200" y="0" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00" text-anchor="middle">adaptive</text>
+      <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">weight decay</text>
+    </g>
+  </g>
+</svg>

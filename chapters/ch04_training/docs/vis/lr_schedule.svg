@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Pure black background -->
+  <rect width="800" height="500" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Learning Rate Schedules</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Warmup prevents instability; decay enables fine-tuning
+  </text>
+
+  <!-- ============ Main Chart ============ -->
+  <g transform="translate(100, 100)">
+    <!-- Axes -->
+    <line x1="0" y1="250" x2="600" y2="250" stroke="#444444" stroke-width="1"/>
+    <line x1="0" y1="0" x2="0" y2="250" stroke="#444444" stroke-width="1"/>
+
+    <!-- Y-axis labels -->
+    <text x="-15" y="10" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="end">LR</text>
+    <text x="-10" y="50" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">base</text>
+    <line x1="-5" y1="50" x2="600" y2="50" stroke="#333333" stroke-width="1" stroke-dasharray="3,3"/>
+    <text x="-10" y="250" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">0</text>
+
+    <!-- X-axis labels -->
+    <text x="600" y="270" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="end">steps</text>
+    <text x="100" y="270" font-family="monospace" font-size="9" fill="#666666" text-anchor="middle">warmup</text>
+    <line x1="100" y1="245" x2="100" y2="255" stroke="#666666" stroke-width="1"/>
+
+    <!-- Warmup region -->
+    <rect x="0" y="0" width="100" height="250" fill="#FFFF00" fill-opacity="0.05"/>
+    <text x="50" y="280" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00" text-anchor="middle">warmup</text>
+
+    <!-- Decay region -->
+    <rect x="100" y="0" width="500" height="250" fill="#83C167" fill-opacity="0.02"/>
+    <text x="350" y="280" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">decay</text>
+
+    <!-- ============ Cosine Schedule ============ -->
+    <!-- Warmup: linear rise -->
+    <path d="M 0,250 L 100,50" fill="none" stroke="#29ABCA" stroke-width="3"/>
+
+    <!-- Decay: cosine curve -->
+    <path d="M 100,50
+             Q 150,52 200,60
+             T 300,100
+             T 400,160
+             T 500,220
+             T 600,240"
+          fill="none" stroke="#29ABCA" stroke-width="3"/>
+
+    <text x="420" y="100" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA">Cosine decay</text>
+
+    <!-- ============ Linear Schedule ============ -->
+    <!-- Warmup: linear rise -->
+    <path d="M 0,250 L 100,50" fill="none" stroke="#FFFF00" stroke-width="2" stroke-dasharray="5,3"/>
+
+    <!-- Decay: linear -->
+    <path d="M 100,50 L 600,240" fill="none" stroke="#FFFF00" stroke-width="2" stroke-dasharray="5,3"/>
+
+    <text x="500" y="180" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00">Linear decay</text>
+
+    <!-- Key points -->
+    <!-- Start -->
+    <circle cx="0" cy="250" r="5" fill="#FF6B6B"/>
+    <text x="10" y="240" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FF6B6B">lr≈0</text>
+
+    <!-- Peak -->
+    <circle cx="100" cy="50" r="5" fill="#83C167"/>
+    <text x="115" y="45" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">peak lr</text>
+
+    <!-- End -->
+    <circle cx="600" cy="240" r="5" fill="#888888"/>
+    <text x="570" y="235" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888">min lr</text>
+  </g>
+
+  <!-- ============ Why Warmup ============ -->
+  <g transform="translate(50, 380)">
+    <text x="175" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FFFF00" text-anchor="middle">Why Warmup?</text>
+
+    <g transform="translate(0, 25)">
+      <!-- Without warmup -->
+      <g transform="translate(0, 0)">
+        <text x="85" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B" text-anchor="middle">Without warmup:</text>
+
+        <g transform="translate(20, 15)">
+          <!-- Exploding loss curve -->
+          <rect x="0" y="0" width="130" height="50" fill="#333333" stroke="#444444"/>
+          <path d="M 10,40 L 30,35 L 50,20 L 70,45 L 90,10 L 110,50"
+                fill="none" stroke="#FF6B6B" stroke-width="2"/>
+          <text x="65" y="65" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#FF6B6B" text-anchor="middle">loss explodes!</text>
+        </g>
+      </g>
+
+      <!-- With warmup -->
+      <g transform="translate(180, 0)">
+        <text x="85" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="middle">With warmup:</text>
+
+        <g transform="translate(20, 15)">
+          <!-- Stable loss curve -->
+          <rect x="0" y="0" width="130" height="50" fill="#333333" stroke="#444444"/>
+          <path d="M 10,15 Q 30,20 50,30 T 90,38 T 130,42"
+                fill="none" stroke="#83C167" stroke-width="2"/>
+          <text x="65" y="65" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">stable training</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- ============ Why Decay ============ -->
+  <g transform="translate(430, 380)">
+    <text x="175" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#83C167" text-anchor="middle">Why Decay?</text>
+
+    <g transform="translate(0, 25)">
+      <!-- Loss landscape -->
+      <g transform="translate(50, 10)">
+        <!-- Valley -->
+        <path d="M 0,50 Q 50,60 100,55 Q 150,50 200,50 Q 250,55 300,60"
+              fill="none" stroke="#444444" stroke-width="2"/>
+
+        <!-- Large step overshoots -->
+        <circle cx="100" cy="30" r="4" fill="#FFFF00"/>
+        <line x1="100" y1="30" x2="200" y2="45" stroke="#FFFF00" stroke-width="1" stroke-dasharray="3,2"/>
+        <circle cx="200" cy="45" r="3" fill="#FFFF00" fill-opacity="0.7"/>
+        <text x="150" y="25" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#FFFF00" text-anchor="middle">large LR</text>
+
+        <!-- Small step finds minimum -->
+        <circle cx="140" cy="55" r="4" fill="#83C167"/>
+        <line x1="140" y1="55" x2="155" y2="52" stroke="#83C167" stroke-width="1"/>
+        <circle cx="155" cy="52" r="3" fill="#83C167"/>
+        <text x="180" y="70" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="start">small LR</text>
+        <text x="180" y="82" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="start">fine-tunes</text>
+      </g>
+    </g>
+  </g>
+</svg>
