@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+  <!-- Pure black background -->
+  <rect width="900" height="500" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">The Kernel Trick: Associativity</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="58" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    (AB)C = A(BC) — Change multiplication order to avoid n×n matrix
+  </text>
+
+  <!-- ============ Standard Order: (QK^T)V ============ -->
+  <g transform="translate(50, 100)">
+    <text x="180" y="-15" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#FF6B6B" text-anchor="middle">Standard: (QK^T)V</text>
+
+    <!-- Q matrix (n x d) -->
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="60" height="100" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="2"/>
+      <text x="30" y="55" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#29ABCA" text-anchor="middle">Q</text>
+      <text x="30" y="115" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">n×d</text>
+    </g>
+
+    <!-- @ symbol -->
+    <text x="75" y="85" font-family="monospace" font-size="18" fill="#888888">@</text>
+
+    <!-- K^T matrix (d x n) -->
+    <g transform="translate(95, 20)">
+      <rect x="0" y="0" width="100" height="60" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="2"/>
+      <text x="50" y="35" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#29ABCA" text-anchor="middle">K^T</text>
+      <text x="50" y="75" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">d×n</text>
+    </g>
+
+    <!-- = symbol -->
+    <text x="210" y="85" font-family="monospace" font-size="18" fill="#888888">=</text>
+
+    <!-- Attention matrix (n x n) - THE BOTTLENECK -->
+    <g transform="translate(230, 5)">
+      <rect x="0" y="0" width="100" height="100" fill="#FF6B6B" fill-opacity="0.4" stroke="#FF6B6B" stroke-width="3"/>
+      <text x="50" y="55" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FF6B6B" text-anchor="middle">n×n</text>
+      <text x="50" y="115" font-family="monospace" font-size="10" fill="#FF6B6B" text-anchor="middle">O(n²)</text>
+      <!-- Warning icon -->
+      <text x="50" y="-5" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B" text-anchor="middle">⚠ Bottleneck!</text>
+    </g>
+
+    <!-- @ symbol -->
+    <text x="345" y="85" font-family="monospace" font-size="18" fill="#888888">@</text>
+
+    <!-- V matrix (n x d) -->
+    <g transform="translate(365, 20)">
+      <rect x="0" y="0" width="60" height="100" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="2"/>
+      <text x="30" y="55" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#29ABCA" text-anchor="middle">V</text>
+      <text x="30" y="115" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">n×d</text>
+    </g>
+  </g>
+
+  <!-- ============ Linear Order: Q(K^T V) ============ -->
+  <g transform="translate(500, 100)">
+    <text x="180" y="-15" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#83C167" text-anchor="middle">Linear: Q(K^T V)</text>
+
+    <!-- K^T matrix (d x n) -->
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="100" height="60" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="2"/>
+      <text x="50" y="35" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167" text-anchor="middle">K^T</text>
+      <text x="50" y="75" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">d×n</text>
+    </g>
+
+    <!-- @ symbol -->
+    <text x="115" y="65" font-family="monospace" font-size="18" fill="#888888">@</text>
+
+    <!-- V matrix (n x d) -->
+    <g transform="translate(135, 5)">
+      <rect x="0" y="0" width="60" height="100" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="2"/>
+      <text x="30" y="55" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167" text-anchor="middle">V</text>
+      <text x="30" y="115" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">n×d</text>
+    </g>
+
+    <!-- = symbol -->
+    <text x="210" y="85" font-family="monospace" font-size="18" fill="#888888">=</text>
+
+    <!-- KV matrix (d x d) - SMALL! -->
+    <g transform="translate(230, 25)">
+      <rect x="0" y="0" width="60" height="60" fill="#83C167" fill-opacity="0.5" stroke="#83C167" stroke-width="3"/>
+      <text x="30" y="35" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167" text-anchor="middle">d×d</text>
+      <text x="30" y="75" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">O(d²)</text>
+      <!-- Checkmark -->
+      <text x="30" y="-5" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">✓ Small!</text>
+    </g>
+
+    <!-- Then Q @ (KV) -->
+    <g transform="translate(60, 145)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Then: Q @ (K^T V)</text>
+
+      <!-- Q matrix small -->
+      <g transform="translate(0, 15)">
+        <rect x="0" y="0" width="40" height="60" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+        <text x="20" y="35" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">n×d</text>
+      </g>
+
+      <text x="50" y="50" font-family="monospace" font-size="14" fill="#888888">@</text>
+
+      <!-- KV small -->
+      <g transform="translate(65, 25)">
+        <rect x="0" y="0" width="40" height="40" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+        <text x="20" y="25" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">d×d</text>
+      </g>
+
+      <text x="115" y="50" font-family="monospace" font-size="14" fill="#888888">=</text>
+
+      <!-- Output -->
+      <g transform="translate(130, 15)">
+        <rect x="0" y="0" width="40" height="60" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+        <text x="20" y="35" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">n×d</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ============ Complexity Comparison ============ -->
+  <g transform="translate(100, 360)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">Complexity Comparison</text>
+
+    <!-- Standard box -->
+    <g transform="translate(50, 30)">
+      <rect x="0" y="0" width="250" height="80" fill="#FF6B6B" fill-opacity="0.1" stroke="#FF6B6B" rx="5"/>
+      <text x="125" y="25" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FF6B6B" text-anchor="middle">Standard Attention</text>
+      <text x="125" y="50" font-family="monospace" font-size="16" fill="#FF6B6B" text-anchor="middle">O(n² × d)</text>
+      <text x="125" y="70" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Must form n×n matrix</text>
+    </g>
+
+    <!-- VS -->
+    <text x="350" y="75" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">vs</text>
+
+    <!-- Linear box -->
+    <g transform="translate(400, 30)">
+      <rect x="0" y="0" width="250" height="80" fill="#83C167" fill-opacity="0.1" stroke="#83C167" rx="5"/>
+      <text x="125" y="25" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167" text-anchor="middle">Linear Attention</text>
+      <text x="125" y="50" font-family="monospace" font-size="16" fill="#83C167" text-anchor="middle">O(n × d²)</text>
+      <text x="125" y="70" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Only d×d matrix</text>
+    </g>
+
+    <!-- Speedup annotation -->
+    <g transform="translate(280, 120)">
+      <text x="70" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">
+        Speedup = n/d
+      </text>
+      <text x="70" y="20" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">
+        For n=4096, d=64: 64× faster!
+      </text>
+    </g>
+  </g>
+</svg>
