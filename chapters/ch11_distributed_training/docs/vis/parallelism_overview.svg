@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <!-- Pure black background -->
+  <rect width="900" height="600" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="40" font-family="CMU Serif, Georgia, serif" font-size="26" fill="#ffffff" text-anchor="middle">Parallelism Strategies: The Four Types</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="70" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    How to scale training beyond a single GPU
+  </text>
+
+  <!-- ============ Data Parallelism ============ -->
+  <g transform="translate(50, 110)">
+    <text x="90" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#29ABCA" text-anchor="middle">Data Parallel</text>
+    <text x="90" y="20" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">Same model, different data</text>
+
+    <!-- Three GPUs with full models -->
+    <g transform="translate(0, 35)">
+      <!-- GPU 0 -->
+      <rect x="0" y="0" width="55" height="100" rx="4" fill="none" stroke="#29ABCA" stroke-width="2"/>
+      <text x="27" y="20" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA" text-anchor="middle">GPU 0</text>
+      <rect x="8" y="30" width="40" height="30" rx="2" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA"/>
+      <text x="28" y="50" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Model</text>
+      <rect x="8" y="65" width="40" height="25" rx="2" fill="#FFFF00" fill-opacity="0.2" stroke="#FFFF00"/>
+      <text x="28" y="82" font-family="monospace" font-size="8" fill="#FFFF00" text-anchor="middle">Data₀</text>
+
+      <!-- GPU 1 -->
+      <rect x="62" y="0" width="55" height="100" rx="4" fill="none" stroke="#29ABCA" stroke-width="2"/>
+      <text x="89" y="20" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA" text-anchor="middle">GPU 1</text>
+      <rect x="70" y="30" width="40" height="30" rx="2" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA"/>
+      <text x="90" y="50" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Model</text>
+      <rect x="70" y="65" width="40" height="25" rx="2" fill="#FFFF00" fill-opacity="0.2" stroke="#FFFF00"/>
+      <text x="90" y="82" font-family="monospace" font-size="8" fill="#FFFF00" text-anchor="middle">Data₁</text>
+
+      <!-- GPU 2 -->
+      <rect x="124" y="0" width="55" height="100" rx="4" fill="none" stroke="#29ABCA" stroke-width="2"/>
+      <text x="151" y="20" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA" text-anchor="middle">GPU 2</text>
+      <rect x="132" y="30" width="40" height="30" rx="2" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA"/>
+      <text x="152" y="50" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Model</text>
+      <rect x="132" y="65" width="40" height="25" rx="2" fill="#FFFF00" fill-opacity="0.2" stroke="#FFFF00"/>
+      <text x="152" y="82" font-family="monospace" font-size="8" fill="#FFFF00" text-anchor="middle">Data₂</text>
+    </g>
+
+    <!-- All-reduce arrow -->
+    <g transform="translate(0, 150)">
+      <line x1="27" y1="0" x2="27" y2="20" stroke="#83C167" stroke-width="2"/>
+      <line x1="90" y1="0" x2="90" y2="20" stroke="#83C167" stroke-width="2"/>
+      <line x1="152" y1="0" x2="152" y2="20" stroke="#83C167" stroke-width="2"/>
+      <line x1="27" y1="20" x2="152" y2="20" stroke="#83C167" stroke-width="2"/>
+      <circle cx="90" cy="20" r="4" fill="#83C167"/>
+      <text x="90" y="40" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">All-Reduce ∇</text>
+    </g>
+  </g>
+
+  <!-- ============ Tensor Parallelism ============ -->
+  <g transform="translate(280, 110)">
+    <text x="90" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#FFFF00" text-anchor="middle">Tensor Parallel</text>
+    <text x="90" y="20" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">Split layers horizontally</text>
+
+    <!-- Single layer split across GPUs -->
+    <g transform="translate(0, 35)">
+      <!-- Input -->
+      <rect x="55" y="0" width="70" height="25" rx="2" fill="#888888" fill-opacity="0.2" stroke="#888888"/>
+      <text x="90" y="17" font-family="monospace" font-size="10" fill="#888888" text-anchor="middle">Input X</text>
+
+      <!-- Split arrows -->
+      <line x1="70" y1="25" x2="35" y2="45" stroke="#FFFF00" stroke-width="1.5"/>
+      <line x1="110" y1="25" x2="145" y2="45" stroke="#FFFF00" stroke-width="1.5"/>
+
+      <!-- GPU 0 - half of layer -->
+      <rect x="0" y="45" width="70" height="50" rx="4" fill="none" stroke="#FFFF00" stroke-width="2"/>
+      <text x="35" y="62" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00" text-anchor="middle">GPU 0</text>
+      <rect x="8" y="68" width="54" height="20" rx="2" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00"/>
+      <text x="35" y="82" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">W[:, :n/2]</text>
+
+      <!-- GPU 1 - other half -->
+      <rect x="110" y="45" width="70" height="50" rx="4" fill="none" stroke="#FFFF00" stroke-width="2"/>
+      <text x="145" y="62" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00" text-anchor="middle">GPU 1</text>
+      <rect x="118" y="68" width="54" height="20" rx="2" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00"/>
+      <text x="145" y="82" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">W[:, n/2:]</text>
+
+      <!-- Merge arrows -->
+      <line x1="35" y1="95" x2="70" y2="115" stroke="#FFFF00" stroke-width="1.5"/>
+      <line x1="145" y1="95" x2="110" y2="115" stroke="#FFFF00" stroke-width="1.5"/>
+
+      <!-- Output -->
+      <rect x="50" y="115" width="80" height="25" rx="2" fill="#83C167" fill-opacity="0.2" stroke="#83C167"/>
+      <text x="90" y="132" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">concat(Y₀,Y₁)</text>
+    </g>
+
+    <text x="90" y="185" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">Needs fast interconnect (NVLink)</text>
+  </g>
+
+  <!-- ============ Pipeline Parallelism ============ -->
+  <g transform="translate(510, 110)">
+    <text x="90" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#83C167" text-anchor="middle">Pipeline Parallel</text>
+    <text x="90" y="20" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">Split layers vertically</text>
+
+    <!-- Vertical pipeline -->
+    <g transform="translate(30, 35)">
+      <!-- Stage 0 -->
+      <rect x="0" y="0" width="120" height="35" rx="4" fill="none" stroke="#83C167" stroke-width="2"/>
+      <text x="60" y="15" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">GPU 0: Stage 0</text>
+      <text x="60" y="28" font-family="monospace" font-size="9" fill="#666666" text-anchor="middle">Layers 0-5</text>
+
+      <!-- Arrow -->
+      <line x1="60" y1="35" x2="60" y2="45" stroke="#83C167" stroke-width="2"/>
+      <polygon points="60,50 55,43 65,43" fill="#83C167"/>
+
+      <!-- Stage 1 -->
+      <rect x="0" y="50" width="120" height="35" rx="4" fill="none" stroke="#83C167" stroke-width="2"/>
+      <text x="60" y="65" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">GPU 1: Stage 1</text>
+      <text x="60" y="78" font-family="monospace" font-size="9" fill="#666666" text-anchor="middle">Layers 6-11</text>
+
+      <!-- Arrow -->
+      <line x1="60" y1="85" x2="60" y2="95" stroke="#83C167" stroke-width="2"/>
+      <polygon points="60,100 55,93 65,93" fill="#83C167"/>
+
+      <!-- Stage 2 -->
+      <rect x="0" y="100" width="120" height="35" rx="4" fill="none" stroke="#83C167" stroke-width="2"/>
+      <text x="60" y="115" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">GPU 2: Stage 2</text>
+      <text x="60" y="128" font-family="monospace" font-size="9" fill="#666666" text-anchor="middle">Layers 12-17</text>
+    </g>
+
+    <text x="90" y="185" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">Pipeline bubbles reduce efficiency</text>
+  </g>
+
+  <!-- ============ Expert Parallelism ============ -->
+  <g transform="translate(740, 110)">
+    <text x="75" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#FF6B6B" text-anchor="middle">Expert Parallel</text>
+    <text x="75" y="20" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">MoE: distribute experts</text>
+
+    <!-- Router -->
+    <g transform="translate(0, 35)">
+      <rect x="25" y="0" width="100" height="25" rx="2" fill="#888888" fill-opacity="0.2" stroke="#888888"/>
+      <text x="75" y="17" font-family="monospace" font-size="10" fill="#888888" text-anchor="middle">Router</text>
+
+      <!-- Fan out to experts -->
+      <line x1="50" y1="25" x2="30" y2="45" stroke="#FF6B6B" stroke-width="1.5"/>
+      <line x1="75" y1="25" x2="75" y2="45" stroke="#FF6B6B" stroke-width="1.5"/>
+      <line x1="100" y1="25" x2="120" y2="45" stroke="#FF6B6B" stroke-width="1.5"/>
+
+      <!-- Experts -->
+      <rect x="5" y="45" width="50" height="40" rx="4" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+      <text x="30" y="60" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#FF6B6B" text-anchor="middle">GPU 0</text>
+      <text x="30" y="75" font-family="monospace" font-size="8" fill="#FF6B6B" text-anchor="middle">E0, E1</text>
+
+      <rect x="95" y="45" width="50" height="40" rx="4" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+      <text x="120" y="60" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#FF6B6B" text-anchor="middle">GPU 1</text>
+      <text x="120" y="75" font-family="monospace" font-size="8" fill="#FF6B6B" text-anchor="middle">E2, E3</text>
+
+      <!-- Fan in -->
+      <line x1="30" y1="85" x2="50" y2="105" stroke="#FF6B6B" stroke-width="1.5"/>
+      <line x1="75" y1="85" x2="75" y2="105" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="4,2"/>
+      <line x1="120" y1="85" x2="100" y2="105" stroke="#FF6B6B" stroke-width="1.5"/>
+
+      <!-- Output -->
+      <rect x="25" y="105" width="100" height="25" rx="2" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B"/>
+      <text x="75" y="122" font-family="monospace" font-size="10" fill="#FF6B6B" text-anchor="middle">All-to-All</text>
+    </g>
+
+    <text x="75" y="185" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">For MoE architectures</text>
+  </g>
+
+  <!-- ============ Comparison Table ============ -->
+  <g transform="translate(50, 340)">
+    <text x="400" y="0" font-family="CMU Serif, Georgia, serif" font-size="20" fill="#ffffff" text-anchor="middle">When to Use Each Strategy</text>
+
+    <!-- Table -->
+    <g transform="translate(0, 25)">
+      <!-- Headers -->
+      <rect x="0" y="0" width="200" height="35" fill="#333333"/>
+      <rect x="200" y="0" width="200" height="35" fill="#333333"/>
+      <rect x="400" y="0" width="200" height="35" fill="#333333"/>
+      <rect x="600" y="0" width="200" height="35" fill="#333333"/>
+
+      <text x="100" y="23" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#29ABCA" text-anchor="middle">Data Parallel</text>
+      <text x="300" y="23" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">Tensor Parallel</text>
+      <text x="500" y="23" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167" text-anchor="middle">Pipeline Parallel</text>
+      <text x="700" y="23" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FF6B6B" text-anchor="middle">Expert Parallel</text>
+
+      <!-- Row 1: When -->
+      <rect x="0" y="35" width="200" height="50" fill="none" stroke="#444444"/>
+      <rect x="200" y="35" width="200" height="50" fill="none" stroke="#444444"/>
+      <rect x="400" y="35" width="200" height="50" fill="none" stroke="#444444"/>
+      <rect x="600" y="35" width="200" height="50" fill="none" stroke="#444444"/>
+
+      <text x="100" y="55" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Model fits on 1 GPU</text>
+      <text x="100" y="72" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Want more throughput</text>
+
+      <text x="300" y="55" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Single layer too large</text>
+      <text x="300" y="72" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Fast interconnect (NVLink)</text>
+
+      <text x="500" y="55" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Model doesn't fit</text>
+      <text x="500" y="72" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Slower network OK</text>
+
+      <text x="700" y="55" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">MoE architecture</text>
+      <text x="700" y="72" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Many experts</text>
+
+      <!-- Row 2: Memory -->
+      <rect x="0" y="85" width="200" height="35" fill="none" stroke="#444444"/>
+      <rect x="200" y="85" width="200" height="35" fill="none" stroke="#444444"/>
+      <rect x="400" y="85" width="200" height="35" fill="none" stroke="#444444"/>
+      <rect x="600" y="85" width="200" height="35" fill="none" stroke="#444444"/>
+
+      <text x="100" y="108" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">Memory: 1× per GPU</text>
+      <text x="300" y="108" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Memory: 1/N per GPU</text>
+      <text x="500" y="108" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Memory: 1/N per GPU</text>
+      <text x="700" y="108" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B" text-anchor="middle">Memory: per expert</text>
+
+      <!-- Row 3: Communication -->
+      <rect x="0" y="120" width="200" height="35" fill="none" stroke="#444444"/>
+      <rect x="200" y="120" width="200" height="35" fill="none" stroke="#444444"/>
+      <rect x="400" y="120" width="200" height="35" fill="none" stroke="#444444"/>
+      <rect x="600" y="120" width="200" height="35" fill="none" stroke="#444444"/>
+
+      <text x="100" y="143" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">Comm: All-Reduce</text>
+      <text x="300" y="143" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Comm: High (2× per layer)</text>
+      <text x="500" y="143" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Comm: Low (P2P)</text>
+      <text x="700" y="143" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B" text-anchor="middle">Comm: All-to-All</text>
+    </g>
+  </g>
+
+  <!-- Decision Tree Hint -->
+  <g transform="translate(50, 555)">
+    <text x="400" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666" text-anchor="middle">
+      Start with Data Parallel → Add FSDP if memory-limited → Add Pipeline/Tensor for very large models
+    </text>
+  </g>
+</svg>

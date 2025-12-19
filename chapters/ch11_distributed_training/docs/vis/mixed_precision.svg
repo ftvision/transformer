@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <!-- Pure black background -->
+  <rect width="900" height="600" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="40" font-family="CMU Serif, Georgia, serif" font-size="26" fill="#ffffff" text-anchor="middle">Mixed Precision Training: fp16 vs bf16</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="68" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Half the memory, double the speed — but watch for numerical issues
+  </text>
+
+  <!-- ============ Number Format Comparison ============ -->
+  <g transform="translate(50, 100)">
+    <text x="180" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">Number Formats</text>
+
+    <!-- fp32 -->
+    <g transform="translate(0, 30)">
+      <text x="0" y="15" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888">fp32</text>
+
+      <rect x="60" y="0" width="20" height="25" rx="2" fill="#FF6B6B" fill-opacity="0.5" stroke="#FF6B6B"/>
+      <text x="70" y="40" font-family="monospace" font-size="8" fill="#FF6B6B" text-anchor="middle">1</text>
+
+      <rect x="82" y="0" width="80" height="25" rx="2" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+      <text x="122" y="40" font-family="monospace" font-size="8" fill="#FFFF00" text-anchor="middle">8 exp</text>
+
+      <rect x="164" y="0" width="196" height="25" rx="2" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+      <text x="262" y="40" font-family="monospace" font-size="8" fill="#29ABCA" text-anchor="middle">23 mantissa</text>
+
+      <text x="380" y="17" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Range: ±3.4×10³⁸</text>
+    </g>
+
+    <!-- fp16 -->
+    <g transform="translate(0, 85)">
+      <text x="0" y="15" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00">fp16</text>
+
+      <rect x="60" y="0" width="20" height="25" rx="2" fill="#FF6B6B" fill-opacity="0.5" stroke="#FF6B6B"/>
+      <text x="70" y="40" font-family="monospace" font-size="8" fill="#FF6B6B" text-anchor="middle">1</text>
+
+      <rect x="82" y="0" width="50" height="25" rx="2" fill="#FFFF00" fill-opacity="0.6" stroke="#FFFF00" stroke-width="2"/>
+      <text x="107" y="40" font-family="monospace" font-size="8" fill="#FFFF00" text-anchor="middle">5 exp</text>
+
+      <rect x="134" y="0" width="100" height="25" rx="2" fill="#29ABCA" fill-opacity="0.6" stroke="#29ABCA" stroke-width="2"/>
+      <text x="184" y="40" font-family="monospace" font-size="8" fill="#29ABCA" text-anchor="middle">10 mantissa</text>
+
+      <text x="250" y="17" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00">Range: ±65504</text>
+      <text x="380" y="17" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FF6B6B">← Limited!</text>
+    </g>
+
+    <!-- bf16 -->
+    <g transform="translate(0, 140)">
+      <text x="0" y="15" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167">bf16</text>
+
+      <rect x="60" y="0" width="20" height="25" rx="2" fill="#FF6B6B" fill-opacity="0.5" stroke="#FF6B6B"/>
+      <text x="70" y="40" font-family="monospace" font-size="8" fill="#FF6B6B" text-anchor="middle">1</text>
+
+      <rect x="82" y="0" width="80" height="25" rx="2" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+      <text x="122" y="40" font-family="monospace" font-size="8" fill="#FFFF00" text-anchor="middle">8 exp</text>
+
+      <rect x="164" y="0" width="70" height="25" rx="2" fill="#83C167" fill-opacity="0.6" stroke="#83C167" stroke-width="2"/>
+      <text x="199" y="40" font-family="monospace" font-size="8" fill="#83C167" text-anchor="middle">7 mantissa</text>
+
+      <text x="250" y="17" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">Range: ±3.4×10³⁸</text>
+      <text x="380" y="17" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">Same as fp32!</text>
+    </g>
+  </g>
+
+  <!-- ============ Key Difference Box ============ -->
+  <g transform="translate(520, 100)">
+    <rect x="0" y="0" width="330" height="170" rx="6" fill="#222222" stroke="#ffffff" stroke-width="1"/>
+    <text x="165" y="28" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#ffffff" text-anchor="middle">The Key Difference</text>
+
+    <g transform="translate(20, 50)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00">fp16: More precision, limited range</text>
+      <text x="10" y="20" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">• Can overflow during training</text>
+      <text x="10" y="38" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">• Needs loss scaling</text>
+
+      <text x="0" y="70" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">bf16: Less precision, full range</text>
+      <text x="10" y="90" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">• No overflow issues</text>
+      <text x="10" y="108" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">• Drop-in replacement for fp32</text>
+    </g>
+  </g>
+
+  <!-- ============ Loss Scaling Flow ============ -->
+  <g transform="translate(50, 300)">
+    <text x="400" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">fp16 Training with Loss Scaling</text>
+
+    <!-- Flow diagram -->
+    <g transform="translate(0, 30)">
+      <!-- Forward -->
+      <rect x="0" y="0" width="120" height="50" rx="4" fill="none" stroke="#29ABCA" stroke-width="2"/>
+      <text x="60" y="22" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">Forward</text>
+      <text x="60" y="40" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">fp16</text>
+
+      <!-- Arrow -->
+      <line x1="120" y1="25" x2="150" y2="25" stroke="#888888" stroke-width="2"/>
+      <polygon points="150,25 143,20 143,30" fill="#888888"/>
+
+      <!-- Loss -->
+      <rect x="150" y="0" width="80" height="50" rx="4" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+      <text x="190" y="22" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B" text-anchor="middle">Loss</text>
+      <text x="190" y="40" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">fp32</text>
+
+      <!-- Arrow + Scale -->
+      <line x1="230" y1="25" x2="290" y2="25" stroke="#FFFF00" stroke-width="2"/>
+      <polygon points="290,25 283,20 283,30" fill="#FFFF00"/>
+      <text x="260" y="15" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00" text-anchor="middle">× scale</text>
+
+      <!-- Backward -->
+      <rect x="290" y="0" width="120" height="50" rx="4" fill="none" stroke="#FFFF00" stroke-width="2"/>
+      <text x="350" y="22" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Backward</text>
+      <text x="350" y="40" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">grads × scale</text>
+
+      <!-- Arrow + Unscale -->
+      <line x1="410" y1="25" x2="470" y2="25" stroke="#FFFF00" stroke-width="2"/>
+      <polygon points="470,25 463,20 463,30" fill="#FFFF00"/>
+      <text x="440" y="15" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00" text-anchor="middle">÷ scale</text>
+
+      <!-- Optimizer -->
+      <rect x="470" y="0" width="120" height="50" rx="4" fill="none" stroke="#83C167" stroke-width="2"/>
+      <text x="530" y="22" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Optimizer</text>
+      <text x="530" y="40" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">fp32 master</text>
+
+      <!-- Arrow to params -->
+      <line x1="590" y1="25" x2="650" y2="25" stroke="#888888" stroke-width="2"/>
+      <polygon points="650,25 643,20 643,30" fill="#888888"/>
+
+      <!-- Updated params -->
+      <rect x="650" y="0" width="100" height="50" rx="4" fill="none" stroke="#29ABCA" stroke-width="2"/>
+      <text x="700" y="22" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#29ABCA" text-anchor="middle">Updated</text>
+      <text x="700" y="40" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">cast to fp16</text>
+    </g>
+
+    <!-- Why scaling works -->
+    <g transform="translate(0, 100)">
+      <rect x="0" y="0" width="400" height="80" rx="4" fill="#333333"/>
+      <text x="200" y="22" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">Why Loss Scaling Works</text>
+
+      <text x="20" y="45" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Small gradients (1e-8) underflow to 0 in fp16</text>
+      <text x="20" y="62" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Scale up: 1e-8 × 65536 = 6.5e-4 (representable!)</text>
+      <text x="20" y="79" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">Then scale down before optimizer step</text>
+    </g>
+
+    <!-- bf16 is simpler -->
+    <g transform="translate(420, 100)">
+      <rect x="0" y="0" width="330" height="80" rx="4" fill="#222222" stroke="#83C167"/>
+      <text x="165" y="22" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167" text-anchor="middle">bf16: No Scaling Needed!</text>
+
+      <text x="20" y="45" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Same exponent range as fp32</text>
+      <text x="20" y="62" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">No overflow/underflow in normal training</text>
+      <text x="20" y="79" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167">Just use autocast(dtype=torch.bfloat16)</text>
+    </g>
+  </g>
+
+  <!-- ============ Which Ops in Which Precision ============ -->
+  <g transform="translate(50, 500)">
+    <text x="400" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#ffffff" text-anchor="middle">PyTorch AMP: Automatic Precision Selection</text>
+
+    <!-- fp16/bf16 ops -->
+    <g transform="translate(0, 25)">
+      <rect x="0" y="0" width="350" height="65" rx="4" fill="#29ABCA" fill-opacity="0.15" stroke="#29ABCA"/>
+      <text x="175" y="20" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">Run in fp16/bf16 (fast)</text>
+      <text x="175" y="40" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">Linear, Conv, Attention matmuls, GELU, BatchNorm</text>
+      <text x="175" y="55" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">→ Tensor Core acceleration</text>
+    </g>
+
+    <!-- fp32 ops -->
+    <g transform="translate(380, 25)">
+      <rect x="0" y="0" width="370" height="65" rx="4" fill="#FF6B6B" fill-opacity="0.15" stroke="#FF6B6B"/>
+      <text x="185" y="20" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B" text-anchor="middle">Keep in fp32 (precise)</text>
+      <text x="185" y="40" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">Loss, Softmax, LayerNorm, Reductions, Optimizer</text>
+      <text x="185" y="55" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">→ Numerically sensitive operations</text>
+    </g>
+  </g>
+</svg>

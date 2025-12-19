@@ -1,0 +1,225 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+  <!-- Pure black background -->
+  <rect width="900" height="650" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="40" font-family="CMU Serif, Georgia, serif" font-size="26" fill="#ffffff" text-anchor="middle">ZeRO: Zero Redundancy Optimizer</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="68" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Progressively shard model states to reduce memory redundancy
+  </text>
+
+  <!-- ============ DDP Baseline ============ -->
+  <g transform="translate(50, 100)">
+    <text x="90" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FF6B6B" text-anchor="middle">DDP (Baseline)</text>
+    <text x="90" y="18" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">Full redundancy</text>
+
+    <!-- GPU memory breakdown -->
+    <g transform="translate(0, 30)">
+      <!-- GPU 0 -->
+      <rect x="0" y="0" width="85" height="200" rx="4" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+      <text x="42" y="18" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FF6B6B" text-anchor="middle">GPU 0</text>
+
+      <!-- Params -->
+      <rect x="5" y="25" width="75" height="30" rx="2" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+      <text x="42" y="45" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Params</text>
+
+      <!-- Gradients -->
+      <rect x="5" y="60" width="75" height="30" rx="2" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+      <text x="42" y="80" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">Gradients</text>
+
+      <!-- Optimizer -->
+      <rect x="5" y="95" width="75" height="95" rx="2" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+      <text x="42" y="125" font-family="monospace" font-size="9" fill="#83C167" text-anchor="middle">Optimizer</text>
+      <text x="42" y="140" font-family="monospace" font-size="8" fill="#666666" text-anchor="middle">m, v, fp32</text>
+      <text x="42" y="175" font-family="CMU Serif, Georgia, serif" font-size="8" fill="#666666" text-anchor="middle">(4× params)</text>
+
+      <!-- GPU 1 - identical -->
+      <rect x="95" y="0" width="85" height="200" rx="4" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+      <text x="137" y="18" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FF6B6B" text-anchor="middle">GPU 1</text>
+
+      <rect x="100" y="25" width="75" height="30" rx="2" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+      <text x="137" y="45" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Params</text>
+
+      <rect x="100" y="60" width="75" height="30" rx="2" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+      <text x="137" y="80" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">Gradients</text>
+
+      <rect x="100" y="95" width="75" height="95" rx="2" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+      <text x="137" y="125" font-family="monospace" font-size="9" fill="#83C167" text-anchor="middle">Optimizer</text>
+      <text x="137" y="140" font-family="monospace" font-size="8" fill="#666666" text-anchor="middle">m, v, fp32</text>
+    </g>
+
+    <!-- Memory label -->
+    <text x="90" y="250" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B" text-anchor="middle">~16× params per GPU</text>
+  </g>
+
+  <!-- ============ ZeRO Stage 1 ============ -->
+  <g transform="translate(260, 100)">
+    <text x="90" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FFFF00" text-anchor="middle">ZeRO-1</text>
+    <text x="90" y="18" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">Shard optimizer</text>
+
+    <g transform="translate(0, 30)">
+      <!-- GPU 0 -->
+      <rect x="0" y="0" width="85" height="200" rx="4" fill="none" stroke="#FFFF00" stroke-width="2"/>
+      <text x="42" y="18" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00" text-anchor="middle">GPU 0</text>
+
+      <!-- Params - full -->
+      <rect x="5" y="25" width="75" height="30" rx="2" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+      <text x="42" y="45" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Params</text>
+
+      <!-- Gradients - full -->
+      <rect x="5" y="60" width="75" height="30" rx="2" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+      <text x="42" y="80" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">Gradients</text>
+
+      <!-- Optimizer - sharded -->
+      <rect x="5" y="95" width="75" height="45" rx="2" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+      <text x="42" y="118" font-family="monospace" font-size="9" fill="#83C167" text-anchor="middle">Opt shard₀</text>
+      <text x="42" y="132" font-family="monospace" font-size="8" fill="#666666" text-anchor="middle">(1/N)</text>
+
+      <!-- GPU 1 -->
+      <rect x="95" y="0" width="85" height="200" rx="4" fill="none" stroke="#FFFF00" stroke-width="2"/>
+      <text x="137" y="18" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00" text-anchor="middle">GPU 1</text>
+
+      <rect x="100" y="25" width="75" height="30" rx="2" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+      <text x="137" y="45" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Params</text>
+
+      <rect x="100" y="60" width="75" height="30" rx="2" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+      <text x="137" y="80" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">Gradients</text>
+
+      <rect x="100" y="95" width="75" height="45" rx="2" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+      <text x="137" y="118" font-family="monospace" font-size="9" fill="#83C167" text-anchor="middle">Opt shard₁</text>
+      <text x="137" y="132" font-family="monospace" font-size="8" fill="#666666" text-anchor="middle">(1/N)</text>
+    </g>
+
+    <text x="90" y="250" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">~6× params per GPU</text>
+  </g>
+
+  <!-- ============ ZeRO Stage 2 ============ -->
+  <g transform="translate(470, 100)">
+    <text x="90" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#29ABCA" text-anchor="middle">ZeRO-2</text>
+    <text x="90" y="18" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">+ Shard gradients</text>
+
+    <g transform="translate(0, 30)">
+      <!-- GPU 0 -->
+      <rect x="0" y="0" width="85" height="200" rx="4" fill="none" stroke="#29ABCA" stroke-width="2"/>
+      <text x="42" y="18" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA" text-anchor="middle">GPU 0</text>
+
+      <!-- Params - full -->
+      <rect x="5" y="25" width="75" height="30" rx="2" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+      <text x="42" y="45" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Params</text>
+
+      <!-- Gradients - sharded -->
+      <rect x="5" y="60" width="75" height="25" rx="2" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+      <text x="42" y="77" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">Grad shard₀</text>
+
+      <!-- Optimizer - sharded -->
+      <rect x="5" y="90" width="75" height="45" rx="2" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+      <text x="42" y="113" font-family="monospace" font-size="9" fill="#83C167" text-anchor="middle">Opt shard₀</text>
+
+      <!-- GPU 1 -->
+      <rect x="95" y="0" width="85" height="200" rx="4" fill="none" stroke="#29ABCA" stroke-width="2"/>
+      <text x="137" y="18" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA" text-anchor="middle">GPU 1</text>
+
+      <rect x="100" y="25" width="75" height="30" rx="2" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+      <text x="137" y="45" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Params</text>
+
+      <rect x="100" y="60" width="75" height="25" rx="2" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+      <text x="137" y="77" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">Grad shard₁</text>
+
+      <rect x="100" y="90" width="75" height="45" rx="2" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+      <text x="137" y="113" font-family="monospace" font-size="9" fill="#83C167" text-anchor="middle">Opt shard₁</text>
+    </g>
+
+    <text x="90" y="250" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">~4× params per GPU</text>
+  </g>
+
+  <!-- ============ ZeRO Stage 3 ============ -->
+  <g transform="translate(680, 100)">
+    <text x="90" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#83C167" text-anchor="middle">ZeRO-3</text>
+    <text x="90" y="18" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">+ Shard params</text>
+
+    <g transform="translate(0, 30)">
+      <!-- GPU 0 -->
+      <rect x="0" y="0" width="85" height="200" rx="4" fill="none" stroke="#83C167" stroke-width="2"/>
+      <text x="42" y="18" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">GPU 0</text>
+
+      <!-- Params - sharded -->
+      <rect x="5" y="25" width="75" height="25" rx="2" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+      <text x="42" y="42" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Param shard₀</text>
+
+      <!-- Gradients - sharded -->
+      <rect x="5" y="55" width="75" height="25" rx="2" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+      <text x="42" y="72" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">Grad shard₀</text>
+
+      <!-- Optimizer - sharded -->
+      <rect x="5" y="85" width="75" height="40" rx="2" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+      <text x="42" y="108" font-family="monospace" font-size="9" fill="#83C167" text-anchor="middle">Opt shard₀</text>
+
+      <!-- GPU 1 -->
+      <rect x="95" y="0" width="85" height="200" rx="4" fill="none" stroke="#83C167" stroke-width="2"/>
+      <text x="137" y="18" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">GPU 1</text>
+
+      <rect x="100" y="25" width="75" height="25" rx="2" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+      <text x="137" y="42" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Param shard₁</text>
+
+      <rect x="100" y="55" width="75" height="25" rx="2" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+      <text x="137" y="72" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">Grad shard₁</text>
+
+      <rect x="100" y="85" width="75" height="40" rx="2" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+      <text x="137" y="108" font-family="monospace" font-size="9" fill="#83C167" text-anchor="middle">Opt shard₁</text>
+    </g>
+
+    <text x="90" y="250" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">~1.5× params per GPU</text>
+  </g>
+
+  <!-- ============ Memory Comparison Bar Chart ============ -->
+  <g transform="translate(50, 390)">
+    <text x="400" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">Memory per GPU (7B model, 4 GPUs)</text>
+
+    <!-- Bars -->
+    <g transform="translate(0, 30)">
+      <!-- DDP bar -->
+      <rect x="50" y="0" width="180" height="40" rx="4" fill="#FF6B6B" fill-opacity="0.6" stroke="#FF6B6B" stroke-width="2"/>
+      <text x="140" y="26" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#ffffff" text-anchor="middle">DDP: 112GB</text>
+      <text x="240" y="26" font-family="monospace" font-size="11" fill="#FF6B6B" text-anchor="start">× 4 GPUs = 448GB total</text>
+
+      <!-- ZeRO-1 bar -->
+      <rect x="50" y="50" width="110" height="40" rx="4" fill="#FFFF00" fill-opacity="0.5" stroke="#FFFF00" stroke-width="2"/>
+      <text x="105" y="76" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#000000" text-anchor="middle">ZeRO-1: 70GB</text>
+      <text x="170" y="76" font-family="monospace" font-size="11" fill="#FFFF00" text-anchor="start">× 4 = 280GB (optimizer sharded)</text>
+
+      <!-- ZeRO-2 bar -->
+      <rect x="50" y="100" width="85" height="40" rx="4" fill="#29ABCA" fill-opacity="0.6" stroke="#29ABCA" stroke-width="2"/>
+      <text x="92" y="126" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#ffffff" text-anchor="middle">ZeRO-2: 56GB</text>
+      <text x="145" y="126" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="start">× 4 = 224GB (+ grads sharded)</text>
+
+      <!-- ZeRO-3 bar -->
+      <rect x="50" y="150" width="50" height="40" rx="4" fill="#83C167" fill-opacity="0.6" stroke="#83C167" stroke-width="2"/>
+      <text x="75" y="176" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#ffffff" text-anchor="middle">ZeRO-3</text>
+      <text x="110" y="176" font-family="monospace" font-size="11" fill="#83C167" text-anchor="start">28GB × 4 = 112GB (everything sharded)</text>
+    </g>
+  </g>
+
+  <!-- ============ Communication Trade-off ============ -->
+  <g transform="translate(500, 390)">
+    <rect x="0" y="0" width="350" height="200" rx="6" fill="#222222" stroke="#888888"/>
+    <text x="175" y="28" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#ffffff" text-anchor="middle">Communication Trade-off</text>
+
+    <g transform="translate(20, 50)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00">ZeRO-1 &amp; ZeRO-2:</text>
+      <text x="10" y="20" font-family="monospace" font-size="11" fill="#888888">Same as DDP (all-reduce)</text>
+      <text x="10" y="38" font-family="monospace" font-size="11" fill="#83C167">+ All-gather after optimizer step</text>
+
+      <text x="0" y="70" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">ZeRO-3:</text>
+      <text x="10" y="90" font-family="monospace" font-size="11" fill="#888888">Forward: all-gather params per layer</text>
+      <text x="10" y="108" font-family="monospace" font-size="11" fill="#888888">Backward: all-gather + reduce-scatter</text>
+      <text x="10" y="126" font-family="monospace" font-size="11" fill="#FF6B6B">~1.5× communication vs DDP</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="450" y="620" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#666666" text-anchor="middle">
+    PyTorch FSDP implements ZeRO-3 concepts | DeepSpeed offers all three stages
+  </text>
+</svg>
