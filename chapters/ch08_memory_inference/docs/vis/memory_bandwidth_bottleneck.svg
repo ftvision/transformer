@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Pure black background -->
+  <rect width="800" height="500" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Memory-Bound Inference</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    GPUs wait for data, not compute — inference is bandwidth-limited
+  </text>
+
+  <!-- ============ GPU Diagram ============ -->
+  <g transform="translate(50, 100)">
+    <text x="150" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#888888" text-anchor="middle">GPU Architecture</text>
+
+    <!-- HBM (High Bandwidth Memory) -->
+    <rect x="0" y="0" width="300" height="80" rx="5" fill="#1a1a2e" stroke="#29ABCA" stroke-width="2"/>
+    <text x="150" y="35" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#29ABCA" text-anchor="middle">HBM (Model Weights)</text>
+    <text x="150" y="55" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">14 GB for 7B model (fp16)</text>
+    <text x="150" y="72" font-family="monospace" font-size="11" fill="#666666" text-anchor="middle">Bandwidth: 2 TB/s</text>
+
+    <!-- Arrow from HBM to Compute -->
+    <g transform="translate(130, 85)">
+      <line x1="20" y1="0" x2="20" y2="40" stroke="#FF6B6B" stroke-width="3"/>
+      <polygon points="20,45 13,35 27,35" fill="#FF6B6B"/>
+      <text x="60" y="25" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B" text-anchor="start">Bottleneck!</text>
+    </g>
+
+    <!-- Compute Units -->
+    <rect x="50" y="135" width="200" height="60" rx="5" fill="#1a1a2e" stroke="#83C167" stroke-width="2"/>
+    <text x="150" y="160" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167" text-anchor="middle">Compute (Tensor Cores)</text>
+    <text x="150" y="180" font-family="monospace" font-size="11" fill="#666666" text-anchor="middle">312 TFLOPS (mostly idle)</text>
+  </g>
+
+  <!-- ============ Time Breakdown ============ -->
+  <g transform="translate(420, 100)">
+    <text x="170" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#888888" text-anchor="middle">Time Per Token (7B model)</text>
+
+    <!-- Loading bar -->
+    <rect x="0" y="10" width="300" height="40" rx="3" fill="#1a1a2e" stroke="#444444"/>
+    <rect x="2" y="12" width="260" height="36" rx="2" fill="#FF6B6B" fill-opacity="0.3"/>
+    <text x="131" y="35" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B" text-anchor="middle">Loading weights from HBM</text>
+
+    <!-- Compute bar -->
+    <rect x="262" y="12" width="36" height="36" rx="2" fill="#83C167" fill-opacity="0.3"/>
+    <text x="280" y="35" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">Comp</text>
+
+    <!-- Labels -->
+    <text x="131" y="70" font-family="monospace" font-size="11" fill="#FF6B6B" text-anchor="middle">~7 ms (14GB / 2TB/s)</text>
+    <text x="280" y="70" font-family="monospace" font-size="11" fill="#83C167" text-anchor="middle">&lt;1 ms</text>
+
+    <!-- Conclusion -->
+    <rect x="0" y="90" width="340" height="50" rx="5" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" stroke-width="1"/>
+    <text x="170" y="115" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">Max throughput = Bandwidth / Model Size</text>
+    <text x="170" y="132" font-family="monospace" font-size="12" fill="#FFFF00" text-anchor="middle">2 TB/s / 14 GB = ~143 tokens/sec</text>
+  </g>
+
+  <!-- ============ Roofline Diagram ============ -->
+  <g transform="translate(50, 320)">
+    <text x="350" y="-10" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">Roofline Model</text>
+
+    <!-- Axes -->
+    <line x1="50" y1="130" x2="650" y2="130" stroke="#444444" stroke-width="2"/>
+    <line x1="50" y1="130" x2="50" y2="20" stroke="#444444" stroke-width="2"/>
+
+    <!-- Y-axis label -->
+    <text x="25" y="75" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="middle" transform="rotate(-90, 25, 75)">Performance (FLOPS)</text>
+
+    <!-- X-axis label -->
+    <text x="350" y="155" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="middle">Arithmetic Intensity (FLOPS/Byte)</text>
+
+    <!-- Roofline -->
+    <!-- Memory-bound slope -->
+    <line x1="50" y1="130" x2="250" y2="50" stroke="#29ABCA" stroke-width="3"/>
+    <!-- Compute ceiling -->
+    <line x1="250" y1="50" x2="650" y2="50" stroke="#83C167" stroke-width="3"/>
+
+    <!-- Labels on roofline -->
+    <text x="140" y="75" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#29ABCA" text-anchor="middle" transform="rotate(-40, 140, 75)">Memory-bound</text>
+    <text x="450" y="40" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="middle">Compute-bound</text>
+
+    <!-- LLM Inference point -->
+    <circle cx="120" cy="100" r="8" fill="#FF6B6B"/>
+    <text x="120" y="85" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B" text-anchor="middle">LLM Decode</text>
+
+    <!-- Training point -->
+    <circle cx="400" cy="50" r="8" fill="#83C167"/>
+    <text x="400" y="35" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="middle">Training (large batch)</text>
+
+    <!-- Ridge point label -->
+    <line x1="250" y1="50" x2="250" y2="145" stroke="#666666" stroke-width="1" stroke-dasharray="4,4"/>
+    <text x="250" y="160" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">Ridge point</text>
+  </g>
+</svg>

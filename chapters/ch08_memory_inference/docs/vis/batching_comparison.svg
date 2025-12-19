@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Pure black background -->
+  <rect width="800" height="500" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Batching Strategies Compared</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Static vs Continuous Batching — maximizing GPU utilization
+  </text>
+
+  <!-- ============ Static Batching ============ -->
+  <g transform="translate(50, 100)">
+    <text x="150" y="-10" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FF6B6B" text-anchor="middle">Static Batching</text>
+
+    <!-- Time axis -->
+    <line x1="0" y1="150" x2="320" y2="150" stroke="#444444" stroke-width="1"/>
+    <text x="320" y="165" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="end">Time →</text>
+
+    <!-- Request 1 - Short -->
+    <g transform="translate(0, 20)">
+      <text x="-5" y="15" font-family="monospace" font-size="10" fill="#888888" text-anchor="end">Req 1</text>
+      <rect x="0" y="0" width="100" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+      <text x="50" y="17" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Short response</text>
+      <!-- Padding / waiting -->
+      <rect x="100" y="0" width="200" height="25" fill="#FF6B6B" fill-opacity="0.15" stroke="#FF6B6B" stroke-dasharray="4,4"/>
+      <text x="200" y="17" font-family="monospace" font-size="9" fill="#FF6B6B" text-anchor="middle">Waiting (wasted GPU)</text>
+    </g>
+
+    <!-- Request 2 - Long -->
+    <g transform="translate(0, 50)">
+      <text x="-5" y="15" font-family="monospace" font-size="10" fill="#888888" text-anchor="end">Req 2</text>
+      <rect x="0" y="0" width="300" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+      <text x="150" y="17" font-family="monospace" font-size="9" fill="#83C167" text-anchor="middle">Long response (determines batch time)</text>
+    </g>
+
+    <!-- Request 3 - Medium -->
+    <g transform="translate(0, 80)">
+      <text x="-5" y="15" font-family="monospace" font-size="10" fill="#888888" text-anchor="end">Req 3</text>
+      <rect x="0" y="0" width="180" height="25" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00"/>
+      <text x="90" y="17" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">Medium response</text>
+      <rect x="180" y="0" width="120" height="25" fill="#FF6B6B" fill-opacity="0.15" stroke="#FF6B6B" stroke-dasharray="4,4"/>
+      <text x="240" y="17" font-family="monospace" font-size="9" fill="#FF6B6B" text-anchor="middle">Waiting</text>
+    </g>
+
+    <!-- Batch boundary -->
+    <line x1="300" y1="15" x2="300" y2="130" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="300" y="140" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FF6B6B" text-anchor="middle">Batch end</text>
+
+    <!-- Problem callout -->
+    <text x="150" y="180" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B" text-anchor="middle">Problem: Fast requests wait for slow ones</text>
+  </g>
+
+  <!-- ============ Continuous Batching ============ -->
+  <g transform="translate(430, 100)">
+    <text x="150" y="-10" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#83C167" text-anchor="middle">Continuous Batching</text>
+
+    <!-- Time axis -->
+    <line x1="0" y1="150" x2="320" y2="150" stroke="#444444" stroke-width="1"/>
+    <text x="320" y="165" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="end">Time →</text>
+
+    <!-- Request 1 - Released early -->
+    <g transform="translate(0, 20)">
+      <text x="-5" y="15" font-family="monospace" font-size="10" fill="#888888" text-anchor="end">Req 1</text>
+      <rect x="0" y="0" width="100" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+      <text x="50" y="17" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">Done!</text>
+      <text x="115" y="17" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">✓ Released</text>
+    </g>
+
+    <!-- Request 2 - Continues -->
+    <g transform="translate(0, 50)">
+      <text x="-5" y="15" font-family="monospace" font-size="10" fill="#888888" text-anchor="end">Req 2</text>
+      <rect x="0" y="0" width="300" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+      <text x="150" y="17" font-family="monospace" font-size="9" fill="#83C167" text-anchor="middle">Long response</text>
+    </g>
+
+    <!-- Request 3 -->
+    <g transform="translate(0, 80)">
+      <text x="-5" y="15" font-family="monospace" font-size="10" fill="#888888" text-anchor="end">Req 3</text>
+      <rect x="0" y="0" width="180" height="25" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00"/>
+      <text x="90" y="17" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">Medium</text>
+      <text x="195" y="17" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">✓</text>
+    </g>
+
+    <!-- Request 4 - Fills slot from Req 1 -->
+    <g transform="translate(100, 20)">
+      <rect x="0" y="0" width="140" height="25" fill="#FF69B4" fill-opacity="0.3" stroke="#FF69B4"/>
+      <text x="70" y="17" font-family="monospace" font-size="9" fill="#FF69B4" text-anchor="middle">Req 4 (fills slot)</text>
+      <text x="155" y="17" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">✓</text>
+    </g>
+
+    <!-- Request 5 - Fills slot from Req 3 -->
+    <g transform="translate(180, 80)">
+      <rect x="0" y="0" width="120" height="25" fill="#9D65C9" fill-opacity="0.3" stroke="#9D65C9"/>
+      <text x="60" y="17" font-family="monospace" font-size="9" fill="#9D65C9" text-anchor="middle">Req 5</text>
+    </g>
+
+    <!-- Benefit callout -->
+    <text x="150" y="180" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Benefit: GPU always fully utilized</text>
+  </g>
+
+  <!-- ============ Key Insight ============ -->
+  <g transform="translate(50, 310)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">Iteration-Level vs Request-Level Batching</text>
+
+    <!-- Diagram showing per-iteration scheduling -->
+    <g transform="translate(80, 30)">
+      <text x="0" y="15" font-family="monospace" font-size="11" fill="#888888">Iteration 1:</text>
+      <rect x="80" y="0" width="30" height="22" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA"/>
+      <rect x="115" y="0" width="30" height="22" fill="#83C167" fill-opacity="0.3" stroke="#83C167"/>
+      <rect x="150" y="0" width="30" height="22" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00"/>
+      <text x="250" y="15" font-family="monospace" font-size="10" fill="#666666">[R1, R2, R3] → 3 tokens</text>
+    </g>
+
+    <g transform="translate(80, 55)">
+      <text x="0" y="15" font-family="monospace" font-size="11" fill="#888888">Iteration 2:</text>
+      <rect x="80" y="0" width="30" height="22" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA"/>
+      <rect x="115" y="0" width="30" height="22" fill="#83C167" fill-opacity="0.3" stroke="#83C167"/>
+      <rect x="150" y="0" width="30" height="22" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00"/>
+      <text x="250" y="15" font-family="monospace" font-size="10" fill="#666666">[R1, R2, R3] → 3 tokens</text>
+    </g>
+
+    <g transform="translate(80, 80)">
+      <text x="0" y="15" font-family="monospace" font-size="11" fill="#888888">Iteration 3:</text>
+      <rect x="80" y="0" width="30" height="22" fill="#FF69B4" fill-opacity="0.3" stroke="#FF69B4"/>
+      <rect x="115" y="0" width="30" height="22" fill="#83C167" fill-opacity="0.3" stroke="#83C167"/>
+      <rect x="150" y="0" width="30" height="22" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00"/>
+      <text x="250" y="15" font-family="monospace" font-size="10" fill="#83C167">[R4, R2, R3] ← R1 done, R4 added</text>
+    </g>
+
+    <g transform="translate(80, 105)">
+      <text x="0" y="15" font-family="monospace" font-size="11" fill="#888888">Iteration N:</text>
+      <rect x="80" y="0" width="30" height="22" fill="#FF69B4" fill-opacity="0.3" stroke="#FF69B4"/>
+      <rect x="115" y="0" width="30" height="22" fill="#83C167" fill-opacity="0.3" stroke="#83C167"/>
+      <rect x="150" y="0" width="30" height="22" fill="#9D65C9" fill-opacity="0.3" stroke="#9D65C9"/>
+      <text x="250" y="15" font-family="monospace" font-size="10" fill="#83C167">[R4, R2, R5] ← Dynamic slots</text>
+    </g>
+  </g>
+
+  <!-- ============ Metrics ============ -->
+  <g transform="translate(500, 330)">
+    <rect x="0" y="0" width="250" height="120" rx="5" fill="#1a1a2e" stroke="#444444"/>
+    <text x="125" y="25" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#ffffff" text-anchor="middle">Key Metrics</text>
+
+    <text x="20" y="50" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA">TTFT</text>
+    <text x="80" y="50" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666">Time to First Token</text>
+
+    <text x="20" y="70" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">TPOT</text>
+    <text x="80" y="70" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666">Time Per Output Token</text>
+
+    <text x="20" y="90" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00">Throughput</text>
+    <text x="100" y="90" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666">tokens/sec (total)</text>
+
+    <text x="125" y="112" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888" text-anchor="middle">↑ Throughput often trades off with ↑ Latency</text>
+  </g>
+</svg>
