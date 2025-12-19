@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 580">
+  <!-- Pure black background -->
+  <rect width="800" height="580" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">TPU Systolic Array: Matrix Multiply Engine</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="58" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Data flows through — each element used multiple times
+  </text>
+
+  <!-- ============ Matrix A (flows right) ============ -->
+  <g transform="translate(80, 110)">
+    <text x="35" y="-15" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">Matrix A</text>
+    <text x="35" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">(flows →)</text>
+
+    <!-- A matrix values -->
+    <g transform="translate(0, 15)">
+      <rect x="0" y="0" width="30" height="30" fill="#FFFF00" fill-opacity="0.2" stroke="#FFFF00" stroke-width="1"/>
+      <text x="15" y="20" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">a₀₀</text>
+      <rect x="35" y="0" width="30" height="30" fill="#FFFF00" fill-opacity="0.15" stroke="#FFFF00" stroke-width="1"/>
+      <text x="50" y="20" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">a₀₁</text>
+
+      <rect x="0" y="50" width="30" height="30" fill="#FFFF00" fill-opacity="0.15" stroke="#FFFF00" stroke-width="1"/>
+      <text x="15" y="70" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">a₁₀</text>
+      <rect x="35" y="50" width="30" height="30" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" stroke-width="1"/>
+      <text x="50" y="70" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">a₁₁</text>
+
+      <rect x="0" y="100" width="30" height="30" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" stroke-width="1"/>
+      <text x="15" y="120" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">a₂₀</text>
+      <rect x="35" y="100" width="30" height="30" fill="#FFFF00" fill-opacity="0.05" stroke="#FFFF00" stroke-width="1"/>
+      <text x="50" y="120" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">a₂₁</text>
+    </g>
+
+    <!-- Arrows flowing right -->
+    <g transform="translate(70, 40)">
+      <line x1="0" y1="0" x2="30" y2="0" stroke="#FFFF00" stroke-width="2"/>
+      <polygon points="30,0 23,-4 23,4" fill="#FFFF00"/>
+    </g>
+  </g>
+
+  <!-- ============ Matrix B (flows down) ============ -->
+  <g transform="translate(190, 80)">
+    <text x="90" y="-20" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#29ABCA" text-anchor="middle">Matrix B (flows ↓)</text>
+
+    <!-- B matrix values -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="30" height="30" fill="#29ABCA" fill-opacity="0.2" stroke="#29ABCA" stroke-width="1"/>
+      <text x="15" y="20" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">b₀₀</text>
+      <rect x="60" y="0" width="30" height="30" fill="#29ABCA" fill-opacity="0.2" stroke="#29ABCA" stroke-width="1"/>
+      <text x="75" y="20" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">b₀₁</text>
+      <rect x="120" y="0" width="30" height="30" fill="#29ABCA" fill-opacity="0.2" stroke="#29ABCA" stroke-width="1"/>
+      <text x="135" y="20" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">b₀₂</text>
+
+      <rect x="0" y="35" width="30" height="30" fill="#29ABCA" fill-opacity="0.15" stroke="#29ABCA" stroke-width="1"/>
+      <text x="15" y="55" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">b₁₀</text>
+      <rect x="60" y="35" width="30" height="30" fill="#29ABCA" fill-opacity="0.15" stroke="#29ABCA" stroke-width="1"/>
+      <text x="75" y="55" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">b₁₁</text>
+      <rect x="120" y="35" width="30" height="30" fill="#29ABCA" fill-opacity="0.15" stroke="#29ABCA" stroke-width="1"/>
+      <text x="135" y="55" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">b₁₂</text>
+    </g>
+
+    <!-- Arrows flowing down -->
+    <line x1="15" y1="70" x2="15" y2="95" stroke="#29ABCA" stroke-width="2"/>
+    <polygon points="15,95 11,88 19,88" fill="#29ABCA"/>
+    <line x1="75" y1="70" x2="75" y2="95" stroke="#29ABCA" stroke-width="2"/>
+    <polygon points="75,95 71,88 79,88" fill="#29ABCA"/>
+    <line x1="135" y1="70" x2="135" y2="95" stroke="#29ABCA" stroke-width="2"/>
+    <polygon points="135,95 131,88 139,88" fill="#29ABCA"/>
+  </g>
+
+  <!-- ============ Systolic Array (PE Grid) ============ -->
+  <g transform="translate(190, 190)">
+    <!-- 3x3 grid of processing elements -->
+    <!-- Row 0 -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="50" height="50" fill="#83C167" fill-opacity="0.2" stroke="#83C167" stroke-width="2" rx="5"/>
+      <text x="25" y="22" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">PE</text>
+      <text x="25" y="38" font-family="monospace" font-size="9" fill="#888888" text-anchor="middle">c₀₀</text>
+    </g>
+    <g transform="translate(60, 0)">
+      <rect x="0" y="0" width="50" height="50" fill="#83C167" fill-opacity="0.15" stroke="#83C167" stroke-width="1" rx="5"/>
+      <text x="25" y="22" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">PE</text>
+      <text x="25" y="38" font-family="monospace" font-size="9" fill="#888888" text-anchor="middle">c₀₁</text>
+    </g>
+    <g transform="translate(120, 0)">
+      <rect x="0" y="0" width="50" height="50" fill="#83C167" fill-opacity="0.15" stroke="#83C167" stroke-width="1" rx="5"/>
+      <text x="25" y="22" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">PE</text>
+      <text x="25" y="38" font-family="monospace" font-size="9" fill="#888888" text-anchor="middle">c₀₂</text>
+    </g>
+
+    <!-- Row 1 -->
+    <g transform="translate(0, 60)">
+      <rect x="0" y="0" width="50" height="50" fill="#83C167" fill-opacity="0.15" stroke="#83C167" stroke-width="1" rx="5"/>
+      <text x="25" y="22" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">PE</text>
+      <text x="25" y="38" font-family="monospace" font-size="9" fill="#888888" text-anchor="middle">c₁₀</text>
+    </g>
+    <g transform="translate(60, 60)">
+      <rect x="0" y="0" width="50" height="50" fill="#83C167" fill-opacity="0.15" stroke="#83C167" stroke-width="1" rx="5"/>
+      <text x="25" y="22" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">PE</text>
+      <text x="25" y="38" font-family="monospace" font-size="9" fill="#888888" text-anchor="middle">c₁₁</text>
+    </g>
+    <g transform="translate(120, 60)">
+      <rect x="0" y="0" width="50" height="50" fill="#83C167" fill-opacity="0.15" stroke="#83C167" stroke-width="1" rx="5"/>
+      <text x="25" y="22" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">PE</text>
+      <text x="25" y="38" font-family="monospace" font-size="9" fill="#888888" text-anchor="middle">c₁₂</text>
+    </g>
+
+    <!-- Row 2 -->
+    <g transform="translate(0, 120)">
+      <rect x="0" y="0" width="50" height="50" fill="#83C167" fill-opacity="0.15" stroke="#83C167" stroke-width="1" rx="5"/>
+      <text x="25" y="22" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">PE</text>
+      <text x="25" y="38" font-family="monospace" font-size="9" fill="#888888" text-anchor="middle">c₂₀</text>
+    </g>
+    <g transform="translate(60, 120)">
+      <rect x="0" y="0" width="50" height="50" fill="#83C167" fill-opacity="0.15" stroke="#83C167" stroke-width="1" rx="5"/>
+      <text x="25" y="22" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">PE</text>
+      <text x="25" y="38" font-family="monospace" font-size="9" fill="#888888" text-anchor="middle">c₂₁</text>
+    </g>
+    <g transform="translate(120, 120)">
+      <rect x="0" y="0" width="50" height="50" fill="#83C167" fill-opacity="0.15" stroke="#83C167" stroke-width="1" rx="5"/>
+      <text x="25" y="22" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#83C167" text-anchor="middle">PE</text>
+      <text x="25" y="38" font-family="monospace" font-size="9" fill="#888888" text-anchor="middle">c₂₂</text>
+    </g>
+
+    <!-- Output label -->
+    <text x="85" y="195" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167" text-anchor="middle">Output C = A × B</text>
+  </g>
+
+  <!-- ============ PE Detail Box ============ -->
+  <g transform="translate(450, 100)">
+    <rect x="0" y="0" width="300" height="180" fill="#ffffff" fill-opacity="0.05" stroke="#666666" stroke-width="1" rx="8"/>
+    <text x="150" y="25" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#ffffff" text-anchor="middle">Each Processing Element (PE)</text>
+
+    <g transform="translate(30, 45)">
+      <!-- PE diagram -->
+      <rect x="60" y="0" width="120" height="80" fill="#83C167" fill-opacity="0.15" stroke="#83C167" stroke-width="2" rx="5"/>
+
+      <!-- Inputs -->
+      <text x="0" y="25" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00" text-anchor="middle">a</text>
+      <line x1="15" y1="22" x2="60" y2="40" stroke="#FFFF00" stroke-width="1.5"/>
+      <polygon points="60,40 52,36 52,44" fill="#FFFF00"/>
+
+      <text x="120" y="-10" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#29ABCA" text-anchor="middle">b</text>
+      <line x1="120" y1="0" x2="120" y2="0" stroke="#29ABCA" stroke-width="1.5"/>
+      <polygon points="120,0 116,-8 124,-8" fill="#29ABCA"/>
+
+      <!-- Inside PE -->
+      <text x="120" y="30" font-family="monospace" font-size="10" fill="#83C167" text-anchor="middle">acc += a × b</text>
+      <text x="120" y="50" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888" text-anchor="middle">pass a right →</text>
+      <text x="120" y="65" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888" text-anchor="middle">pass b down ↓</text>
+
+      <!-- Outputs -->
+      <line x1="180" y1="40" x2="220" y2="40" stroke="#FFFF00" stroke-width="1.5"/>
+      <polygon points="220,40 213,36 213,44" fill="#FFFF00"/>
+      <text x="235" y="45" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00" text-anchor="middle">a</text>
+
+      <line x1="120" y1="80" x2="120" y2="110" stroke="#29ABCA" stroke-width="1.5"/>
+      <polygon points="120,110 116,103 124,103" fill="#29ABCA"/>
+      <text x="120" y="125" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#29ABCA" text-anchor="middle">b</text>
+    </g>
+  </g>
+
+  <!-- ============ Key Benefits ============ -->
+  <g transform="translate(450, 310)">
+    <rect x="0" y="0" width="300" height="120" fill="#ffffff" fill-opacity="0.05" stroke="#666666" stroke-width="1" rx="8"/>
+    <text x="150" y="25" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#ffffff" text-anchor="middle">Why Systolic Arrays?</text>
+
+    <text x="20" y="50" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00">• Data reuse:</text>
+    <text x="110" y="50" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">each element used N times</text>
+
+    <text x="20" y="70" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA">• Regular flow:</text>
+    <text x="110" y="70" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">predictable data movement</text>
+
+    <text x="20" y="90" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">• High utilization:</text>
+    <text x="125" y="90" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">all PEs active once full</text>
+
+    <text x="20" y="110" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FF6B6B">• Energy efficient:</text>
+    <text x="130" y="110" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">minimal data movement</text>
+  </g>
+
+  <!-- ============ TPU MXU Specs ============ -->
+  <g transform="translate(100, 450)">
+    <rect x="0" y="0" width="600" height="110" fill="#ffffff" fill-opacity="0.05" stroke="#666666" stroke-width="1" rx="8"/>
+    <text x="300" y="25" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#ffffff" text-anchor="middle">TPU v4 MXU Specifications</text>
+
+    <g transform="translate(30, 45)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#83C167">Size:</text>
+      <text x="50" y="0" font-family="monospace" font-size="12" fill="#888888">128 × 128 = 16,384 PEs</text>
+
+      <text x="0" y="25" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#83C167">Throughput:</text>
+      <text x="90" y="25" font-family="monospace" font-size="12" fill="#888888">275 TFLOPS (bfloat16)</text>
+
+      <text x="300" y="0" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#83C167">Precision:</text>
+      <text x="370" y="0" font-family="monospace" font-size="12" fill="#888888">bfloat16 in, float32 acc</text>
+
+      <text x="300" y="25" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#83C167">Chips/Pod:</text>
+      <text x="380" y="25" font-family="monospace" font-size="12" fill="#888888">4,096 → 1.1 exaflops</text>
+    </g>
+
+    <text x="300" y="95" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Keep matrix dimensions as multiples of 128 for best MXU utilization</text>
+  </g>
+</svg>
