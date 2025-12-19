@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <!-- Pure black background -->
+  <rect width="800" height="520" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">The Roofline Model</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="58" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Are you memory-bound or compute-bound?
+  </text>
+
+  <!-- ============ Graph Area ============ -->
+  <g transform="translate(120, 100)">
+    <!-- Axes -->
+    <line x1="0" y1="300" x2="520" y2="300" stroke="#666666" stroke-width="2"/>
+    <line x1="0" y1="0" x2="0" y2="300" stroke="#666666" stroke-width="2"/>
+
+    <!-- X-axis label -->
+    <text x="260" y="340" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">Arithmetic Intensity (FLOPS / Byte)</text>
+
+    <!-- Y-axis label -->
+    <text x="-40" y="150" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle" transform="rotate(-90, -40, 150)">Performance (TFLOPS)</text>
+
+    <!-- Y-axis ticks -->
+    <line x1="-5" y1="250" x2="0" y2="250" stroke="#666666" stroke-width="1"/>
+    <text x="-15" y="255" font-family="monospace" font-size="10" fill="#666666" text-anchor="end">50</text>
+    <line x1="-5" y1="200" x2="0" y2="200" stroke="#666666" stroke-width="1"/>
+    <text x="-15" y="205" font-family="monospace" font-size="10" fill="#666666" text-anchor="end">100</text>
+    <line x1="-5" y1="150" x2="0" y2="150" stroke="#666666" stroke-width="1"/>
+    <text x="-15" y="155" font-family="monospace" font-size="10" fill="#666666" text-anchor="end">150</text>
+    <line x1="-5" y1="100" x2="0" y2="100" stroke="#666666" stroke-width="1"/>
+    <text x="-15" y="105" font-family="monospace" font-size="10" fill="#666666" text-anchor="end">200</text>
+    <line x1="-5" y1="50" x2="0" y2="50" stroke="#666666" stroke-width="1"/>
+    <text x="-15" y="55" font-family="monospace" font-size="10" fill="#666666" text-anchor="end">250</text>
+
+    <!-- X-axis ticks (log scale representation) -->
+    <line x1="50" y1="300" x2="50" y2="305" stroke="#666666" stroke-width="1"/>
+    <text x="50" y="320" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">1</text>
+    <line x1="150" y1="300" x2="150" y2="305" stroke="#666666" stroke-width="1"/>
+    <text x="150" y="320" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">10</text>
+    <line x1="250" y1="300" x2="250" y2="305" stroke="#666666" stroke-width="1"/>
+    <text x="250" y="320" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">100</text>
+    <line x1="350" y1="300" x2="350" y2="305" stroke="#666666" stroke-width="1"/>
+    <text x="350" y="320" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">1000</text>
+    <line x1="450" y1="300" x2="450" y2="305" stroke="#666666" stroke-width="1"/>
+    <text x="450" y="320" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">10000</text>
+
+    <!-- ============ Roofline ============ -->
+    <!-- Memory-bound slope (left side) -->
+    <line x1="0" y1="300" x2="200" y2="50" stroke="#29ABCA" stroke-width="3"/>
+
+    <!-- Compute-bound ceiling (right side) -->
+    <line x1="200" y1="50" x2="520" y2="50" stroke="#FF6B6B" stroke-width="3"/>
+
+    <!-- Ridge point -->
+    <circle cx="200" cy="50" r="6" fill="#FFFF00"/>
+    <text x="200" y="30" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Ridge Point</text>
+
+    <!-- Labels for regions -->
+    <text x="80" y="200" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#29ABCA" text-anchor="middle" transform="rotate(-50, 80, 200)">Memory-bound</text>
+    <text x="360" y="80" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FF6B6B" text-anchor="middle">Compute-bound</text>
+
+    <!-- Peak labels -->
+    <text x="520" y="45" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B" text-anchor="start">Peak Compute</text>
+    <text x="10" y="290" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA" text-anchor="start">slope = bandwidth</text>
+
+    <!-- ============ Example Operations ============ -->
+    <!-- LayerNorm - memory bound -->
+    <circle cx="70" cy="220" r="8" fill="#83C167"/>
+    <text x="85" y="225" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">LayerNorm</text>
+
+    <!-- Softmax - memory bound -->
+    <circle cx="90" cy="190" r="8" fill="#83C167"/>
+    <text x="105" y="195" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">Softmax</text>
+
+    <!-- GELU - memory bound -->
+    <circle cx="60" cy="250" r="8" fill="#83C167"/>
+    <text x="75" y="255" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">GELU</text>
+
+    <!-- MatMul - compute bound -->
+    <circle cx="350" cy="70" r="8" fill="#FFFF00"/>
+    <text x="365" y="75" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00" text-anchor="start">MatMul (large)</text>
+
+    <!-- Attention - depends -->
+    <circle cx="180" cy="80" r="8" fill="#FF6B6B"/>
+    <text x="195" y="85" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B" text-anchor="start">Attention</text>
+  </g>
+
+  <!-- ============ Legend / Key Insights ============ -->
+  <g transform="translate(100, 430)">
+    <rect x="0" y="0" width="600" height="75" fill="#ffffff" fill-opacity="0.05" stroke="#666666" stroke-width="1" rx="8"/>
+
+    <!-- Left column -->
+    <g transform="translate(20, 20)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#29ABCA">Memory-bound ops:</text>
+      <text x="130" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Fuse to reduce traffic</text>
+      <text x="0" y="25" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167">• LayerNorm, Softmax, GELU, Dropout</text>
+    </g>
+
+    <!-- Right column -->
+    <g transform="translate(330, 20)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FF6B6B">Compute-bound ops:</text>
+      <text x="125" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Use tensor cores</text>
+      <text x="0" y="25" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00">• MatMul, Conv — let cuBLAS handle</text>
+    </g>
+
+    <text x="300" y="60" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">AI = FLOPS / Bytes loaded. Below ridge → fuse. Above ridge → already optimized.</text>
+  </g>
+</svg>
