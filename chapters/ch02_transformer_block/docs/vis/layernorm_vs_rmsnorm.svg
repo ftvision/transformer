@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430">
+  <!-- Background -->
+  <rect width="900" height="430" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">LayerNorm vs RMSNorm</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="58" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    RMSNorm skips mean centering for faster computation
+  </text>
+
+  <!-- ============ LayerNorm (left) ============ -->
+  <g transform="translate(70, 90)">
+    <text x="150" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#FC6255" text-anchor="middle">LayerNorm</text>
+    <text x="150" y="20" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">Original Transformer, GPT-2</text>
+
+    <!-- Formula box -->
+    <rect x="20" y="35" width="260" height="75" fill="#FC6255" fill-opacity="0.1" stroke="#FC6255" stroke-width="1"/>
+
+    <!-- Step 1: Mean -->
+    <text x="30" y="58" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="start">1. Compute mean:</text>
+    <text x="150" y="58" font-family="monospace" font-size="12" fill="#FC6255" text-anchor="start">μ = mean(x)</text>
+
+    <!-- Step 2: Variance -->
+    <text x="30" y="78" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="start">2. Compute variance:</text>
+    <text x="170" y="78" font-family="monospace" font-size="12" fill="#FC6255" text-anchor="start">σ² = var(x)</text>
+
+    <!-- Step 3: Normalize -->
+    <text x="30" y="98" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="start">3. Normalize:</text>
+    <text x="120" y="98" font-family="monospace" font-size="12" fill="#FC6255" text-anchor="start">(x - μ) / √(σ² + ε)</text>
+
+    <!-- Output formula -->
+    <text x="150" y="140" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#ffffff" text-anchor="middle">Output:</text>
+    <text x="150" y="163" font-family="monospace" font-size="14" fill="#FC6255" text-anchor="middle">γ · norm(x) + β</text>
+
+    <!-- Parameters -->
+    <text x="150" y="195" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">Parameters: γ (scale), β (shift)</text>
+
+    <!-- Properties box -->
+    <rect x="20" y="215" width="260" height="85" fill="none" stroke="#444444" stroke-width="1"/>
+    <text x="150" y="235" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#888888" text-anchor="middle">Properties</text>
+
+    <text x="30" y="260" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">✓ Centers mean to 0</text>
+    <text x="30" y="278" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">✓ Scales std to 1</text>
+    <text x="30" y="296" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FC6255" text-anchor="start">✗ More operations</text>
+  </g>
+
+  <!-- ============ RMSNorm (right) ============ -->
+  <g transform="translate(500, 90)">
+    <text x="150" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#83C167" text-anchor="middle">RMSNorm</text>
+    <text x="150" y="20" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">LLaMA, Mistral</text>
+
+    <!-- Formula box -->
+    <rect x="20" y="35" width="260" height="75" fill="#83C167" fill-opacity="0.1" stroke="#83C167" stroke-width="1"/>
+
+    <!-- Step 1: RMS -->
+    <text x="30" y="58" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="start">1. Compute RMS:</text>
+    <text x="145" y="58" font-family="monospace" font-size="12" fill="#83C167" text-anchor="start">rms = √mean(x²)</text>
+
+    <!-- Step 2: Skip mean! -->
+    <text x="30" y="78" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="start" text-decoration="line-through">2. No mean subtraction</text>
+
+    <!-- Step 3: Normalize -->
+    <text x="30" y="98" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="start">2. Normalize:</text>
+    <text x="120" y="98" font-family="monospace" font-size="12" fill="#83C167" text-anchor="start">x / (rms + ε)</text>
+
+    <!-- Output formula -->
+    <text x="150" y="140" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#ffffff" text-anchor="middle">Output:</text>
+    <text x="150" y="163" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">γ · norm(x)</text>
+
+    <!-- Parameters -->
+    <text x="150" y="195" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">Parameters: γ (scale only)</text>
+
+    <!-- Properties box -->
+    <rect x="20" y="215" width="260" height="85" fill="none" stroke="#444444" stroke-width="1"/>
+    <text x="150" y="235" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#888888" text-anchor="middle">Properties</text>
+
+    <text x="30" y="260" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00" text-anchor="start">~ No mean centering</text>
+    <text x="30" y="278" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">✓ Scales by RMS</text>
+    <text x="30" y="296" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">✓ Fewer operations (faster!)</text>
+  </g>
+
+  <!-- ============ Comparison Arrow ============ -->
+  <g transform="translate(400, 200)">
+    <line x1="0" y1="0" x2="70" y2="0" stroke="#888888" stroke-width="2"/>
+    <polygon points="70,0 62,-4 62,4" fill="#888888"/>
+    <text x="35" y="-10" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888" text-anchor="middle">simpler</text>
+  </g>
+
+  <!-- ============ Bottom Key Insight ============ -->
+  <g transform="translate(70, 370)">
+    <rect x="0" y="0" width="760" height="48" fill="none" stroke="#444444" stroke-width="1"/>
+    <text x="380" y="20" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">Key Insight</text>
+    <text x="380" y="40" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">
+      Mean centering may not be necessary — RMSNorm provides similar stabilization with ~10% speedup
+    </text>
+  </g>
+</svg>
