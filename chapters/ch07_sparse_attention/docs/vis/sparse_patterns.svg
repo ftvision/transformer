@@ -1,0 +1,311 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+  <defs>
+    <style>
+      .title { font-family: "CMU Serif", Georgia, serif; font-size: 24px; fill: #FFFFFF; }
+      .subtitle { font-family: "CMU Serif", Georgia, serif; font-size: 14px; fill: #888888; }
+      .label { font-family: "CMU Serif", Georgia, serif; font-size: 12px; fill: #FFFFFF; }
+      .cell-active { fill: #29ABCA; }
+      .cell-inactive { fill: #1a1a1a; }
+      .cell-border { stroke: #333333; stroke-width: 0.5; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="400" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" class="title">Sparse Attention Patterns</text>
+  <text x="450" y="55" text-anchor="middle" class="subtitle">Reducing O(n²) to O(n) with structured sparsity</text>
+
+  <!-- Local Attention (8x8 matrix) -->
+  <g transform="translate(80, 90)">
+    <text x="60" y="-10" text-anchor="middle" class="label" fill="#29ABCA">Local (window=3)</text>
+
+    <!-- 8x8 grid -->
+    <g>
+      <!-- Row 0: positions 0,1 active -->
+      <rect x="0" y="0" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="15" y="0" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="30" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="45" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="75" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 1: positions 0,1,2 active -->
+      <rect x="0" y="15" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="15" y="15" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="30" y="15" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="45" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="75" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 2: positions 0,1,2,3 active -->
+      <rect x="0" y="30" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="15" y="30" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="30" y="30" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="45" y="30" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="60" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="75" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 3: positions 1,2,3,4 active -->
+      <rect x="0" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="15" y="45" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="30" y="45" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="45" y="45" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="60" y="45" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="75" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 4: positions 2,3,4,5 active -->
+      <rect x="0" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="15" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="60" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="45" y="60" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="60" y="60" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="75" y="60" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="90" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 5: positions 3,4,5,6 active -->
+      <rect x="0" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="15" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="45" y="75" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="60" y="75" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="75" y="75" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="90" y="75" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="105" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 6: positions 4,5,6,7 active -->
+      <rect x="0" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="15" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="45" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="90" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="75" y="90" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="90" y="90" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="105" y="90" width="15" height="15" class="cell-active cell-border"/>
+
+      <!-- Row 7: positions 5,6,7 active -->
+      <rect x="0" y="105" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="15" y="105" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="105" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="45" y="105" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="105" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="75" y="105" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="90" y="105" width="15" height="15" class="cell-active cell-border"/>
+      <rect x="105" y="105" width="15" height="15" class="cell-active cell-border"/>
+    </g>
+
+    <!-- Axis labels -->
+    <text x="60" y="135" text-anchor="middle" class="subtitle">Keys</text>
+    <text x="-15" y="60" text-anchor="middle" class="subtitle" transform="rotate(-90, -15, 60)">Queries</text>
+  </g>
+
+  <!-- Strided Attention (8x8 matrix) -->
+  <g transform="translate(330, 90)">
+    <text x="60" y="-10" text-anchor="middle" class="label" fill="#FFFF00">Strided (stride=2)</text>
+
+    <!-- 8x8 grid - strided pattern -->
+    <g>
+      <!-- Row 0: positions 0 active -->
+      <rect x="0" y="0" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="15" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="45" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="75" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 1: positions 0,1 active -->
+      <rect x="0" y="15" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="15" y="15" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="30" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="45" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="75" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 2: positions 0,2 active -->
+      <rect x="0" y="30" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="15" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="30" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="45" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="75" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 3: positions 0,2,3 active -->
+      <rect x="0" y="45" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="15" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="45" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="45" y="45" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="60" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="75" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 4: positions 0,2,4 active -->
+      <rect x="0" y="60" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="15" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="60" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="45" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="60" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="75" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 5: positions 0,2,4,5 active -->
+      <rect x="0" y="75" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="15" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="75" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="45" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="75" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="75" y="75" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="90" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 6: positions 0,2,4,6 active -->
+      <rect x="0" y="90" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="15" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="90" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="45" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="90" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="75" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="90" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="105" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 7: positions 0,2,4,6,7 active -->
+      <rect x="0" y="105" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="15" y="105" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="105" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="45" y="105" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="105" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="75" y="105" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="105" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+      <rect x="105" y="105" width="15" height="15" class="cell-active cell-border" fill="#FFFF00"/>
+    </g>
+
+    <!-- Axis labels -->
+    <text x="60" y="135" text-anchor="middle" class="subtitle">Keys</text>
+  </g>
+
+  <!-- Block Attention (8x8 matrix) -->
+  <g transform="translate(580, 90)">
+    <text x="60" y="-10" text-anchor="middle" class="label" fill="#83C167">Block (size=4)</text>
+
+    <!-- 8x8 grid - block pattern -->
+    <g>
+      <!-- Row 0: block 0 (positions 0-3) active -->
+      <rect x="0" y="0" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="15" y="0" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="30" y="0" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="45" y="0" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="60" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="75" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="0" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 1 -->
+      <rect x="0" y="15" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="15" y="15" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="30" y="15" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="45" y="15" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="60" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="75" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 2 -->
+      <rect x="0" y="30" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="15" y="30" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="30" y="30" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="45" y="30" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="60" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="75" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 3 -->
+      <rect x="0" y="45" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="15" y="45" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="30" y="45" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="45" y="45" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="60" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="75" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="90" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="105" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+
+      <!-- Row 4: block 1 (positions 4-7) active -->
+      <rect x="0" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="15" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="45" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="60" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="75" y="60" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="90" y="60" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="105" y="60" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+
+      <!-- Row 5 -->
+      <rect x="0" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="15" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="45" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="75" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="75" y="75" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="90" y="75" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="105" y="75" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+
+      <!-- Row 6 -->
+      <rect x="0" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="15" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="45" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="90" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="75" y="90" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="90" y="90" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="105" y="90" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+
+      <!-- Row 7 -->
+      <rect x="0" y="105" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="15" y="105" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="30" y="105" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="45" y="105" width="15" height="15" class="cell-inactive cell-border"/>
+      <rect x="60" y="105" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="75" y="105" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="90" y="105" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+      <rect x="105" y="105" width="15" height="15" class="cell-active cell-border" fill="#83C167"/>
+    </g>
+
+    <!-- Axis labels -->
+    <text x="60" y="135" text-anchor="middle" class="subtitle">Keys</text>
+  </g>
+
+  <!-- Complexity comparison -->
+  <g transform="translate(80, 280)">
+    <text x="0" y="0" class="label" fill="#888888">Complexity:</text>
+    <text x="0" y="25" class="label" fill="#29ABCA">Local: O(n × w)</text>
+    <text x="150" y="25" class="label" fill="#FFFF00">Strided: O(n × n/s)</text>
+    <text x="330" y="25" class="label" fill="#83C167">Block: O(n × b)</text>
+
+    <text x="0" y="55" class="subtitle">Full attention: O(n²) | Sparse patterns reduce to O(n × k) where k &lt;&lt; n</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(620, 280)">
+    <rect x="0" y="0" width="15" height="15" fill="#29ABCA"/>
+    <text x="22" y="12" class="label">Attended</text>
+    <rect x="100" y="0" width="15" height="15" fill="#1a1a1a" stroke="#333333"/>
+    <text x="122" y="12" class="label">Masked</text>
+  </g>
+</svg>

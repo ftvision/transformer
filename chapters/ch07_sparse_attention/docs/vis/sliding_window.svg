@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450">
+  <defs>
+    <style>
+      .title { font-family: "CMU Serif", Georgia, serif; font-size: 24px; fill: #FFFFFF; }
+      .subtitle { font-family: "CMU Serif", Georgia, serif; font-size: 14px; fill: #888888; }
+      .label { font-family: "CMU Serif", Georgia, serif; font-size: 12px; fill: #FFFFFF; }
+      .small-label { font-family: "CMU Serif", Georgia, serif; font-size: 10px; fill: #888888; }
+      .cell-local { fill: #29ABCA; }
+      .cell-global { fill: #FFFF00; }
+      .cell-inactive { fill: #1a1a1a; }
+      .cell-border { stroke: #333333; stroke-width: 0.5; }
+      .token { font-family: monospace; font-size: 10px; fill: #FFFFFF; }
+      .global-token { font-family: monospace; font-size: 10px; fill: #FFFF00; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="450" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" class="title">Sliding Window + Global Attention</text>
+  <text x="450" y="55" text-anchor="middle" class="subtitle">Longformer/Mistral-style attention with designated global tokens</text>
+
+  <!-- Token sequence visualization -->
+  <g transform="translate(100, 80)">
+    <text x="0" y="0" class="label" fill="#888888">Token Sequence:</text>
+
+    <!-- Tokens -->
+    <rect x="0" y="10" width="50" height="25" fill="#FFFF00" rx="3"/>
+    <text x="25" y="27" text-anchor="middle" class="token" fill="#000000">[CLS]</text>
+
+    <rect x="55" y="10" width="50" height="25" fill="#1a1a1a" stroke="#29ABCA" rx="3"/>
+    <text x="80" y="27" text-anchor="middle" class="token">The</text>
+
+    <rect x="110" y="10" width="50" height="25" fill="#1a1a1a" stroke="#29ABCA" rx="3"/>
+    <text x="135" y="27" text-anchor="middle" class="token">quick</text>
+
+    <rect x="165" y="10" width="50" height="25" fill="#1a1a1a" stroke="#29ABCA" rx="3"/>
+    <text x="190" y="27" text-anchor="middle" class="token">brown</text>
+
+    <rect x="220" y="10" width="50" height="25" fill="#1a1a1a" stroke="#29ABCA" rx="3"/>
+    <text x="245" y="27" text-anchor="middle" class="token">fox</text>
+
+    <rect x="275" y="10" width="50" height="25" fill="#1a1a1a" stroke="#29ABCA" rx="3"/>
+    <text x="300" y="27" text-anchor="middle" class="token">jumps</text>
+
+    <rect x="330" y="10" width="50" height="25" fill="#1a1a1a" stroke="#29ABCA" rx="3"/>
+    <text x="355" y="27" text-anchor="middle" class="token">over</text>
+
+    <rect x="385" y="10" width="50" height="25" fill="#FFFF00" rx="3"/>
+    <text x="410" y="27" text-anchor="middle" class="token" fill="#000000">[SEP]</text>
+
+    <!-- Legend inline -->
+    <rect x="480" y="10" width="15" height="15" fill="#FFFF00"/>
+    <text x="500" y="22" class="small-label" fill="#FFFFFF">Global</text>
+    <rect x="550" y="10" width="15" height="15" fill="#1a1a1a" stroke="#29ABCA"/>
+    <text x="570" y="22" class="small-label" fill="#FFFFFF">Local</text>
+  </g>
+
+  <!-- Attention matrix (8x8) -->
+  <g transform="translate(150, 150)">
+    <text x="60" y="-15" text-anchor="middle" class="label">Attention Pattern (window=2)</text>
+
+    <!-- Column labels -->
+    <text x="7" y="-5" text-anchor="middle" class="small-label" fill="#FFFF00">CLS</text>
+    <text x="22" y="-5" text-anchor="middle" class="small-label">The</text>
+    <text x="37" y="-5" text-anchor="middle" class="small-label">qck</text>
+    <text x="52" y="-5" text-anchor="middle" class="small-label">brn</text>
+    <text x="67" y="-5" text-anchor="middle" class="small-label">fox</text>
+    <text x="82" y="-5" text-anchor="middle" class="small-label">jmp</text>
+    <text x="97" y="-5" text-anchor="middle" class="small-label">ovr</text>
+    <text x="112" y="-5" text-anchor="middle" class="small-label" fill="#FFFF00">SEP</text>
+
+    <!-- Row labels -->
+    <text x="-8" y="12" text-anchor="end" class="small-label" fill="#FFFF00">CLS</text>
+    <text x="-8" y="27" text-anchor="end" class="small-label">The</text>
+    <text x="-8" y="42" text-anchor="end" class="small-label">qck</text>
+    <text x="-8" y="57" text-anchor="end" class="small-label">brn</text>
+    <text x="-8" y="72" text-anchor="end" class="small-label">fox</text>
+    <text x="-8" y="87" text-anchor="end" class="small-label">jmp</text>
+    <text x="-8" y="102" text-anchor="end" class="small-label">ovr</text>
+    <text x="-8" y="117" text-anchor="end" class="small-label" fill="#FFFF00">SEP</text>
+
+    <!-- 8x8 grid -->
+    <!-- Row 0 (CLS - global): attends to all -->
+    <rect x="0" y="0" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="15" y="0" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="30" y="0" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="45" y="0" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="60" y="0" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="75" y="0" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="90" y="0" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="105" y="0" width="15" height="15" class="cell-global cell-border"/>
+
+    <!-- Row 1 (The): global + local window -->
+    <rect x="0" y="15" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="15" y="15" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="30" y="15" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="45" y="15" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="60" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+    <rect x="75" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+    <rect x="90" y="15" width="15" height="15" class="cell-inactive cell-border"/>
+    <rect x="105" y="15" width="15" height="15" class="cell-global cell-border"/>
+
+    <!-- Row 2 (quick): global + local window -->
+    <rect x="0" y="30" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="15" y="30" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="30" y="30" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="45" y="30" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="60" y="30" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="75" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+    <rect x="90" y="30" width="15" height="15" class="cell-inactive cell-border"/>
+    <rect x="105" y="30" width="15" height="15" class="cell-global cell-border"/>
+
+    <!-- Row 3 (brown): global + local window -->
+    <rect x="0" y="45" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="15" y="45" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="30" y="45" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="45" y="45" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="60" y="45" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="75" y="45" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="90" y="45" width="15" height="15" class="cell-inactive cell-border"/>
+    <rect x="105" y="45" width="15" height="15" class="cell-global cell-border"/>
+
+    <!-- Row 4 (fox): global + local window -->
+    <rect x="0" y="60" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="15" y="60" width="15" height="15" class="cell-inactive cell-border"/>
+    <rect x="30" y="60" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="45" y="60" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="60" y="60" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="75" y="60" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="90" y="60" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="105" y="60" width="15" height="15" class="cell-global cell-border"/>
+
+    <!-- Row 5 (jumps): global + local window -->
+    <rect x="0" y="75" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="15" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+    <rect x="30" y="75" width="15" height="15" class="cell-inactive cell-border"/>
+    <rect x="45" y="75" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="60" y="75" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="75" y="75" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="90" y="75" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="105" y="75" width="15" height="15" class="cell-global cell-border"/>
+
+    <!-- Row 6 (over): global + local window -->
+    <rect x="0" y="90" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="15" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+    <rect x="30" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+    <rect x="45" y="90" width="15" height="15" class="cell-inactive cell-border"/>
+    <rect x="60" y="90" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="75" y="90" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="90" y="90" width="15" height="15" class="cell-local cell-border"/>
+    <rect x="105" y="90" width="15" height="15" class="cell-global cell-border"/>
+
+    <!-- Row 7 (SEP - global): attends to all -->
+    <rect x="0" y="105" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="15" y="105" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="30" y="105" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="45" y="105" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="60" y="105" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="75" y="105" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="90" y="105" width="15" height="15" class="cell-global cell-border"/>
+    <rect x="105" y="105" width="15" height="15" class="cell-global cell-border"/>
+
+    <!-- Axis labels -->
+    <text x="60" y="140" text-anchor="middle" class="subtitle">Keys (attend to)</text>
+    <text x="-30" y="60" text-anchor="middle" class="subtitle" transform="rotate(-90, -30, 60)">Queries</text>
+  </g>
+
+  <!-- Complexity analysis -->
+  <g transform="translate(450, 150)">
+    <text x="0" y="0" class="label" fill="#FFFFFF">Complexity Breakdown</text>
+
+    <!-- Formula box -->
+    <rect x="0" y="15" width="350" height="100" fill="#111111" rx="5"/>
+
+    <text x="15" y="40" class="label" fill="#29ABCA">Local window: O(n × w)</text>
+    <text x="200" y="40" class="small-label">w = window size</text>
+
+    <text x="15" y="65" class="label" fill="#FFFF00">Global tokens: O(n × g + g × n)</text>
+    <text x="260" y="65" class="small-label">g = # global</text>
+
+    <text x="15" y="95" class="label" fill="#FFFFFF">Total: O(n × (w + 2g))</text>
+    <text x="200" y="95" class="small-label">≈ O(n) when w, g are constant</text>
+  </g>
+
+  <!-- Memory savings -->
+  <g transform="translate(450, 280)">
+    <text x="0" y="0" class="label" fill="#FFFFFF">Memory vs Full Attention</text>
+
+    <!-- Comparison bars -->
+    <text x="0" y="25" class="small-label">Full (n=4096):</text>
+    <rect x="100" y="12" width="250" height="18" fill="#FF6B6B" rx="2"/>
+    <text x="355" y="26" class="small-label">16M positions</text>
+
+    <text x="0" y="50" class="small-label">Sliding (w=512):</text>
+    <rect x="100" y="37" width="31" height="18" fill="#83C167" rx="2"/>
+    <text x="140" y="51" class="small-label">2M positions (8× savings)</text>
+
+    <text x="0" y="75" class="small-label">+ Global (g=2):</text>
+    <rect x="100" y="62" width="35" height="18" fill="#83C167" rx="2"/>
+    <text x="140" y="76" class="small-label">+16K (negligible)</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(150, 310)">
+    <rect x="0" y="0" width="15" height="15" fill="#FFFF00"/>
+    <text x="22" y="12" class="label">Global attention (attends to/from all)</text>
+
+    <rect x="0" y="25" width="15" height="15" fill="#29ABCA"/>
+    <text x="22" y="37" class="label">Local window attention</text>
+
+    <rect x="0" y="50" width="15" height="15" fill="#1a1a1a" stroke="#333333"/>
+    <text x="22" y="62" class="label">Masked (no attention)</text>
+  </g>
+
+  <!-- Key insight -->
+  <g transform="translate(100, 400)">
+    <text x="350" y="0" text-anchor="middle" class="subtitle">Key insight: Global tokens enable information flow across the entire sequence</text>
+    <text x="350" y="20" text-anchor="middle" class="subtitle">while local windows maintain O(n) complexity for most tokens</text>
+  </g>
+</svg>

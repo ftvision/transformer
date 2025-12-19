@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550">
+  <defs>
+    <style>
+      .title { font-family: "CMU Serif", Georgia, serif; font-size: 24px; fill: #FFFFFF; }
+      .subtitle { font-family: "CMU Serif", Georgia, serif; font-size: 14px; fill: #888888; }
+      .label { font-family: "CMU Serif", Georgia, serif; font-size: 12px; fill: #FFFFFF; }
+      .small-label { font-family: "CMU Serif", Georgia, serif; font-size: 10px; fill: #888888; }
+      .token-label { font-family: monospace; font-size: 10px; fill: #FFFFFF; }
+      .weight { font-family: monospace; font-size: 9px; fill: #FFFFFF; }
+      .box { stroke-width: 1.5; rx: 4; }
+      .expert-box { stroke-width: 2; rx: 5; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666666"/>
+    </marker>
+    <marker id="arrowhead-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#29ABCA"/>
+    </marker>
+    <marker id="arrowhead-yellow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#FFFF00"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="550" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" class="title">Mixture of Experts (MoE) Routing</text>
+  <text x="450" y="55" text-anchor="middle" class="subtitle">Each token selects top-k experts from a pool of N experts</text>
+
+  <!-- Input tokens -->
+  <g transform="translate(100, 90)">
+    <text x="350" y="0" text-anchor="middle" class="label">Input Tokens</text>
+
+    <rect x="0" y="15" width="60" height="30" fill="#29ABCA" class="box" stroke="#29ABCA"/>
+    <text x="30" y="35" text-anchor="middle" class="token-label" fill="#000000">Token 0</text>
+
+    <rect x="80" y="15" width="60" height="30" fill="#FFFF00" class="box" stroke="#FFFF00"/>
+    <text x="110" y="35" text-anchor="middle" class="token-label" fill="#000000">Token 1</text>
+
+    <rect x="160" y="15" width="60" height="30" fill="#83C167" class="box" stroke="#83C167"/>
+    <text x="190" y="35" text-anchor="middle" class="token-label" fill="#000000">Token 2</text>
+
+    <rect x="240" y="15" width="60" height="30" fill="#FF9500" class="box" stroke="#FF9500"/>
+    <text x="270" y="35" text-anchor="middle" class="token-label" fill="#000000">Token 3</text>
+
+    <text x="340" y="35" class="small-label">...</text>
+
+    <rect x="380" y="15" width="60" height="30" fill="#9B59B6" class="box" stroke="#9B59B6"/>
+    <text x="410" y="35" text-anchor="middle" class="token-label" fill="#000000">Token N</text>
+
+    <rect x="460" y="15" width="60" height="30" fill="#FF6B6B" class="box" stroke="#FF6B6B"/>
+    <text x="490" y="35" text-anchor="middle" class="token-label" fill="#000000">Token N+1</text>
+
+    <rect x="540" y="15" width="60" height="30" fill="#E74C3C" class="box" stroke="#E74C3C"/>
+    <text x="570" y="35" text-anchor="middle" class="token-label" fill="#000000">Token N+2</text>
+  </g>
+
+  <!-- Router -->
+  <g transform="translate(350, 170)">
+    <rect x="0" y="0" width="200" height="40" fill="#1a1a1a" stroke="#FFFFFF" stroke-width="2" rx="5"/>
+    <text x="100" y="25" text-anchor="middle" class="label">Router: softmax(X @ W_r)</text>
+
+    <!-- Arrows from tokens to router -->
+    <line x1="-220" y1="-30" x2="20" y2="0" stroke="#29ABCA" stroke-width="1.5"/>
+    <line x1="-140" y1="-30" x2="50" y2="0" stroke="#FFFF00" stroke-width="1.5"/>
+    <line x1="-60" y1="-30" x2="80" y2="0" stroke="#83C167" stroke-width="1.5"/>
+    <line x1="20" y1="-30" x2="100" y2="0" stroke="#FF9500" stroke-width="1.5"/>
+    <line x1="160" y1="-30" x2="140" y2="0" stroke="#9B59B6" stroke-width="1.5"/>
+    <line x1="240" y1="-30" x2="170" y2="0" stroke="#FF6B6B" stroke-width="1.5"/>
+    <line x1="320" y1="-30" x2="190" y2="0" stroke="#E74C3C" stroke-width="1.5"/>
+  </g>
+
+  <!-- Expert pool -->
+  <g transform="translate(100, 280)">
+    <text x="350" y="0" text-anchor="middle" class="label">Expert Pool (8 experts, top-2 selection)</text>
+
+    <!-- Experts -->
+    <rect x="0" y="20" width="70" height="70" fill="#1a1a1a" stroke="#29ABCA" stroke-width="3" class="expert-box"/>
+    <text x="35" y="50" text-anchor="middle" class="label" fill="#29ABCA">Expert 0</text>
+    <text x="35" y="70" text-anchor="middle" class="small-label">FFN</text>
+
+    <rect x="90" y="20" width="70" height="70" fill="#1a1a1a" stroke="#FFFF00" stroke-width="3" class="expert-box"/>
+    <text x="125" y="50" text-anchor="middle" class="label" fill="#FFFF00">Expert 1</text>
+    <text x="125" y="70" text-anchor="middle" class="small-label">FFN</text>
+
+    <rect x="180" y="20" width="70" height="70" fill="#1a1a1a" stroke="#83C167" stroke-width="3" class="expert-box"/>
+    <text x="215" y="50" text-anchor="middle" class="label" fill="#83C167">Expert 2</text>
+    <text x="215" y="70" text-anchor="middle" class="small-label">FFN</text>
+
+    <rect x="270" y="20" width="70" height="70" fill="#1a1a1a" stroke="#FF9500" stroke-width="3" class="expert-box"/>
+    <text x="305" y="50" text-anchor="middle" class="label" fill="#FF9500">Expert 3</text>
+    <text x="305" y="70" text-anchor="middle" class="small-label">FFN</text>
+
+    <rect x="360" y="20" width="70" height="70" fill="#1a1a1a" stroke="#9B59B6" stroke-width="3" class="expert-box"/>
+    <text x="395" y="50" text-anchor="middle" class="label" fill="#9B59B6">Expert 4</text>
+    <text x="395" y="70" text-anchor="middle" class="small-label">FFN</text>
+
+    <rect x="450" y="20" width="70" height="70" fill="#1a1a1a" stroke="#FF6B6B" stroke-width="3" class="expert-box"/>
+    <text x="485" y="50" text-anchor="middle" class="label" fill="#FF6B6B">Expert 5</text>
+    <text x="485" y="70" text-anchor="middle" class="small-label">FFN</text>
+
+    <rect x="540" y="20" width="70" height="70" fill="#1a1a1a" stroke="#E74C3C" stroke-width="3" class="expert-box"/>
+    <text x="575" y="50" text-anchor="middle" class="label" fill="#E74C3C">Expert 6</text>
+    <text x="575" y="70" text-anchor="middle" class="small-label">FFN</text>
+
+    <rect x="630" y="20" width="70" height="70" fill="#1a1a1a" stroke="#888888" stroke-width="3" class="expert-box"/>
+    <text x="665" y="50" text-anchor="middle" class="label" fill="#888888">Expert 7</text>
+    <text x="665" y="70" text-anchor="middle" class="small-label">FFN</text>
+  </g>
+
+  <!-- Routing example arrows with weights -->
+  <g transform="translate(100, 220)">
+    <!-- Token 0 -> Expert 0 (0.6), Expert 2 (0.4) -->
+    <line x1="30" y1="0" x2="35" y2="60" stroke="#29ABCA" stroke-width="2"/>
+    <text x="20" y="35" class="weight" fill="#29ABCA">0.6</text>
+    <line x1="30" y1="0" x2="215" y2="60" stroke="#29ABCA" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="120" y="25" class="weight" fill="#29ABCA">0.4</text>
+
+    <!-- Token 1 -> Expert 1 (0.7), Expert 3 (0.3) -->
+    <line x1="110" y1="0" x2="125" y2="60" stroke="#FFFF00" stroke-width="2"/>
+    <text x="105" y="35" class="weight" fill="#FFFF00">0.7</text>
+    <line x1="110" y1="0" x2="305" y2="60" stroke="#FFFF00" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="200" y="25" class="weight" fill="#FFFF00">0.3</text>
+
+    <!-- Token 2 -> Expert 2 (0.5), Expert 4 (0.5) -->
+    <line x1="190" y1="0" x2="215" y2="60" stroke="#83C167" stroke-width="2"/>
+    <text x="190" y="35" class="weight" fill="#83C167">0.5</text>
+    <line x1="190" y1="0" x2="395" y2="60" stroke="#83C167" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="290" y="25" class="weight" fill="#83C167">0.5</text>
+  </g>
+
+  <!-- Output formula -->
+  <g transform="translate(100, 400)">
+    <rect x="0" y="0" width="700" height="50" fill="#111111" rx="5"/>
+    <text x="350" y="20" text-anchor="middle" class="label">Output = Σ (weight_i × Expert_i(token))</text>
+    <text x="350" y="40" text-anchor="middle" class="small-label">Token 0: 0.6 × Expert_0(x) + 0.4 × Expert_2(x)</text>
+  </g>
+
+  <!-- Efficiency stats -->
+  <g transform="translate(100, 470)">
+    <text x="0" y="0" class="label" fill="#FFFFFF">Efficiency (8 experts, top-2):</text>
+
+    <text x="0" y="25" class="small-label">• Total parameters: 8× single FFN</text>
+    <text x="250" y="25" class="small-label">• Active per token: 2× single FFN (25%)</text>
+    <text x="550" y="25" class="small-label">• Capacity boost: ~8×</text>
+
+    <text x="0" y="50" class="label" fill="#83C167">Load Balancing Loss = N × Σ(f_i × P_i)</text>
+    <text x="300" y="50" class="small-label">Encourages uniform expert usage</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(100, 520)">
+    <line x1="0" y1="0" x2="30" y2="0" stroke="#FFFFFF" stroke-width="2"/>
+    <text x="35" y="4" class="small-label" fill="#FFFFFF">Primary expert</text>
+
+    <line x1="130" y1="0" x2="160" y2="0" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="165" y="4" class="small-label" fill="#FFFFFF">Secondary expert</text>
+
+    <text x="300" y="4" class="small-label">Numbers = routing weights (sum to 1.0)</text>
+  </g>
+</svg>
