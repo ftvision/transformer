@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+  <!-- Pure black background -->
+  <rect width="900" height="400" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Chunkwise Parallel Computation</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Parallel within chunks, sequential state passing between chunks
+  </text>
+
+  <!-- ============ Full Sequence ============ -->
+  <g transform="translate(50, 90)">
+    <text x="400" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">Full Sequence</text>
+
+    <!-- Long sequence bar -->
+    <rect x="50" y="15" width="700" height="30" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA" stroke-width="1"/>
+
+    <!-- Position markers -->
+    <text x="50" y="60" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">0</text>
+    <text x="750" y="60" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">n</text>
+  </g>
+
+  <!-- Down arrow -->
+  <g transform="translate(450, 155)">
+    <line x1="0" y1="0" x2="0" y2="25" stroke="#FFFF00" stroke-width="2"/>
+    <polygon points="0,25 -5,18 5,18" fill="#FFFF00"/>
+    <text x="30" y="15" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="start">split into chunks</text>
+  </g>
+
+  <!-- ============ Chunked Sequence ============ -->
+  <g transform="translate(50, 195)">
+    <text x="400" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">Chunked Processing</text>
+
+    <!-- Chunk 1 -->
+    <g transform="translate(50, 20)">
+      <rect x="0" y="0" width="150" height="40" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="2"/>
+      <text x="75" y="25" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Chunk 1</text>
+      <text x="75" y="55" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">parallel</text>
+    </g>
+
+    <!-- State arrow 1->2 -->
+    <g transform="translate(215, 40)">
+      <line x1="0" y1="0" x2="35" y2="0" stroke="#FFFF00" stroke-width="2"/>
+      <polygon points="35,0 28,-4 28,4" fill="#FFFF00"/>
+      <text x="17" y="-8" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">S₁</text>
+    </g>
+
+    <!-- Chunk 2 -->
+    <g transform="translate(265, 20)">
+      <rect x="0" y="0" width="150" height="40" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="2"/>
+      <text x="75" y="25" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Chunk 2</text>
+      <text x="75" y="55" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">parallel</text>
+    </g>
+
+    <!-- State arrow 2->3 -->
+    <g transform="translate(430, 40)">
+      <line x1="0" y1="0" x2="35" y2="0" stroke="#FFFF00" stroke-width="2"/>
+      <polygon points="35,0 28,-4 28,4" fill="#FFFF00"/>
+      <text x="17" y="-8" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">S₂</text>
+    </g>
+
+    <!-- Chunk 3 -->
+    <g transform="translate(480, 20)">
+      <rect x="0" y="0" width="150" height="40" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="2"/>
+      <text x="75" y="25" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Chunk 3</text>
+      <text x="75" y="55" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">parallel</text>
+    </g>
+
+    <!-- State arrow 3->... -->
+    <g transform="translate(645, 40)">
+      <line x1="0" y1="0" x2="35" y2="0" stroke="#FFFF00" stroke-width="2"/>
+      <polygon points="35,0 28,-4 28,4" fill="#FFFF00"/>
+      <text x="17" y="-8" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">S₃</text>
+    </g>
+
+    <!-- ... -->
+    <text x="710" y="45" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#666666" text-anchor="middle">...</text>
+  </g>
+
+  <!-- ============ Per-Chunk Detail ============ -->
+  <g transform="translate(100, 310)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#ffffff" text-anchor="middle">Per-Chunk Computation</text>
+
+    <!-- Intra-chunk box -->
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="200" height="55" fill="#83C167" fill-opacity="0.1" stroke="#83C167" rx="5"/>
+      <text x="100" y="22" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Intra-chunk attention</text>
+      <text x="100" y="42" font-family="monospace" font-size="10" fill="#888888" text-anchor="middle">cumsum within chunk</text>
+    </g>
+
+    <!-- Plus sign -->
+    <text x="220" y="50" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#FFFF00" text-anchor="middle">+</text>
+
+    <!-- Inter-chunk box -->
+    <g transform="translate(240, 20)">
+      <rect x="0" y="0" width="200" height="55" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" rx="5"/>
+      <text x="100" y="22" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Inter-chunk contribution</text>
+      <text x="100" y="42" font-family="monospace" font-size="10" fill="#888888" text-anchor="middle">Q_chunk @ prev_state</text>
+    </g>
+
+    <!-- Equals sign -->
+    <text x="460" y="50" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">=</text>
+
+    <!-- Output box -->
+    <g transform="translate(480, 20)">
+      <rect x="0" y="0" width="200" height="55" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" rx="5"/>
+      <text x="100" y="22" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#ffffff" text-anchor="middle">Chunk output</text>
+      <text x="100" y="42" font-family="monospace" font-size="10" fill="#888888" text-anchor="middle">correct causal attention</text>
+    </g>
+  </g>
+</svg>
