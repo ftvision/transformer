@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <!-- Pure black background -->
+  <rect width="800" height="450" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Causal Masking: Preventing Future Peeking</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Each position can only attend to itself and previous positions
+  </text>
+
+  <!-- ============ Bidirectional Attention ============ -->
+  <g transform="translate(80, 100)">
+    <text x="90" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#888888" text-anchor="middle">Bidirectional (Encoder)</text>
+
+    <!-- Tokens -->
+    <g transform="translate(0, 10)">
+      <text x="22" y="-5" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">The</text>
+      <text x="67" y="-5" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">cat</text>
+      <text x="112" y="-5" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">sat</text>
+      <text x="157" y="-5" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">down</text>
+    </g>
+
+    <!-- Grid of cells - all green (full attention) -->
+    <g transform="translate(0, 15)">
+      <!-- Row labels -->
+      <text x="-8" y="28" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">The</text>
+      <text x="-8" y="73" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">cat</text>
+      <text x="-8" y="118" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">sat</text>
+      <text x="-8" y="163" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">down</text>
+
+      <!-- Row 0 -->
+      <rect x="0" y="0" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="22" y="28" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+      <rect x="45" y="0" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="67" y="28" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+      <rect x="90" y="0" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="112" y="28" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+      <rect x="135" y="0" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="157" y="28" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+
+      <!-- Row 1 -->
+      <rect x="0" y="45" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="22" y="73" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+      <rect x="45" y="45" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="67" y="73" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+      <rect x="90" y="45" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="112" y="73" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+      <rect x="135" y="45" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="157" y="73" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+
+      <!-- Row 2 -->
+      <rect x="0" y="90" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="22" y="118" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+      <rect x="45" y="90" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="67" y="118" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+      <rect x="90" y="90" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="112" y="118" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+      <rect x="135" y="90" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="157" y="118" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+
+      <!-- Row 3 -->
+      <rect x="0" y="135" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="22" y="163" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+      <rect x="45" y="135" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="67" y="163" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+      <rect x="90" y="135" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="112" y="163" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+      <rect x="135" y="135" width="45" height="45" fill="#83C167" fill-opacity="0.3" stroke="#83C167" stroke-width="1"/>
+      <text x="157" y="163" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">✓</text>
+    </g>
+
+    <text x="90" y="210" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Every token sees every token</text>
+  </g>
+
+  <!-- ============ Causal Attention ============ -->
+  <g transform="translate(320, 100)">
+    <text x="90" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FFFF00" text-anchor="middle">Causal (Decoder)</text>
+
+    <!-- Tokens -->
+    <g transform="translate(0, 10)">
+      <text x="22" y="-5" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">The</text>
+      <text x="67" y="-5" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">cat</text>
+      <text x="112" y="-5" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">sat</text>
+      <text x="157" y="-5" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">down</text>
+    </g>
+
+    <!-- Grid of cells - lower triangle green, upper triangle red -->
+    <g transform="translate(0, 15)">
+      <!-- Row labels -->
+      <text x="-8" y="28" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">The</text>
+      <text x="-8" y="73" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">cat</text>
+      <text x="-8" y="118" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">sat</text>
+      <text x="-8" y="163" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">down</text>
+
+      <!-- Row 0: only first cell green -->
+      <rect x="0" y="0" width="45" height="45" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+      <text x="22" y="28" font-family="monospace" font-size="14" fill="#FFFF00" text-anchor="middle">✓</text>
+      <rect x="45" y="0" width="45" height="45" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="1"/>
+      <text x="67" y="28" font-family="monospace" font-size="14" fill="#FF6B6B" text-anchor="middle">✗</text>
+      <rect x="90" y="0" width="45" height="45" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="1"/>
+      <text x="112" y="28" font-family="monospace" font-size="14" fill="#FF6B6B" text-anchor="middle">✗</text>
+      <rect x="135" y="0" width="45" height="45" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="1"/>
+      <text x="157" y="28" font-family="monospace" font-size="14" fill="#FF6B6B" text-anchor="middle">✗</text>
+
+      <!-- Row 1: first two cells green -->
+      <rect x="0" y="45" width="45" height="45" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+      <text x="22" y="73" font-family="monospace" font-size="14" fill="#FFFF00" text-anchor="middle">✓</text>
+      <rect x="45" y="45" width="45" height="45" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+      <text x="67" y="73" font-family="monospace" font-size="14" fill="#FFFF00" text-anchor="middle">✓</text>
+      <rect x="90" y="45" width="45" height="45" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="1"/>
+      <text x="112" y="73" font-family="monospace" font-size="14" fill="#FF6B6B" text-anchor="middle">✗</text>
+      <rect x="135" y="45" width="45" height="45" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="1"/>
+      <text x="157" y="73" font-family="monospace" font-size="14" fill="#FF6B6B" text-anchor="middle">✗</text>
+
+      <!-- Row 2: first three cells green -->
+      <rect x="0" y="90" width="45" height="45" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+      <text x="22" y="118" font-family="monospace" font-size="14" fill="#FFFF00" text-anchor="middle">✓</text>
+      <rect x="45" y="90" width="45" height="45" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+      <text x="67" y="118" font-family="monospace" font-size="14" fill="#FFFF00" text-anchor="middle">✓</text>
+      <rect x="90" y="90" width="45" height="45" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+      <text x="112" y="118" font-family="monospace" font-size="14" fill="#FFFF00" text-anchor="middle">✓</text>
+      <rect x="135" y="90" width="45" height="45" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="1"/>
+      <text x="157" y="118" font-family="monospace" font-size="14" fill="#FF6B6B" text-anchor="middle">✗</text>
+
+      <!-- Row 3: all cells green -->
+      <rect x="0" y="135" width="45" height="45" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+      <text x="22" y="163" font-family="monospace" font-size="14" fill="#FFFF00" text-anchor="middle">✓</text>
+      <rect x="45" y="135" width="45" height="45" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+      <text x="67" y="163" font-family="monospace" font-size="14" fill="#FFFF00" text-anchor="middle">✓</text>
+      <rect x="90" y="135" width="45" height="45" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+      <text x="112" y="163" font-family="monospace" font-size="14" fill="#FFFF00" text-anchor="middle">✓</text>
+      <rect x="135" y="135" width="45" height="45" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+      <text x="157" y="163" font-family="monospace" font-size="14" fill="#FFFF00" text-anchor="middle">✓</text>
+    </g>
+
+    <text x="90" y="210" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Can only see past + self</text>
+  </g>
+
+  <!-- ============ The -inf Trick ============ -->
+  <g transform="translate(560, 100)">
+    <text x="100" y="-15" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#29ABCA" text-anchor="middle">The −∞ Trick</text>
+
+    <!-- Before softmax -->
+    <text x="100" y="15" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">Before softmax</text>
+    <g transform="translate(20, 25)">
+      <rect x="0" y="0" width="40" height="30" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="20" y="20" font-family="monospace" font-size="10" fill="#29ABCA" text-anchor="middle">2.1</text>
+      <rect x="40" y="0" width="40" height="30" fill="none" stroke="#FF6B6B" stroke-width="1"/>
+      <text x="60" y="20" font-family="monospace" font-size="9" fill="#FF6B6B" text-anchor="middle">−∞</text>
+      <rect x="80" y="0" width="40" height="30" fill="none" stroke="#FF6B6B" stroke-width="1"/>
+      <text x="100" y="20" font-family="monospace" font-size="9" fill="#FF6B6B" text-anchor="middle">−∞</text>
+      <rect x="120" y="0" width="40" height="30" fill="none" stroke="#FF6B6B" stroke-width="1"/>
+      <text x="140" y="20" font-family="monospace" font-size="9" fill="#FF6B6B" text-anchor="middle">−∞</text>
+    </g>
+
+    <!-- Arrow -->
+    <g transform="translate(100, 75)">
+      <line x1="0" y1="0" x2="0" y2="25" stroke="#888888" stroke-width="2"/>
+      <polygon points="0,25 -4,18 4,18" fill="#888888"/>
+      <text x="35" y="15" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="start">softmax</text>
+    </g>
+
+    <!-- After softmax -->
+    <text x="100" y="120" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">After softmax</text>
+    <g transform="translate(20, 130)">
+      <rect x="0" y="0" width="40" height="30" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00" stroke-width="1"/>
+      <text x="20" y="20" font-family="monospace" font-size="10" fill="#FFFF00" text-anchor="middle">1.0</text>
+      <rect x="40" y="0" width="40" height="30" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="60" y="20" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">0</text>
+      <rect x="80" y="0" width="40" height="30" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="100" y="20" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">0</text>
+      <rect x="120" y="0" width="40" height="30" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="140" y="20" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">0</text>
+    </g>
+
+    <text x="100" y="185" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">exp(−∞) = 0</text>
+    <text x="100" y="200" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#29ABCA" text-anchor="middle">Masked positions → 0 weight</text>
+  </g>
+
+  <!-- ============ Why Causal? ============ -->
+  <g transform="translate(50, 340)">
+    <text x="350" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">Why Causal Masking?</text>
+
+    <g transform="translate(0, 25)">
+      <!-- Without masking -->
+      <g transform="translate(50, 0)">
+        <text x="80" y="0" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FF6B6B" text-anchor="middle">Without masking:</text>
+        <text x="80" y="25" font-family="monospace" font-size="12" fill="#888888" text-anchor="middle">"The [?] sat"</text>
+        <text x="80" y="45" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B" text-anchor="middle">Can see "sat" → just copy!</text>
+      </g>
+
+      <!-- Arrow -->
+      <g transform="translate(280, 25)">
+        <line x1="0" y1="0" x2="80" y2="0" stroke="#888888" stroke-width="2"/>
+        <polygon points="80,0 73,-4 73,4" fill="#888888"/>
+      </g>
+
+      <!-- With masking -->
+      <g transform="translate(420, 0)">
+        <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FFFF00" text-anchor="middle">With causal mask:</text>
+        <text x="100" y="25" font-family="monospace" font-size="12" fill="#888888" text-anchor="middle">"The [?] ███"</text>
+        <text x="100" y="45" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00" text-anchor="middle">Must predict from context</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(50, 420)">
+    <rect x="0" y="0" width="15" height="15" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00"/>
+    <text x="22" y="12" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Can attend</text>
+    <rect x="120" y="0" width="15" height="15" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B"/>
+    <text x="142" y="12" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Masked</text>
+  </g>
+</svg>

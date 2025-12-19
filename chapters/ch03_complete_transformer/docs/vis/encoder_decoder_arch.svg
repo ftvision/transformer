@@ -1,0 +1,249 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550">
+  <!-- Pure black background -->
+  <rect width="900" height="550" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Three Transformer Architectures</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="58" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Encoder-Only, Decoder-Only, and Encoder-Decoder
+  </text>
+
+  <!-- ============ Encoder-Only (BERT) ============ -->
+  <g transform="translate(70, 90)">
+    <text x="90" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#83C167" text-anchor="middle">Encoder-Only</text>
+    <text x="90" y="18" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="middle">(BERT)</text>
+
+    <!-- Input -->
+    <g transform="translate(20, 40)">
+      <rect x="0" y="0" width="140" height="35" rx="5" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="70" y="22" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">Input Tokens</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="90" y1="80" x2="90" y2="100" stroke="#666666" stroke-width="1.5"/>
+    <polygon points="90,105 86,98 94,98" fill="#666666"/>
+
+    <!-- Encoder block -->
+    <g transform="translate(10, 110)">
+      <rect x="0" y="0" width="160" height="120" rx="8" fill="#83C167" fill-opacity="0.15" stroke="#83C167" stroke-width="2"/>
+      <text x="80" y="25" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#83C167" text-anchor="middle">Encoder</text>
+
+      <!-- Bidirectional arrows -->
+      <g transform="translate(30, 50)">
+        <line x1="0" y1="0" x2="100" y2="0" stroke="#83C167" stroke-width="1"/>
+        <polygon points="0,0 7,-3 7,3" fill="#83C167"/>
+        <polygon points="100,0 93,-3 93,3" fill="#83C167"/>
+        <text x="50" y="18" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="middle">Bidirectional</text>
+      </g>
+
+      <text x="80" y="95" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">All tokens see all tokens</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="90" y1="235" x2="90" y2="255" stroke="#666666" stroke-width="1.5"/>
+    <polygon points="90,260 86,253 94,253" fill="#666666"/>
+
+    <!-- Output -->
+    <g transform="translate(20, 265)">
+      <rect x="0" y="0" width="140" height="35" rx="5" fill="none" stroke="#83C167" stroke-width="1"/>
+      <text x="70" y="22" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">Hidden States</text>
+    </g>
+
+  </g>
+
+  <!-- ============ Decoder-Only (GPT) ============ -->
+  <g transform="translate(350, 90)">
+    <text x="90" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#FFFF00" text-anchor="middle">Decoder-Only</text>
+    <text x="90" y="18" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="middle">(GPT, LLaMA)</text>
+
+    <!-- Input -->
+    <g transform="translate(20, 40)">
+      <rect x="0" y="0" width="140" height="35" rx="5" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="70" y="22" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">Input Tokens</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="90" y1="80" x2="90" y2="100" stroke="#666666" stroke-width="1.5"/>
+    <polygon points="90,105 86,98 94,98" fill="#666666"/>
+
+    <!-- Decoder block -->
+    <g transform="translate(10, 110)">
+      <rect x="0" y="0" width="160" height="120" rx="8" fill="#FFFF00" fill-opacity="0.15" stroke="#FFFF00" stroke-width="2"/>
+      <text x="80" y="25" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FFFF00" text-anchor="middle">Decoder</text>
+
+      <!-- Causal arrow -->
+      <g transform="translate(30, 50)">
+        <line x1="0" y1="0" x2="100" y2="0" stroke="#FFFF00" stroke-width="1"/>
+        <polygon points="100,0 93,-3 93,3" fill="#FFFF00"/>
+        <text x="50" y="18" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00" text-anchor="middle">Causal (→ only)</text>
+      </g>
+
+      <text x="80" y="95" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">Each token sees past only</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="90" y1="235" x2="90" y2="255" stroke="#666666" stroke-width="1.5"/>
+    <polygon points="90,260 86,253 94,253" fill="#666666"/>
+
+    <!-- Output -->
+    <g transform="translate(20, 265)">
+      <rect x="0" y="0" width="140" height="35" rx="5" fill="none" stroke="#FFFF00" stroke-width="1"/>
+      <text x="70" y="22" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Next Token</text>
+    </g>
+
+  </g>
+
+  <!-- ============ Encoder-Decoder (T5) ============ -->
+  <g transform="translate(630, 90)">
+    <text x="110" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#29ABCA" text-anchor="middle">Encoder-Decoder</text>
+    <text x="110" y="18" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#666666" text-anchor="middle">(T5, BART)</text>
+
+    <!-- Encoder side -->
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="100" height="30" rx="5" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="50" y="20" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888" text-anchor="middle">Source</text>
+    </g>
+
+    <line x1="50" y1="75" x2="50" y2="90" stroke="#666666" stroke-width="1.5"/>
+    <polygon points="50,95 46,88 54,88" fill="#666666"/>
+
+    <g transform="translate(0, 100)">
+      <rect x="0" y="0" width="100" height="80" rx="6" fill="#83C167" fill-opacity="0.15" stroke="#83C167" stroke-width="2"/>
+      <text x="50" y="25" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="middle">Encoder</text>
+      <text x="50" y="45" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#666666" text-anchor="middle">Bidirectional</text>
+      <line x1="20" y1="60" x2="80" y2="60" stroke="#83C167" stroke-width="1"/>
+      <polygon points="20,60 27,57 27,63" fill="#83C167"/>
+      <polygon points="80,60 73,57 73,63" fill="#83C167"/>
+    </g>
+
+    <!-- Decoder side -->
+    <g transform="translate(120, 40)">
+      <rect x="0" y="0" width="100" height="30" rx="5" fill="none" stroke="#444444" stroke-width="1"/>
+      <text x="50" y="20" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#888888" text-anchor="middle">Target</text>
+    </g>
+
+    <line x1="170" y1="75" x2="170" y2="90" stroke="#666666" stroke-width="1.5"/>
+    <polygon points="170,95 166,88 174,88" fill="#666666"/>
+
+    <g transform="translate(120, 100)">
+      <rect x="0" y="0" width="100" height="80" rx="6" fill="#FFFF00" fill-opacity="0.15" stroke="#FFFF00" stroke-width="2"/>
+      <text x="50" y="25" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00" text-anchor="middle">Decoder</text>
+      <text x="50" y="45" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#666666" text-anchor="middle">Causal</text>
+      <line x1="20" y1="60" x2="80" y2="60" stroke="#FFFF00" stroke-width="1"/>
+      <polygon points="80,60 73,57 73,63" fill="#FFFF00"/>
+    </g>
+
+    <!-- Cross-attention arrow -->
+    <g transform="translate(100, 140)">
+      <path d="M 0,0 C 10,0 10,0 20,0" stroke="#29ABCA" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+      <polygon points="20,0 13,-3 13,3" fill="#29ABCA"/>
+      <text x="10" y="-8" font-family="CMU Serif, Georgia, serif" font-size="8" fill="#29ABCA" text-anchor="middle">cross</text>
+    </g>
+
+    <!-- Output -->
+    <line x1="170" y1="185" x2="170" y2="200" stroke="#666666" stroke-width="1.5"/>
+    <polygon points="170,205 166,198 174,198" fill="#666666"/>
+
+    <g transform="translate(120, 210)">
+      <rect x="0" y="0" width="100" height="30" rx="5" fill="none" stroke="#29ABCA" stroke-width="1"/>
+      <text x="50" y="19" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA" text-anchor="middle">Output</text>
+    </g>
+
+  </g>
+
+  <!-- ============ Bottom comparison ============ -->
+  <g transform="translate(50, 410)">
+    <text x="400" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#ffffff" text-anchor="middle">Attention Patterns</text>
+
+    <!-- Encoder pattern -->
+    <g transform="translate(50, 25)">
+      <text x="50" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="middle">Encoder</text>
+      <g transform="translate(0, 10)">
+        <rect x="0" y="0" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="25" y="0" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="50" y="0" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="75" y="0" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="0" y="25" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="25" y="25" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="50" y="25" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="75" y="25" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="0" y="50" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="25" y="50" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="50" y="50" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="75" y="50" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="0" y="75" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="25" y="75" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="50" y="75" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+        <rect x="75" y="75" width="25" height="25" fill="#83C167" fill-opacity="0.4" stroke="#83C167"/>
+      </g>
+    </g>
+
+    <!-- Decoder pattern (causal) -->
+    <g transform="translate(250, 25)">
+      <text x="50" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00" text-anchor="middle">Decoder</text>
+      <g transform="translate(0, 10)">
+        <rect x="0" y="0" width="25" height="25" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+        <rect x="25" y="0" width="25" height="25" fill="#333333" stroke="#444444"/>
+        <rect x="50" y="0" width="25" height="25" fill="#333333" stroke="#444444"/>
+        <rect x="75" y="0" width="25" height="25" fill="#333333" stroke="#444444"/>
+        <rect x="0" y="25" width="25" height="25" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+        <rect x="25" y="25" width="25" height="25" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+        <rect x="50" y="25" width="25" height="25" fill="#333333" stroke="#444444"/>
+        <rect x="75" y="25" width="25" height="25" fill="#333333" stroke="#444444"/>
+        <rect x="0" y="50" width="25" height="25" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+        <rect x="25" y="50" width="25" height="25" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+        <rect x="50" y="50" width="25" height="25" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+        <rect x="75" y="50" width="25" height="25" fill="#333333" stroke="#444444"/>
+        <rect x="0" y="75" width="25" height="25" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+        <rect x="25" y="75" width="25" height="25" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+        <rect x="50" y="75" width="25" height="25" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+        <rect x="75" y="75" width="25" height="25" fill="#FFFF00" fill-opacity="0.4" stroke="#FFFF00"/>
+      </g>
+    </g>
+
+    <!-- Cross-attention pattern -->
+    <g transform="translate(450, 25)">
+      <text x="75" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#29ABCA" text-anchor="middle">Cross-Attention</text>
+      <g transform="translate(0, 10)">
+        <!-- Encoder columns (source) -->
+        <text x="50" y="-5" font-family="CMU Serif, Georgia, serif" font-size="8" fill="#83C167" text-anchor="middle">encoder</text>
+        <text x="-15" y="55" font-family="CMU Serif, Georgia, serif" font-size="8" fill="#FFFF00" text-anchor="middle" transform="rotate(-90, -15, 55)">decoder</text>
+
+        <rect x="0" y="0" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="25" y="0" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="50" y="0" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="75" y="0" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="100" y="0" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="125" y="0" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="0" y="25" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="25" y="25" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="50" y="25" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="75" y="25" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="100" y="25" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="125" y="25" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="0" y="50" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="25" y="50" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="50" y="50" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="75" y="50" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="100" y="50" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="125" y="50" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="0" y="75" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="25" y="75" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="50" y="75" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="75" y="75" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="100" y="75" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+        <rect x="125" y="75" width="25" height="25" fill="#29ABCA" fill-opacity="0.4" stroke="#29ABCA"/>
+      </g>
+    </g>
+
+    <!-- Labels -->
+    <g transform="translate(700, 50)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167" text-anchor="start">Full attention</text>
+      <text x="0" y="20" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00" text-anchor="start">Causal mask</text>
+      <text x="0" y="40" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA" text-anchor="start">Q from decoder</text>
+      <text x="0" y="55" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA" text-anchor="start">K,V from encoder</text>
+    </g>
+  </g>
+</svg>
