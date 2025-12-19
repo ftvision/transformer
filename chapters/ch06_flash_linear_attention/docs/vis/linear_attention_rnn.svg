@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450">
+  <!-- Pure black background -->
+  <rect width="900" height="450" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Linear Attention as an RNN</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    The hidden state S accumulates key-value associations
+  </text>
+
+  <!-- ============ Left side: Standard Attention ============ -->
+  <g transform="translate(50, 100)">
+    <text x="150" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#888888" text-anchor="middle">Standard Attention</text>
+    <text x="150" y="25" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666" text-anchor="middle">O(n²) memory</text>
+
+    <!-- Attention matrix visualization -->
+    <g transform="translate(50, 50)">
+      <!-- n x n matrix -->
+      <rect x="0" y="0" width="200" height="150" fill="#29ABCA" fill-opacity="0.2" stroke="#29ABCA" stroke-width="2"/>
+
+      <!-- Grid lines -->
+      <line x1="50" y1="0" x2="50" y2="150" stroke="#29ABCA" stroke-opacity="0.3"/>
+      <line x1="100" y1="0" x2="100" y2="150" stroke="#29ABCA" stroke-opacity="0.3"/>
+      <line x1="150" y1="0" x2="150" y2="150" stroke="#29ABCA" stroke-opacity="0.3"/>
+      <line x1="0" y1="37.5" x2="200" y2="37.5" stroke="#29ABCA" stroke-opacity="0.3"/>
+      <line x1="0" y1="75" x2="200" y2="75" stroke="#29ABCA" stroke-opacity="0.3"/>
+      <line x1="0" y1="112.5" x2="200" y2="112.5" stroke="#29ABCA" stroke-opacity="0.3"/>
+
+      <!-- Label -->
+      <text x="100" y="185" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">Attention Matrix</text>
+      <text x="100" y="205" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">(n × n)</text>
+
+      <!-- Dimensions -->
+      <text x="100" y="-10" font-family="monospace" font-size="11" fill="#666666" text-anchor="middle">seq_len</text>
+      <text x="-15" y="75" font-family="monospace" font-size="11" fill="#666666" text-anchor="middle" transform="rotate(-90, -15, 75)">seq_len</text>
+    </g>
+  </g>
+
+  <!-- Arrow between -->
+  <g transform="translate(350, 200)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#FFFF00" stroke-width="2"/>
+    <polygon points="80,0 73,-5 73,5" fill="#FFFF00"/>
+    <text x="40" y="-15" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">linearize</text>
+  </g>
+
+  <!-- ============ Right side: Linear Attention (RNN) ============ -->
+  <g transform="translate(480, 100)">
+    <text x="180" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#83C167" text-anchor="middle">Linear Attention (RNN View)</text>
+    <text x="180" y="25" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#666666" text-anchor="middle">O(d²) memory</text>
+
+    <!-- State matrix S -->
+    <g transform="translate(80, 50)">
+      <!-- d x d matrix -->
+      <rect x="0" y="0" width="100" height="100" fill="#83C167" fill-opacity="0.2" stroke="#83C167" stroke-width="2"/>
+
+      <!-- Inner grid -->
+      <line x1="25" y1="0" x2="25" y2="100" stroke="#83C167" stroke-opacity="0.3"/>
+      <line x1="50" y1="0" x2="50" y2="100" stroke="#83C167" stroke-opacity="0.3"/>
+      <line x1="75" y1="0" x2="75" y2="100" stroke="#83C167" stroke-opacity="0.3"/>
+      <line x1="0" y1="25" x2="100" y2="25" stroke="#83C167" stroke-opacity="0.3"/>
+      <line x1="0" y1="50" x2="100" y2="50" stroke="#83C167" stroke-opacity="0.3"/>
+      <line x1="0" y1="75" x2="100" y2="75" stroke="#83C167" stroke-opacity="0.3"/>
+
+      <!-- Label -->
+      <text x="50" y="130" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167" text-anchor="middle">State S</text>
+      <text x="50" y="150" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">(d_k × d_v)</text>
+
+      <!-- Dimensions -->
+      <text x="50" y="-10" font-family="monospace" font-size="11" fill="#666666" text-anchor="middle">d_k</text>
+      <text x="-15" y="50" font-family="monospace" font-size="11" fill="#666666" text-anchor="middle" transform="rotate(-90, -15, 50)">d_v</text>
+    </g>
+
+    <!-- Update arrow loop -->
+    <g transform="translate(200, 80)">
+      <path d="M 0,40 Q 60,40 60,0 Q 60,-30 30,-30 Q 0,-30 0,0" fill="none" stroke="#FFFF00" stroke-width="2"/>
+      <polygon points="0,0 -5,10 5,10" fill="#FFFF00"/>
+      <text x="85" y="10" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00" text-anchor="start">+k^T v</text>
+    </g>
+  </g>
+
+  <!-- ============ Bottom: Update Equation ============ -->
+  <g transform="translate(50, 340)">
+    <text x="400" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#ffffff" text-anchor="middle">Recurrent Update</text>
+
+    <!-- Equation box -->
+    <rect x="150" y="20" width="500" height="70" fill="#ffffff" fill-opacity="0.05" stroke="#444444" rx="5"/>
+
+    <text x="400" y="55" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#83C167" text-anchor="middle">
+      S
+      <tspan font-size="12" dy="3">t</tspan>
+      <tspan dy="-3"> = S</tspan>
+      <tspan font-size="12" dy="3">t-1</tspan>
+      <tspan dy="-3" fill="#FFFF00"> + φ(k</tspan>
+      <tspan font-size="12" dy="3">t</tspan>
+      <tspan dy="-3">)</tspan>
+      <tspan baseline-shift="super" font-size="12">T</tspan>
+      <tspan fill="#FFFF00"> v</tspan>
+      <tspan font-size="12" dy="3">t</tspan>
+    </text>
+
+    <text x="400" y="78" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+      output
+      <tspan font-size="10" dy="3">t</tspan>
+      <tspan dy="-3"> = φ(q</tspan>
+      <tspan font-size="10" dy="3">t</tspan>
+      <tspan dy="-3">) · S</tspan>
+      <tspan font-size="10" dy="3">t</tspan>
+    </text>
+  </g>
+
+  <!-- Memory comparison at bottom -->
+  <g transform="translate(700, 340)">
+    <text x="80" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#ffffff" text-anchor="middle">Memory</text>
+
+    <rect x="0" y="15" width="160" height="60" fill="#ffffff" fill-opacity="0.05" stroke="#444444" rx="5"/>
+
+    <text x="80" y="40" font-family="monospace" font-size="12" fill="#29ABCA" text-anchor="middle">Standard: O(n²)</text>
+    <text x="80" y="60" font-family="monospace" font-size="12" fill="#83C167" text-anchor="middle">Linear: O(d²)</text>
+  </g>
+</svg>

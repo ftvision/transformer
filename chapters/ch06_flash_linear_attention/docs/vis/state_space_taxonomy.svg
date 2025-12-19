@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550">
+  <!-- Pure black background -->
+  <rect width="900" height="550" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Linear Sequence Models Taxonomy</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    All share the state-space form: h_t = A_t · h_{t-1} + B_t · x_t
+  </text>
+
+  <!-- ============ Root: State-Space Models ============ -->
+  <g transform="translate(350, 90)">
+    <rect x="0" y="0" width="200" height="50" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-width="2" rx="5"/>
+    <text x="100" y="30" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#ffffff" text-anchor="middle">State-Space Models</text>
+  </g>
+
+  <!-- Branches -->
+  <g transform="translate(450, 145)">
+    <line x1="0" y1="0" x2="0" y2="25" stroke="#666666" stroke-width="2"/>
+    <line x1="-300" y1="25" x2="300" y2="25" stroke="#666666" stroke-width="2"/>
+    <line x1="-300" y1="25" x2="-300" y2="45" stroke="#666666" stroke-width="2"/>
+    <line x1="0" y1="25" x2="0" y2="45" stroke="#666666" stroke-width="2"/>
+    <line x1="300" y1="25" x2="300" y2="45" stroke="#666666" stroke-width="2"/>
+  </g>
+
+  <!-- ============ Three main branches ============ -->
+
+  <!-- Branch 1: A = I (no decay) -->
+  <g transform="translate(50, 195)">
+    <rect x="0" y="0" width="180" height="70" fill="#29ABCA" fill-opacity="0.2" stroke="#29ABCA" stroke-width="2" rx="5"/>
+    <text x="90" y="25" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#29ABCA" text-anchor="middle">A = I</text>
+    <text x="90" y="45" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">(no decay)</text>
+    <text x="90" y="62" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">S = S + kv</text>
+  </g>
+
+  <!-- Branch 2: A = diag (learned decay) -->
+  <g transform="translate(360, 195)">
+    <rect x="0" y="0" width="180" height="70" fill="#83C167" fill-opacity="0.2" stroke="#83C167" stroke-width="2" rx="5"/>
+    <text x="90" y="25" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#83C167" text-anchor="middle">A = diag(λ)</text>
+    <text x="90" y="45" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">(learned decay)</text>
+    <text x="90" y="62" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">S = λS + kv</text>
+  </g>
+
+  <!-- Branch 3: A = f(x) (selective) -->
+  <g transform="translate(670, 195)">
+    <rect x="0" y="0" width="180" height="70" fill="#FFFF00" fill-opacity="0.2" stroke="#FFFF00" stroke-width="2" rx="5"/>
+    <text x="90" y="25" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FFFF00" text-anchor="middle">A = f(x)</text>
+    <text x="90" y="45" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">(data-dependent)</text>
+    <text x="90" y="62" font-family="monospace" font-size="10" fill="#666666" text-anchor="middle">S = g(x)S + ...</text>
+  </g>
+
+  <!-- ============ Sub-branches ============ -->
+
+  <!-- Under A = I: Linear Attention -->
+  <g transform="translate(50, 285)">
+    <line x1="90" y1="0" x2="90" y2="20" stroke="#666666" stroke-width="1"/>
+
+    <rect x="20" y="25" width="140" height="55" fill="#29ABCA" fill-opacity="0.1" stroke="#29ABCA" rx="3"/>
+    <text x="90" y="48" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">Linear Attention</text>
+    <text x="90" y="65" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">Katharopoulos 2020</text>
+  </g>
+
+  <!-- Under A = diag: S4, DSS -->
+  <g transform="translate(340, 285)">
+    <line x1="110" y1="0" x2="110" y2="20" stroke="#666666" stroke-width="1"/>
+    <line x1="40" y1="20" x2="180" y2="20" stroke="#666666" stroke-width="1"/>
+    <line x1="40" y1="20" x2="40" y2="35" stroke="#666666" stroke-width="1"/>
+    <line x1="180" y1="20" x2="180" y2="35" stroke="#666666" stroke-width="1"/>
+
+    <!-- S4 -->
+    <rect x="0" y="40" width="80" height="50" fill="#83C167" fill-opacity="0.1" stroke="#83C167" rx="3"/>
+    <text x="40" y="60" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">S4</text>
+    <text x="40" y="78" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#666666" text-anchor="middle">Gu 2022</text>
+
+    <!-- RetNet -->
+    <rect x="140" y="40" width="80" height="50" fill="#83C167" fill-opacity="0.1" stroke="#83C167" rx="3"/>
+    <text x="180" y="60" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#83C167" text-anchor="middle">RetNet</text>
+    <text x="180" y="78" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#666666" text-anchor="middle">Sun 2023</text>
+  </g>
+
+  <!-- Under A = f(x): Mamba, GLA -->
+  <g transform="translate(650, 285)">
+    <line x1="110" y1="0" x2="110" y2="20" stroke="#666666" stroke-width="1"/>
+    <line x1="40" y1="20" x2="180" y2="20" stroke="#666666" stroke-width="1"/>
+    <line x1="40" y1="20" x2="40" y2="35" stroke="#666666" stroke-width="1"/>
+    <line x1="180" y1="20" x2="180" y2="35" stroke="#666666" stroke-width="1"/>
+
+    <!-- Mamba -->
+    <rect x="0" y="40" width="80" height="50" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" rx="3"/>
+    <text x="40" y="60" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">Mamba</text>
+    <text x="40" y="78" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#666666" text-anchor="middle">Gu 2023</text>
+
+    <!-- GLA -->
+    <rect x="140" y="40" width="80" height="50" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" rx="3"/>
+    <text x="180" y="60" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FFFF00" text-anchor="middle">GLA</text>
+    <text x="180" y="78" font-family="CMU Serif, Georgia, serif" font-size="9" fill="#666666" text-anchor="middle">Yang 2023</text>
+  </g>
+
+  <!-- ============ Bottom: Unified Models ============ -->
+  <g transform="translate(250, 400)">
+    <line x1="200" y1="0" x2="200" y2="20" stroke="#666666" stroke-width="2" stroke-dasharray="4,2"/>
+
+    <rect x="100" y="25" width="200" height="60" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="2" rx="5"/>
+    <text x="200" y="50" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FF6B6B" text-anchor="middle">Mamba-2 / SSD</text>
+    <text x="200" y="70" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Unified attention + SSM</text>
+  </g>
+
+  <!-- Convergence arrows -->
+  <g transform="translate(140, 375)">
+    <line x1="0" y1="0" x2="170" y2="50" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+  </g>
+  <g transform="translate(450, 375)">
+    <line x1="0" y1="0" x2="0" y2="50" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+  </g>
+  <g transform="translate(760, 375)">
+    <line x1="0" y1="0" x2="-170" y2="50" stroke="#666666" stroke-width="1" stroke-dasharray="3,2"/>
+  </g>
+
+  <!-- ============ Legend ============ -->
+  <g transform="translate(50, 490)">
+    <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888">Key:</text>
+
+    <rect x="50" y="-12" width="15" height="15" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA"/>
+    <text x="70" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">No forgetting</text>
+
+    <rect x="180" y="-12" width="15" height="15" fill="#83C167" fill-opacity="0.3" stroke="#83C167"/>
+    <text x="200" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Fixed decay</text>
+
+    <rect x="300" y="-12" width="15" height="15" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00"/>
+    <text x="320" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Data-dependent</text>
+
+    <rect x="450" y="-12" width="15" height="15" fill="#FF6B6B" fill-opacity="0.3" stroke="#FF6B6B"/>
+    <text x="470" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888">Unified</text>
+  </g>
+</svg>
