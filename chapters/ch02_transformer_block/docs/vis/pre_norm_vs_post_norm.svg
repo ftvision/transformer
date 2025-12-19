@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580">
+  <!-- Background -->
+  <rect width="900" height="580" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Pre-Norm vs Post-Norm</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Where to place LayerNorm in a transformer block
+  </text>
+
+  <!-- ============ Post-Norm (Original Transformer) ============ -->
+  <g transform="translate(100, 90)">
+    <text x="120" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#FC6255" text-anchor="middle">Post-Norm (Original)</text>
+    <text x="120" y="20" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">Attention Is All You Need, 2017</text>
+
+    <!-- Input -->
+    <rect x="80" y="40" width="80" height="30" fill="none" stroke="#29ABCA" stroke-width="2"/>
+    <text x="120" y="60" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#29ABCA" text-anchor="middle">x</text>
+
+    <!-- Split point -->
+    <circle cx="120" cy="85" r="3" fill="#29ABCA"/>
+    <line x1="120" y1="70" x2="120" y2="82" stroke="#666666" stroke-width="2"/>
+
+    <!-- Skip connection right -->
+    <path d="M 123 85 L 180 85 L 180 155" fill="none" stroke="#666666" stroke-width="2" stroke-dasharray="5,3"/>
+
+    <!-- Arrow down to attention -->
+    <line x1="120" y1="88" x2="120" y2="100" stroke="#666666" stroke-width="2"/>
+    <polygon points="120,105 115,97 125,97" fill="#666666"/>
+
+    <!-- Attention box -->
+    <rect x="70" y="108" width="100" height="35" fill="#333333" stroke="#666666" stroke-width="2"/>
+    <text x="120" y="130" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#ffffff" text-anchor="middle">Attention</text>
+
+    <!-- Arrow to add -->
+    <line x1="120" y1="143" x2="120" y2="150" stroke="#666666" stroke-width="2"/>
+
+    <!-- Add circle -->
+    <circle cx="120" cy="160" r="12" fill="none" stroke="#FFFF00" stroke-width="2"/>
+    <text x="120" y="164" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">+</text>
+
+    <!-- Skip connection meets -->
+    <line x1="180" y1="155" x2="180" y2="160" stroke="#666666" stroke-width="2"/>
+    <line x1="132" y1="160" x2="180" y2="160" stroke="#666666" stroke-width="2"/>
+
+    <!-- Arrow to norm -->
+    <line x1="120" y1="172" x2="120" y2="182" stroke="#666666" stroke-width="2"/>
+    <polygon points="120,187 115,179 125,179" fill="#666666"/>
+
+    <!-- LayerNorm box (AFTER add) -->
+    <rect x="70" y="190" width="100" height="30" fill="#FC6255" fill-opacity="0.2" stroke="#FC6255" stroke-width="2"/>
+    <text x="120" y="210" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FC6255" text-anchor="middle">LayerNorm</text>
+
+    <!-- Arrow down -->
+    <line x1="120" y1="220" x2="120" y2="235" stroke="#666666" stroke-width="2"/>
+
+    <!-- Second split point -->
+    <circle cx="120" cy="240" r="3" fill="#666666"/>
+
+    <!-- Second skip connection -->
+    <path d="M 123 240 L 180 240 L 180 310" fill="none" stroke="#666666" stroke-width="2" stroke-dasharray="5,3"/>
+
+    <!-- Arrow to FFN -->
+    <line x1="120" y1="243" x2="120" y2="255" stroke="#666666" stroke-width="2"/>
+    <polygon points="120,260 115,252 125,252" fill="#666666"/>
+
+    <!-- FFN box -->
+    <rect x="70" y="263" width="100" height="35" fill="#333333" stroke="#666666" stroke-width="2"/>
+    <text x="120" y="285" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#ffffff" text-anchor="middle">FFN</text>
+
+    <!-- Arrow to second add -->
+    <line x1="120" y1="298" x2="120" y2="305" stroke="#666666" stroke-width="2"/>
+
+    <!-- Second add circle -->
+    <circle cx="120" cy="315" r="12" fill="none" stroke="#FFFF00" stroke-width="2"/>
+    <text x="120" y="319" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">+</text>
+
+    <!-- Skip connection meets -->
+    <line x1="180" y1="310" x2="180" y2="315" stroke="#666666" stroke-width="2"/>
+    <line x1="132" y1="315" x2="180" y2="315" stroke="#666666" stroke-width="2"/>
+
+    <!-- Arrow to second norm -->
+    <line x1="120" y1="327" x2="120" y2="337" stroke="#666666" stroke-width="2"/>
+    <polygon points="120,342 115,334 125,334" fill="#666666"/>
+
+    <!-- Second LayerNorm box -->
+    <rect x="70" y="345" width="100" height="30" fill="#FC6255" fill-opacity="0.2" stroke="#FC6255" stroke-width="2"/>
+    <text x="120" y="365" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FC6255" text-anchor="middle">LayerNorm</text>
+
+    <!-- Output arrow -->
+    <line x1="120" y1="375" x2="120" y2="395" stroke="#666666" stroke-width="2"/>
+    <polygon points="120,400 115,392 125,392" fill="#666666"/>
+
+    <!-- Output -->
+    <rect x="80" y="403" width="80" height="30" fill="none" stroke="#83C167" stroke-width="2"/>
+    <text x="120" y="423" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#83C167" text-anchor="middle">output</text>
+  </g>
+
+  <!-- ============ Pre-Norm (Modern) ============ -->
+  <g transform="translate(500, 90)">
+    <text x="120" y="0" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#83C167" text-anchor="middle">Pre-Norm (Modern)</text>
+    <text x="120" y="20" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">GPT-2, LLaMA, Mistral</text>
+
+    <!-- Input -->
+    <rect x="80" y="40" width="80" height="30" fill="none" stroke="#29ABCA" stroke-width="2"/>
+    <text x="120" y="60" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#29ABCA" text-anchor="middle">x</text>
+
+    <!-- Split point -->
+    <circle cx="120" cy="85" r="3" fill="#29ABCA"/>
+    <line x1="120" y1="70" x2="120" y2="82" stroke="#666666" stroke-width="2"/>
+
+    <!-- Skip connection right (CLEAN PATH) -->
+    <path d="M 123 85 L 200 85 L 200 195" fill="none" stroke="#83C167" stroke-width="3"/>
+    <text x="215" y="145" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">clean</text>
+    <text x="215" y="158" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">path!</text>
+
+    <!-- Arrow down to norm -->
+    <line x1="120" y1="88" x2="120" y2="100" stroke="#666666" stroke-width="2"/>
+    <polygon points="120,105 115,97 125,97" fill="#666666"/>
+
+    <!-- LayerNorm box (BEFORE attention) -->
+    <rect x="70" y="108" width="100" height="30" fill="#83C167" fill-opacity="0.2" stroke="#83C167" stroke-width="2"/>
+    <text x="120" y="128" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="middle">LayerNorm</text>
+
+    <!-- Arrow to attention -->
+    <line x1="120" y1="138" x2="120" y2="148" stroke="#666666" stroke-width="2"/>
+    <polygon points="120,153 115,145 125,145" fill="#666666"/>
+
+    <!-- Attention box -->
+    <rect x="70" y="156" width="100" height="35" fill="#333333" stroke="#666666" stroke-width="2"/>
+    <text x="120" y="178" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#ffffff" text-anchor="middle">Attention</text>
+
+    <!-- Arrow to add -->
+    <line x1="120" y1="191" x2="120" y2="195" stroke="#666666" stroke-width="2"/>
+
+    <!-- Add circle -->
+    <circle cx="120" cy="205" r="12" fill="none" stroke="#FFFF00" stroke-width="2"/>
+    <text x="120" y="209" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">+</text>
+
+    <!-- Skip connection meets -->
+    <line x1="200" y1="195" x2="200" y2="205" stroke="#83C167" stroke-width="3"/>
+    <line x1="132" y1="205" x2="200" y2="205" stroke="#83C167" stroke-width="3"/>
+
+    <!-- Arrow down -->
+    <line x1="120" y1="217" x2="120" y2="232" stroke="#666666" stroke-width="2"/>
+
+    <!-- Second split point -->
+    <circle cx="120" cy="237" r="3" fill="#666666"/>
+
+    <!-- Second skip connection (CLEAN PATH) -->
+    <path d="M 123 237 L 200 237 L 200 347" fill="none" stroke="#83C167" stroke-width="3"/>
+
+    <!-- Arrow to second norm -->
+    <line x1="120" y1="240" x2="120" y2="252" stroke="#666666" stroke-width="2"/>
+    <polygon points="120,257 115,249 125,249" fill="#666666"/>
+
+    <!-- Second LayerNorm box (BEFORE FFN) -->
+    <rect x="70" y="260" width="100" height="30" fill="#83C167" fill-opacity="0.2" stroke="#83C167" stroke-width="2"/>
+    <text x="120" y="280" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="middle">LayerNorm</text>
+
+    <!-- Arrow to FFN -->
+    <line x1="120" y1="290" x2="120" y2="300" stroke="#666666" stroke-width="2"/>
+    <polygon points="120,305 115,297 125,297" fill="#666666"/>
+
+    <!-- FFN box -->
+    <rect x="70" y="308" width="100" height="35" fill="#333333" stroke="#666666" stroke-width="2"/>
+    <text x="120" y="330" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#ffffff" text-anchor="middle">FFN</text>
+
+    <!-- Arrow to second add -->
+    <line x1="120" y1="343" x2="120" y2="347" stroke="#666666" stroke-width="2"/>
+
+    <!-- Second add circle -->
+    <circle cx="120" cy="357" r="12" fill="none" stroke="#FFFF00" stroke-width="2"/>
+    <text x="120" y="361" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">+</text>
+
+    <!-- Skip connection meets -->
+    <line x1="200" y1="347" x2="200" y2="357" stroke="#83C167" stroke-width="3"/>
+    <line x1="132" y1="357" x2="200" y2="357" stroke="#83C167" stroke-width="3"/>
+
+    <!-- Output arrow -->
+    <line x1="120" y1="369" x2="120" y2="395" stroke="#666666" stroke-width="2"/>
+    <polygon points="120,400 115,392 125,392" fill="#666666"/>
+
+    <!-- Output -->
+    <rect x="80" y="403" width="80" height="30" fill="none" stroke="#83C167" stroke-width="2"/>
+    <text x="120" y="423" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#83C167" text-anchor="middle">output</text>
+  </g>
+
+  <!-- ============ Comparison Box ============ -->
+  <g transform="translate(50, 515)">
+    <rect x="0" y="0" width="800" height="55" fill="none" stroke="#444444" stroke-width="1"/>
+
+    <text x="150" y="22" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FC6255" text-anchor="middle">Post-Norm</text>
+    <text x="150" y="42" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">Norm after residual add</text>
+
+    <text x="400" y="22" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#83C167" text-anchor="middle">Pre-Norm</text>
+    <text x="400" y="42" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">Norm before sublayer (clean skip path)</text>
+
+    <text x="650" y="22" font-family="CMU Serif, Georgia, serif" font-size="13" fill="#FFFF00" text-anchor="middle">Result</text>
+    <text x="650" y="42" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Pre-norm trains more stably</text>
+  </g>
+</svg>

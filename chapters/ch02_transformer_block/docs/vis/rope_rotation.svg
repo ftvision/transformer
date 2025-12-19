@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480">
+  <!-- Background -->
+  <rect width="900" height="480" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Rotary Position Embedding (RoPE)</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="60" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Rotate Q and K vectors to encode relative position into attention
+  </text>
+
+  <!-- Left: Rotation concept -->
+  <g transform="translate(150, 120)">
+    <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#29ABCA" text-anchor="middle">Vector Rotation</text>
+
+    <!-- Coordinate system -->
+    <line x1="0" y1="150" x2="200" y2="150" stroke="#444444" stroke-width="1"/>
+    <line x1="100" y1="50" x2="100" y2="250" stroke="#444444" stroke-width="1"/>
+
+    <!-- Original vector -->
+    <line x1="100" y1="150" x2="180" y2="90" stroke="#FC6255" stroke-width="2"/>
+    <circle cx="180" cy="90" r="4" fill="#FC6255"/>
+    <text x="190" y="85" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FC6255" text-anchor="start">q (original)</text>
+
+    <!-- Rotated vector -->
+    <line x1="100" y1="150" x2="150" y2="70" stroke="#83C167" stroke-width="2"/>
+    <circle cx="150" cy="70" r="4" fill="#83C167"/>
+    <text x="155" y="60" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">q' (rotated)</text>
+
+    <!-- Rotation arc -->
+    <path d="M 160 110 A 50 50 0 0 0 140 95" fill="none" stroke="#FFFF00" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <text x="175" y="115" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00" text-anchor="start">θ·pos</text>
+
+    <!-- Labels -->
+    <text x="100" y="280" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">Position determines rotation angle</text>
+  </g>
+
+  <!-- Right: How it encodes relative position -->
+  <g transform="translate(500, 120)">
+    <text x="150" y="0" font-family="CMU Serif, Georgia, serif" font-size="16" fill="#83C167" text-anchor="middle">Relative Position in Attention</text>
+
+    <!-- Position m -->
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="120" height="50" fill="#29ABCA" fill-opacity="0.2" stroke="#29ABCA" stroke-width="1"/>
+      <text x="60" y="20" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#29ABCA" text-anchor="middle">Position m</text>
+      <text x="60" y="38" font-family="monospace" font-size="11" fill="#29ABCA" text-anchor="middle">q_m = rotate(q, m)</text>
+    </g>
+
+    <!-- Position n -->
+    <g transform="translate(180, 40)">
+      <rect x="0" y="0" width="120" height="50" fill="#FC6255" fill-opacity="0.2" stroke="#FC6255" stroke-width="1"/>
+      <text x="60" y="20" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#FC6255" text-anchor="middle">Position n</text>
+      <text x="60" y="38" font-family="monospace" font-size="11" fill="#FC6255" text-anchor="middle">k_n = rotate(k, n)</text>
+    </g>
+
+    <!-- Dot product arrow -->
+    <line x1="150" y1="110" x2="150" y2="140" stroke="#888888" stroke-width="2"/>
+    <polygon points="150,145 145,137 155,137" fill="#888888"/>
+
+    <!-- Result box -->
+    <rect x="50" y="150" width="200" height="60" fill="#FFFF00" fill-opacity="0.1" stroke="#FFFF00" stroke-width="1"/>
+    <text x="150" y="172" font-family="monospace" font-size="12" fill="#FFFF00" text-anchor="middle">q_m · k_n = f(q, k, m-n)</text>
+    <text x="150" y="195" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Only depends on (m - n)!</text>
+
+    <!-- Example -->
+    <text x="150" y="240" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">Example:</text>
+    <text x="150" y="260" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="middle">pos 5 → pos 3 same as pos 105 → pos 103</text>
+    <text x="150" y="278" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#666666" text-anchor="middle">(both have relative distance of 2)</text>
+  </g>
+
+  <!-- Bottom: Key insight box -->
+  <g transform="translate(80, 390)">
+    <rect x="0" y="0" width="740" height="75" fill="none" stroke="#444444" stroke-width="1"/>
+    <text x="370" y="22" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">Why RoPE?</text>
+
+    <g transform="translate(30, 45)">
+      <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">✓ Relative position</text>
+      <text x="140" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">✓ Length extrapolation</text>
+      <text x="300" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">✓ Efficient (element-wise)</text>
+      <text x="480" y="0" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#83C167" text-anchor="start">✓ Works with KV cache</text>
+    </g>
+
+    <text x="370" y="65" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#888888" text-anchor="middle">Used in: LLaMA, Mistral, GPT-NeoX, and most modern LLMs</text>
+  </g>
+</svg>
