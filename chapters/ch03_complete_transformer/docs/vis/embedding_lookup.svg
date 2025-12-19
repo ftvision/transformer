@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+  <!-- Pure black background -->
+  <rect width="900" height="500" fill="#000000"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="CMU Serif, Georgia, serif" font-size="24" fill="#ffffff" text-anchor="middle">Embedding Lookup</text>
+  <text x="450" y="58" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#888888" text-anchor="middle">
+    Token Embedding + Positional Embedding
+  </text>
+
+  <!-- ============ Token IDs ============ -->
+  <g transform="translate(50, 90)">
+    <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#83C167">Token IDs</text>
+
+    <!-- Token boxes -->
+    <g transform="translate(0, 15)">
+      <rect x="0" y="0" width="50" height="35" rx="3" fill="#83C167" fill-opacity="0.2" stroke="#83C167" stroke-width="1"/>
+      <text x="25" y="23" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">15</text>
+
+      <rect x="60" y="0" width="50" height="35" rx="3" fill="#83C167" fill-opacity="0.2" stroke="#83C167" stroke-width="1"/>
+      <text x="85" y="23" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">892</text>
+
+      <rect x="120" y="0" width="50" height="35" rx="3" fill="#83C167" fill-opacity="0.2" stroke="#83C167" stroke-width="1"/>
+      <text x="145" y="23" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">7</text>
+
+      <rect x="180" y="0" width="50" height="35" rx="3" fill="#83C167" fill-opacity="0.2" stroke="#83C167" stroke-width="1"/>
+      <text x="205" y="23" font-family="monospace" font-size="14" fill="#83C167" text-anchor="middle">2048</text>
+    </g>
+
+    <!-- Sequence label -->
+    <text x="115" y="70" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">[seq_len = 4]</text>
+  </g>
+
+  <!-- ============ Token Embedding Table ============ -->
+  <g transform="translate(350, 85)">
+    <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#FFFF00" text-anchor="middle">Token Embedding Table</text>
+    <text x="100" y="18" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">[vocab_size × d_model]</text>
+
+    <!-- Table visualization -->
+    <g transform="translate(0, 30)">
+      <!-- Row labels -->
+      <text x="-10" y="18" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">0</text>
+      <text x="-10" y="38" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">1</text>
+      <text x="-10" y="58" font-family="monospace" font-size="9" fill="#888888" text-anchor="end">...</text>
+      <text x="-10" y="78" font-family="monospace" font-size="9" fill="#83C167" text-anchor="end">15</text>
+      <text x="-10" y="98" font-family="monospace" font-size="9" fill="#888888" text-anchor="end">...</text>
+      <text x="-10" y="118" font-family="monospace" font-size="9" fill="#83C167" text-anchor="end">892</text>
+      <text x="-10" y="138" font-family="monospace" font-size="9" fill="#888888" text-anchor="end">...</text>
+      <text x="-10" y="158" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">50256</text>
+
+      <!-- Grid cells - showing d_model columns compressed -->
+      <!-- Row 0 -->
+      <rect x="0" y="5" width="200" height="20" rx="2" fill="#333333" stroke="#444444"/>
+      <!-- Row 1 -->
+      <rect x="0" y="25" width="200" height="20" rx="2" fill="#333333" stroke="#444444"/>
+      <!-- ... -->
+      <rect x="0" y="45" width="200" height="20" rx="2" fill="#222222" stroke="#333333"/>
+      <!-- Row 15 (highlighted) -->
+      <rect x="0" y="65" width="200" height="20" rx="2" fill="#FFFF00" fill-opacity="0.25" stroke="#FFFF00"/>
+      <!-- ... -->
+      <rect x="0" y="85" width="200" height="20" rx="2" fill="#222222" stroke="#333333"/>
+      <!-- Row 892 (highlighted) -->
+      <rect x="0" y="105" width="200" height="20" rx="2" fill="#FFFF00" fill-opacity="0.25" stroke="#FFFF00"/>
+      <!-- ... -->
+      <rect x="0" y="125" width="200" height="20" rx="2" fill="#222222" stroke="#333333"/>
+      <!-- Row 50256 -->
+      <rect x="0" y="145" width="200" height="20" rx="2" fill="#333333" stroke="#444444"/>
+
+      <!-- d_model label -->
+      <text x="100" y="180" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">d_model = 768</text>
+
+      <!-- Arrow indicators -->
+      <line x1="-35" y1="75" x2="-5" y2="75" stroke="#83C167" stroke-width="1"/>
+      <polygon points="-5,75 -12,72 -12,78" fill="#83C167"/>
+      <line x1="-35" y1="115" x2="-5" y2="115" stroke="#83C167" stroke-width="1"/>
+      <polygon points="-5,115 -12,112 -12,118" fill="#83C167"/>
+    </g>
+  </g>
+
+  <!-- ============ Positional Embedding Table ============ -->
+  <g transform="translate(620, 85)">
+    <text x="100" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#29ABCA" text-anchor="middle">Positional Embedding</text>
+    <text x="100" y="18" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">[max_seq_len × d_model]</text>
+
+    <!-- Table visualization -->
+    <g transform="translate(0, 30)">
+      <!-- Row labels -->
+      <text x="-10" y="18" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="end">0</text>
+      <text x="-10" y="38" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="end">1</text>
+      <text x="-10" y="58" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="end">2</text>
+      <text x="-10" y="78" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="end">3</text>
+      <text x="-10" y="98" font-family="monospace" font-size="9" fill="#888888" text-anchor="end">...</text>
+      <text x="-10" y="158" font-family="monospace" font-size="9" fill="#666666" text-anchor="end">1023</text>
+
+      <!-- Highlighted rows for positions 0-3 -->
+      <rect x="0" y="5" width="200" height="20" rx="2" fill="#29ABCA" fill-opacity="0.25" stroke="#29ABCA"/>
+      <rect x="0" y="25" width="200" height="20" rx="2" fill="#29ABCA" fill-opacity="0.25" stroke="#29ABCA"/>
+      <rect x="0" y="45" width="200" height="20" rx="2" fill="#29ABCA" fill-opacity="0.25" stroke="#29ABCA"/>
+      <rect x="0" y="65" width="200" height="20" rx="2" fill="#29ABCA" fill-opacity="0.25" stroke="#29ABCA"/>
+      <!-- ... -->
+      <rect x="0" y="85" width="200" height="60" rx="2" fill="#222222" stroke="#333333"/>
+      <!-- Row 1023 -->
+      <rect x="0" y="145" width="200" height="20" rx="2" fill="#333333" stroke="#444444"/>
+
+      <!-- d_model label -->
+      <text x="100" y="180" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#666666" text-anchor="middle">d_model = 768</text>
+    </g>
+  </g>
+
+  <!-- ============ Addition Section ============ -->
+  <g transform="translate(50, 330)">
+    <text x="0" y="0" font-family="CMU Serif, Georgia, serif" font-size="14" fill="#ffffff">Result: Token + Position Embeddings</text>
+
+    <!-- Token embeddings row -->
+    <g transform="translate(0, 25)">
+      <text x="0" y="12" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FFFF00">Token:</text>
+      <rect x="60" y="0" width="150" height="25" rx="3" fill="#FFFF00" fill-opacity="0.2" stroke="#FFFF00"/>
+      <text x="135" y="16" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">E[15] ∈ ℝ^768</text>
+
+      <rect x="220" y="0" width="150" height="25" rx="3" fill="#FFFF00" fill-opacity="0.2" stroke="#FFFF00"/>
+      <text x="295" y="16" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">E[892] ∈ ℝ^768</text>
+
+      <rect x="380" y="0" width="150" height="25" rx="3" fill="#FFFF00" fill-opacity="0.2" stroke="#FFFF00"/>
+      <text x="455" y="16" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">E[7] ∈ ℝ^768</text>
+
+      <rect x="540" y="0" width="150" height="25" rx="3" fill="#FFFF00" fill-opacity="0.2" stroke="#FFFF00"/>
+      <text x="615" y="16" font-family="monospace" font-size="9" fill="#FFFF00" text-anchor="middle">E[2048] ∈ ℝ^768</text>
+    </g>
+
+    <!-- Plus signs -->
+    <g transform="translate(0, 55)">
+      <text x="135" y="12" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">+</text>
+      <text x="295" y="12" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">+</text>
+      <text x="455" y="12" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">+</text>
+      <text x="615" y="12" font-family="CMU Serif, Georgia, serif" font-size="18" fill="#ffffff" text-anchor="middle">+</text>
+    </g>
+
+    <!-- Position embeddings row -->
+    <g transform="translate(0, 70)">
+      <text x="0" y="12" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#29ABCA">Position:</text>
+      <rect x="60" y="0" width="150" height="25" rx="3" fill="#29ABCA" fill-opacity="0.2" stroke="#29ABCA"/>
+      <text x="135" y="16" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">P[0] ∈ ℝ^768</text>
+
+      <rect x="220" y="0" width="150" height="25" rx="3" fill="#29ABCA" fill-opacity="0.2" stroke="#29ABCA"/>
+      <text x="295" y="16" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">P[1] ∈ ℝ^768</text>
+
+      <rect x="380" y="0" width="150" height="25" rx="3" fill="#29ABCA" fill-opacity="0.2" stroke="#29ABCA"/>
+      <text x="455" y="16" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">P[2] ∈ ℝ^768</text>
+
+      <rect x="540" y="0" width="150" height="25" rx="3" fill="#29ABCA" fill-opacity="0.2" stroke="#29ABCA"/>
+      <text x="615" y="16" font-family="monospace" font-size="9" fill="#29ABCA" text-anchor="middle">P[3] ∈ ℝ^768</text>
+    </g>
+
+    <!-- Equals line -->
+    <g transform="translate(0, 100)">
+      <line x1="60" y1="0" x2="690" y2="0" stroke="#888888" stroke-width="1"/>
+    </g>
+
+    <!-- Result row -->
+    <g transform="translate(0, 110)">
+      <text x="0" y="12" font-family="CMU Serif, Georgia, serif" font-size="11" fill="#FF6B6B">Input:</text>
+      <rect x="60" y="0" width="150" height="25" rx="3" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B"/>
+      <text x="135" y="16" font-family="monospace" font-size="9" fill="#FF6B6B" text-anchor="middle">x₀ ∈ ℝ^768</text>
+
+      <rect x="220" y="0" width="150" height="25" rx="3" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B"/>
+      <text x="295" y="16" font-family="monospace" font-size="9" fill="#FF6B6B" text-anchor="middle">x₁ ∈ ℝ^768</text>
+
+      <rect x="380" y="0" width="150" height="25" rx="3" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B"/>
+      <text x="455" y="16" font-family="monospace" font-size="9" fill="#FF6B6B" text-anchor="middle">x₂ ∈ ℝ^768</text>
+
+      <rect x="540" y="0" width="150" height="25" rx="3" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B"/>
+      <text x="615" y="16" font-family="monospace" font-size="9" fill="#FF6B6B" text-anchor="middle">x₃ ∈ ℝ^768</text>
+    </g>
+
+    <!-- Final shape -->
+    <text x="420" y="155" font-family="CMU Serif, Georgia, serif" font-size="12" fill="#888888" text-anchor="middle">
+      Output Shape: [batch, seq_len, d_model] = [1, 4, 768]
+    </text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(750, 310)">
+    <rect x="0" y="0" width="12" height="12" fill="#83C167" fill-opacity="0.3" stroke="#83C167"/>
+    <text x="18" y="10" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#83C167">Token ID</text>
+
+    <rect x="0" y="20" width="12" height="12" fill="#FFFF00" fill-opacity="0.3" stroke="#FFFF00"/>
+    <text x="18" y="30" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FFFF00">Token Emb</text>
+
+    <rect x="0" y="40" width="12" height="12" fill="#29ABCA" fill-opacity="0.3" stroke="#29ABCA"/>
+    <text x="18" y="50" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#29ABCA">Position Emb</text>
+
+    <rect x="0" y="60" width="12" height="12" fill="#FF6B6B" fill-opacity="0.3" stroke="#FF6B6B"/>
+    <text x="18" y="70" font-family="CMU Serif, Georgia, serif" font-size="10" fill="#FF6B6B">Combined</text>
+  </g>
+</svg>
