@@ -6,12 +6,8 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 
-dependencies = [
-    "torch>=2.0",
-    "numpy>=1.24",
-    "pytest>=7.0",
-    "matplotlib>=3.7",
-]
+# Root workspace has no direct dependencies - each chapter manages its own
+dependencies = []
 
 [project.optional-dependencies]
 dev = [
@@ -32,12 +28,10 @@ hardware = [
     "jax[cpu]>=0.4",
 ]
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+# No [build-system] - this is a virtual workspace root, not a package
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "ruff>=0.1",
     "mypy>=1.0",
 ]
